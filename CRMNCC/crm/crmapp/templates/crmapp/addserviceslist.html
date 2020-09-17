@@ -1,0 +1,49 @@
+{% extends 'crmapp/base.html' %}
+
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+
+
+<button  class="btn-primary text-light"><a class="text-light "href="{% url 'newopportunity' %}">Add Service</a></button>
+
+
+{% if mylist %}
+
+<table class="table mt-5">
+    <thead class="thead-dark">
+  <tr>
+    <th class="text-center">Opportunity No</th>
+    <th class="text-center">Creation Date</th>
+    <th class="text-center">Service</th>
+    <th class="text-center">Service Category</th>
+    <th class="text-center">Total NRC</th>
+    <th class="text-center">Total MRC</th>
+
+
+  </tr>
+  {% for service in mylist %}
+  <tr>
+  <td class="border text-center"><a href="{% url 'opportunitydetail' pk=opportunity.id %}">{{service.opportunity}}</a></td>
+  <td class="border text-center">{{service.creationdate}}</td>
+  <td class="border text-center">{{service.service}}</td>
+  <td class="border text-center">{{service.servicecategory}}</td>
+  <td class="border text-center">{{service.totalnrc}}</td>
+  <td class="border text-center">{{service.totalmrc}}</td>
+
+
+
+  </tr>
+  {% endfor %}
+</table>
+
+{% endif %}
+
+</div>
+
+
+
+  {% endblock %}

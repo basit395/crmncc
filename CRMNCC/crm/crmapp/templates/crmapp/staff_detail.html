@@ -1,0 +1,38 @@
+{% extends 'crmapp/base.html' %}
+
+{% block content %}
+
+
+
+  <br>
+
+  <div class="container">
+
+<h5>{{staff.staffname}}</h5>
+
+    <table class="table mt-5">
+        <thead class="thead-dark">
+      <tr>
+
+        <th class="text-center">ID</th>
+        <th class="text-center">Join Date</th>
+        <th class="text-center">Status</th>
+        <th class="text-center">Job Title</th>
+
+
+      </tr>
+
+      <tr>
+
+      <td class="border text-center">{{staff.staff_id}}</td>
+      <td class="border text-center">{{staff.joindate}}</td>
+      <td class="border text-center">{{staff.employeestatus}}</td>
+      <td class="border text-center">{{staff.employeejobtitle}}</td>
+
+      </tr>
+
+    </table>
+
+</div>
+
+{% endblock %}

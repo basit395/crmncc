@@ -1,0 +1,44 @@
+{% extends 'crmapp/base.html' %}
+
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+
+
+
+{% if opportunitylist %}
+
+<table class="table mt-5">
+    <thead class="thead-dark">
+  <tr>
+    <th class="text-center">Opportunity No</th>
+    <th class="text-center">LMS</th>
+    <th class="text-center">Creation Date</th>
+    <th class="text-center">Sales Man</th>
+    <th class="text-center">Job Title</th>
+    <th class="text-center">Customer</th>
+    <th class="text-center">Total NRC</th>
+    <th class="text-center">Total MRC</th>
+    <th class="text-center">Status</th>
+
+  </tr>
+  {% for opportunity in opportunitylist %}
+  <tr>
+  <td class="border text-center"><a href="{% url 'opportunitydetail' pk=opportunity.pk %}">{{opportunity.opportunityno}}</a></td>
+  <td class="border text-center">{{opportunity.lms}}</td>
+  <td class="border text-center">{{opportunity.creationdate}}</td>
+  <td class="border text-center">{{opportunity.salesman}}</td>
+  <td class="border text-center">{{opportunity.employeejobtitle}}</td>
+  <td class="border text-center">{{opportunity.customer}}</td>
+  <td class="border text-center">{{opportunity.totalnrc}}</td>
+  <td class="border text-center">{{opportunity.totalmrc}}</td>
+  <td class="border text-center">{{opportunity.status}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+</div>
+{% endblock %}

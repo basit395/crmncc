@@ -1,0 +1,63 @@
+{% extends 'crmapp/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}<title>{{customer.customername}}</title> {%endblock%}
+
+{% block content %}
+
+
+
+
+  <br>
+  <div class="container">
+
+
+
+<div class="row">
+<div class="column ">
+
+
+<h5>{{customer.customername}}</h5>
+
+
+</div>
+
+
+
+<div class="column">
+
+
+
+</div>
+<table class="table mt-4">
+    <thead class="thead-dark">
+  <tr>
+
+    <th class="text-center">CR</th>
+    <th class="text-center">Creation Date</th>
+    <th class="text-center">Activity</th>
+    <th class="text-center">Branches</th>
+  </tr>
+
+  <tr>
+
+  <td class="border text-center">{{customer.cr}}</td>
+  <td class="border text-center">{{customer.creationdate}}</td>
+  <td class="border text-center">{{customer.activity}}</td>
+  <td class="border text-center">{{customer.branches}}</td>
+  </tr>
+
+</table>
+<button type="button" class="btn btn-info mt-5 mr-2"><a href="{% url 'customerupdate' pk=customer.id %}" class="text-light">Update</a></button>
+<br>
+<button type="button" class="btn btn-success mt-5"><a href="{% url 'newopportunityc' pk=customer.id %}" class="text-light" >New Opportunity</a></button>
+
+
+<div class="column"></div>
+
+
+</div>
+</div>
+
+{% endblock %}

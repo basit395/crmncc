@@ -1,0 +1,56 @@
+{% extends 'crmapp/base.html' %}
+
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+
+
+
+
+{% if stafflist %}
+
+<table class="table mt-5">
+    <thead class="thead-dark">
+  <tr>
+    <th class="text-center">Name</th>
+    <th class="text-center">User</th>
+    <th class="text-center">Email</th>
+    <th class="text-center">Status</th>
+    <th class="text-center">Job Title</th>
+    <th class="text-center">No of Opportunities</th>
+
+  </tr>
+  {% for staff in stafflist %}
+    {% for profile in staffprofile %}
+      {% if staff.username == profile.user|stringformat:"s" %}
+
+
+
+  <tr>
+  <td class="border text-center"><a href="">{{staff.first_name}}-{{staff.last_name}}</a></td>
+  <td class="border text-center">{{staff.username}}</td>
+  <td class="border text-center">{{staff.email}}</td>
+  <td class="border text-center">{{staff.is_active}}</td>
+  <td class="border text-center">{{profile.jobtitle}}</td>
+  <td class="border text-center">{{staff.salesman_opportunities.count}}</td>
+  </tr>
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+</table>
+
+{% endif %}
+
+
+
+
+
+
+</div>
+
+
+
+  {% endblock %}

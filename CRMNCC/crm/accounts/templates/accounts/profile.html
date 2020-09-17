@@ -1,0 +1,40 @@
+{% extends 'crmapp/base.html' %}
+
+{% block content %}
+
+
+
+
+  <br>
+  <div class="container p-3 my-3 bg-dark text-white">
+
+
+<div class="row">
+<div class="col-4 "></div>
+
+
+
+<div class="col-4">
+
+
+<div class="card text-white bg-info mt-5 " style="max-width: 18rem;">
+  <div class="card-header">User : {{ profile.user}}</div>
+  <div class="card-body">
+    <h5 class="card-title">Phone :  {{ profile.phone}}</h5>
+    <h5 class="card-title">Job Title :  {{ profile.jobtitle}}</h5>
+
+  </div>
+</div>
+</div>
+<div class="col-4"></div>
+
+
+</div>
+
+<div class="container p-3 my-3 bg-dark text-white">
+
+</div>
+
+</div>
+
+{% endblock %}

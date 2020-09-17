@@ -1,0 +1,59 @@
+{% extends 'crmapp/base.html' %}
+
+{% block content %}
+
+
+
+
+  <br>
+  <div class="container">
+
+<!-- categories -->
+<table class="table mt-5">
+    <thead class="thead-dark">
+  <tr>
+    <th class="text-center">Service Category</th>
+    <th class="text-center">Value </th>
+{% for category in allcategoriesall %}
+<tr>
+<td class="border text-center">{{category.servicecategoryname}}</td>
+  {% for item in allcategories %}
+    {% if item.servicecategory == category.servicecategoryname %}
+
+
+  <td class="border text-center">{{item.Totalc}}</td>
+  </tr>
+
+  {% endif %}
+  {% endfor %}
+{% endfor %}
+</table>
+
+<!-- Services  -->
+
+<table class="table mt-5">
+    <thead class="thead-dark">
+  <tr>
+    <th class="text-center">Service </th>
+    <th class="text-center">Value </th>
+{% for service in allservicesall %}
+
+  <tr>
+  <td class="border text-center">{{service.servicename}}</td>
+
+  {% for item1 in allservices %}
+      {% if service.id == item1.service %}
+        <td class="border text-center">{{item1.Total}} </td>
+        <td class="border text-center">{{yy}} </td>
+      {% endif %}
+  {% endfor %}
+
+  </tr>
+{% endfor %}
+
+</table>
+
+
+</div>
+
+{% endblock %}

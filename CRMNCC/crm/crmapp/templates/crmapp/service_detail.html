@@ -1,0 +1,47 @@
+{% extends 'crmapp/base.html' %}
+
+{% block content %}
+
+
+
+
+  <br>
+
+  <div class="container">
+
+<h5>{{service.servicename}}</h5>
+
+    <table class="table mt-5">
+        <thead class="thead-dark">
+      <tr>
+
+        <th class="text-center">Service</th>
+        <th class="text-center">Service Category</th>
+        <th class="text-center">ncc_id</th>
+        <th class="text-center">catalogue_id</th>
+        <th class="text-center">nrc</th>
+        <th class="text-center">mrc</th>
+        <th class="text-center">commission</th>
+
+
+
+
+      </tr>
+
+      <tr>
+
+      <td class="border text-center">{{service.servicename}}</td>
+      <td class="border text-center">{{service.servicecategory}}</td>
+      <td class="border text-center">{{service.ncc_id}}</td>
+      <td class="border text-center">{{service.catalogue_id}}</td>
+      <td class="border text-center">{{service.nrc}}</td>
+      <td class="border text-center">{{service.mrc}}</td>
+      <td class="border text-center">{{service.commission}}</td>
+
+      </tr>
+
+    </table>
+
+</div>
+
+{% endblock %}

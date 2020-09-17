@@ -1,0 +1,53 @@
+{% extends 'crmapp/base.html' %}
+
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+
+
+<button  class="btn-primary text-light"><a class="text-light "href="{% url 'servicenew' %}">New Service</a></button>
+
+
+{% if servicelist %}
+
+<table class="table mt-5">
+    <thead class="thead-dark">
+  <tr>
+    <th class="text-center">Service</th>
+    <th class="text-center">Service Category</th>
+    <th class="text-center">Ncc_id</th>
+    <th class="text-center">Catalogue_id</th>
+    <th class="text-center">nrc</th>
+    <th class="text-center">mrc</th>
+    <th class="text-center">commission</th>
+    <th class="text-center">No of Opportunities</th>
+    <th class="text-center">No of Orders</th>
+    <th class="text-center">Total_MRC</th>
+
+  </tr>
+  {% for service in servicelist %}
+  <tr>
+    <td class="border text-center"><a href="{% url 'servicedetail' pk=service.id %}">{{service.servicename}}</a></td>
+    <td class="border text-center">{{service.servicecategory}}</td>
+    <td class="border text-center">{{service.ncc_id}}</td>
+    <td class="border text-center">{{service.catalogue_id}}</td>
+    <td class="border text-center">{{service.nrc}}</td>
+    <td class="border text-center">{{service.mrc}}</td>
+    <td class="border text-center">{{service.commission}}</td>
+    <td class="border text-center">{{service.service_opportunities.count}}</td>
+    <td class="border text-center">{{service.service_orders.count}}</td>
+    <td class="border text-center">check</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endif %}
+
+</div>
+
+
+
+  {% endblock %}

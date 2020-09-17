@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <meta charset="utf-8">
+    <title>NCC</title>
+  </head>
+  <body>
+
+
+  <div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    <a class="nav-link" href="{% url 'home' %}">Home<span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="{% url 'customerslist' %}"> Customers <span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="{% url 'opportunitylist' %}"> Opportunities <span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="{% url 'order' %}">Orders<span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="{% url 'servicelist' %}">Services<span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="{% url 'stafflist' %}">Team <span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="">Reports<span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="{% url 'suggestion' %}">Requests<span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="{% url 'orderpost' %}">Post Orders<span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="{% url 'logout' %}">Logout<span class="sr-only">(current)</span></a>
+
+
+
+
+
+  </nav>
+
+  <!-- Example single danger button -->
+<!-- <div class="btn-group">
+  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Action
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#">Separated link</a>
+  </div>
+  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Report
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#">Separated link</a>
+  </div>
+</div> -->
+<br>
+<br>
+  <span style="color:red">Welcome:</span >
+  <h6 style="color:green">{{user.username}}</h6>
+<!--
+  <html>
+  <head>
+  	<style type="text/css">
+  		.sidenav {
+  			height:100%;
+  			width:160px;
+  			position: fixed;
+  			z-index:1;
+  			top:0;
+  			left:0;
+  			background-color:#111;
+  			overflow-x: :hidden;
+  			padding-top:20px;
+  		}
+
+  		.sidenav a {
+  			padding:6px 8px 6px 16px;
+  			text-decoration: none;
+  			font-size:25px;
+  			color: #818181;
+  			display:block;
+  		}
+
+  		.sidenav a:hover{
+  			color:#f1f1f1;
+  		}
+
+  		.main{
+  			margin-left:160px;
+  			padding: 0px 10px;
+  		}
+
+  	</style>
+  	<title>{% block title %}Tim's Site{% endblock %}</title>
+  </head>
+
+  <body>
+  	<div class="sidenav">
+  		<a href="/">Home</a>
+  		<a href="/create">Create</a>
+  		<a href="/2">View</a>
+  	</div>
+
+
+
+  </body>
+  </html> -->
+
+
+</div>
+{% block content %}
+  {% endblock %}
+
+
+
+  </body>
+</html>

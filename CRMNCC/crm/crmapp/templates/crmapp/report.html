@@ -1,0 +1,550 @@
+{% extends 'crmapp/base.html' %}
+
+{% block content %}
+
+
+
+
+  <br>
+  <div class="container">
+
+
+
+<th class="text-center"></th>
+
+
+{% for key, value in allavg.items %}
+<p>Total Average : {{ value|floatformat:2 }} </p>
+
+{% endfor %}
+
+
+{% for key, value in allsum.items %}
+<p>Total MRC: {{ value }} </p>
+{% endfor %}
+
+
+    <table class="table mt-5">
+        <thead class="thead-dark">
+      <tr>
+        <th class="text-center">Sales Man</th>
+        <th class="text-center">No of Opportunities</th>
+        <th class="text-center">Total</th>
+        <th class="text-center">Value / Opportunity</th>
+      </tr>
+
+      {% for sal in allsalesman %}
+      <tr>
+      <td class="border text-center">{{sal.username}}</td>
+      <td class="border text-center">{{sal.salesman_opportunities.count }}</td>
+      {% for person in all2 %}
+          {% if sal.id == person.salesman  %}
+      <td class="border text-center">{{person.Total }}</td>
+          {% endif %}
+      {% endfor %}
+      <td class="border text-center"></td>
+
+      </tr>
+      {% endfor %}
+
+    </table>
+
+<!-- today -->
+<div class="alert alert-primary" role="alert">
+  <h4 class="text-center">Today Report</h4>
+</div>
+
+<div class="row">
+
+
+
+<div class="col-3 ">
+
+<div class="card text-white bg-info " style="max-width: 18rem;">
+  <div class="card-header"></div>
+  <div class="card-body">
+    <h5 class="card-title">{% for key, value in todayosum.items %}
+    <p>Total MRC: {{ value }} </p>
+    {% endfor %}</h5>
+    <h5 class="card-text">No of Opportunities : {{todayocount}}</h5>
+  </div>
+</div>
+
+
+</div>
+
+<div class="col-5">
+
+<table class="table">
+  <thead class="thead-dark">
+<tr>
+  <th class="border text-center">Opportunity </th>
+  <th class="border text-center">No of orders </th>
+  <th class="border text-center">Sales Man </th>
+  <th class="border text-center">MRC </th>
+  <th class="border text-center">Status </th>
+
+{% for item in todayo %}
+<tr>
+<td class="border text-center">{{item.opportunityno}}</td>
+<td class="border text-center">{{item.opportunity_orders__count}}</td>
+<td class="border text-center">{{item.salesman}}</td>
+<td class="border text-center">{{item.totalmrc}}</td>
+<td class="border text-center">{{item.status}}</td>
+</tr>
+{% endfor %}
+</table>
+</div>
+
+<div class="col-4 ">
+
+  {% if todayosalesman %}
+
+  <table class="table">
+    <thead class="thead-dark">
+  <tr>
+
+    <th class="border text-center">Sales Man </th>
+    <th class="border text-center">Total MRC </th>
+
+  {% for item in todayosalesman %}
+      {% for person  in allsalesman %}
+        {% if item.salesman == person.id %}
+  <tr>
+  <td class="border text-center">{{person.username}}</td>
+  <td class="border text-center">{{item.Total}}</td>
+
+  </tr>
+        {% endif %}
+      {% endfor %}
+  {% endfor %}
+  </table>
+
+  {% else %}
+
+  <div class="alert alert-danger" role="alert">
+    <h4 class="text-center">No Sales Today </h4>
+  </div>
+
+  {% endif %}
+</div>
+</div>
+
+
+
+
+
+<div class="alert alert-primary mt-5" role="alert">
+  <h4 class="text-center">Yesterday Report </h4>
+</div>
+
+<!-- yesterday srart -->
+<div class="row">
+
+<div class="col-3 ">
+
+<div class="card text-white bg-info " style="max-width: 18rem;">
+  <div class="card-header"></div>
+  <div class="card-body">
+    <h5 class="card-title">{% for key, value in ydayosum.items %}
+    <p>Total MRC: {{ value }} </p>
+    {% endfor %}</h5>
+    <h5 class="card-text">No of Opportunities : {{ydayocount}}</h5>
+  </div>
+</div>
+
+
+</div>
+
+<div class="col-5">
+
+<table class="table">
+  <thead class="thead-dark">
+<tr>
+  <th class="border text-center">Opportunity </th>
+  <th class="border text-center">No of orders </th>
+  <th class="border text-center">Sales Man </th>
+  <th class="border text-center">MRC </th>
+  <th class="border text-center">Status </th>
+
+{% for item in ydayo %}
+<tr>
+<td class="border text-center">{{item.opportunityno}}</td>
+<td class="border text-center">{{item.opportunity_orders__count}}</td>
+<td class="border text-center">{{item.salesman}}</td>
+<td class="border text-center">{{item.totalmrc}}</td>
+<td class="border text-center">{{item.status}}</td>
+</tr>
+{% endfor %}
+</table>
+</div>
+
+<div class="col-4 ">
+
+  {% if ydayosalesman %}
+
+  <table class="table">
+    <thead class="thead-dark">
+  <tr>
+
+    <th class="border text-center">Sales Man </th>
+    <th class="border text-center">Total MRC </th>
+
+  {% for item in ydayosalesman %}
+   {% for person  in allsalesman %}
+    {% if item.salesman == person.id %}
+  <tr>
+  <td class="border text-center">{{person.username}}</td>
+  <td class="border text-center">{{item.Total}}</td>
+
+  </tr>
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+  </table>
+
+  {% else %}
+
+  <div class="alert alert-danger" role="alert">
+    <h4 class="text-center">No Sales Today </h4>
+  </div>
+
+  {% endif %}
+</div>
+</div>
+
+<!-- yesterday end -->
+
+<!-- this month start -->
+
+<div class="alert alert-primary mt-5" role="alert">
+  <h4 class="text-center">Current Month Report </h4>
+</div>
+
+<div class="row">
+
+<div class="col-3 ">
+
+<div class="card text-white bg-info " style="max-width: 18rem;">
+  <div class="card-header"></div>
+  <div class="card-body">
+    <h5 class="card-title">{% for key, value in thismonthsum.items %}
+    <p>Total MRC: {{ value }} </p>
+    {% endfor %}</h5>
+    <h5 class="card-text">No of Opportunities : {{thismonthcount}}</h5>
+  </div>
+</div>
+
+
+</div>
+
+<div class="col-5">
+
+<table class="table">
+  <thead class="thead-dark">
+<tr>
+  <th class="border text-center">Opportunity </th>
+  <th class="border text-center">No of orders </th>
+  <th class="border text-center">Sales Man </th>
+  <th class="border text-center">MRC </th>
+  <th class="border text-center">Status </th>
+
+{% for item in thismontho %}
+<tr>
+<td class="border text-center">{{item.opportunityno}}</td>
+<td class="border text-center">{{item.opportunity_orders__count}}</td>
+<td class="border text-center">{{item.salesman}}</td>
+<td class="border text-center">{{item.totalmrc}}</td>
+<td class="border text-center">{{item.status}}</td>
+</tr>
+{% endfor %}
+</table>
+</div>
+
+<div class="col-4 ">
+
+  {% if thismonthosalesman %}
+
+  <table class="table">
+    <thead class="thead-dark">
+  <tr>
+
+    <th class="border text-center">Sales Man </th>
+    <th class="border text-center">Total MRC </th>
+
+  {% for item in thismonthosalesman %}
+   {% for person  in allsalesman %}
+    {% if item.salesman == person.id %}
+
+  <tr>
+
+  <td class="border text-center">{{person.username}}</td>
+  <td class="border text-center">{{item.Total}}</td>
+
+  </tr>
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+  </table>
+
+  {% else %}
+
+  <div class="alert alert-danger" role="alert">
+    <h4 class="text-center">No Sales Current Month </h4>
+  </div>
+
+  {% endif %}
+</div>
+</div>
+
+<!-- this month end -->
+
+
+
+<!-- last month start-->
+<div class="alert alert-primary mt-5" role="alert">
+  <h4 class="text-center">Last Month Report </h4>
+</div>
+
+<div class="row">
+
+<div class="col-3 ">
+
+<div class="card text-white bg-info " style="max-width: 18rem;">
+  <div class="card-header"></div>
+  <div class="card-body">
+    <h5 class="card-title">{% for key, value in lastmonthsum.items %}
+    <p>Total MRC: {{ value }} </p>
+    {% endfor %}</h5>
+    <h5 class="card-text">No of Opportunities : {{lastmonthcount}}</h5>
+  </div>
+</div>
+
+
+</div>
+
+<div class="col-5">
+
+<table class="table">
+  <thead class="thead-dark">
+<tr>
+  <th class="border text-center">Opportunity </th>
+  <th class="border text-center">No of orders </th>
+  <th class="border text-center">Sales Man </th>
+  <th class="border text-center">MRC </th>
+  <th class="border text-center">Status </th>
+{% for item in lastmontho %}
+<tr>
+<td class="border text-center">{{item.opportunityno}}</td>
+<td class="border text-center">{{item.opportunity_orders__count}}</td>
+<td class="border text-center">{{item.salesman}}</td>
+<td class="border text-center">{{item.totalmrc}}</td>
+<td class="border text-center">{{item.status}}</td>
+</tr>
+{% endfor %}
+</table>
+</div>
+
+<div class="col-4 ">
+
+  {% if lastmonthosalesman %}
+
+  <table class="table">
+    <thead class="thead-dark">
+  <tr>
+
+    <th class="border text-center">Sales Man </th>
+    <th class="border text-center">Total MRC </th>
+
+    {% for item in lastmonthosalesman %}
+     {% for person  in allsalesman %}
+       {% if item.salesman == person.id %}
+    <tr>
+    <td class="border text-center">{{person.username}}</td>
+    <td class="border text-center">{{item.Total}}</td>
+
+    </tr>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+
+
+  </table>
+
+  {% else %}
+
+  <div class="alert alert-danger" role="alert">
+    <h4 class="text-center">No Sales Last Month </h4>
+  </div>
+
+  {% endif %}
+</div>
+</div>
+
+<!-- last month end -->
+
+<!-- this year start -->
+
+
+<div class="alert alert-primary mt-5" role="alert">
+  <h4 class="text-center">Current Year Report </h4>
+</div>
+<div class="row">
+
+<div class="col-3 ">
+
+<div class="card text-white bg-info " style="max-width: 18rem;">
+  <div class="card-header"></div>
+  <div class="card-body">
+    <h5 class="card-title">{% for key, value in thisyearsum.items %}
+    <p>Total MRC: {{ value }} </p>
+    {% endfor %}</h5>
+    <h5 class="card-text">No of Opportunities : {{thisyearcount}}</h5>
+  </div>
+</div>
+
+
+</div>
+
+<div class="col-5">
+
+<table class="table">
+  <thead class="thead-dark">
+<tr>
+  <th class="border text-center">Opportunity </th>
+  <th class="border text-center">No of orders </th>
+  <th class="border text-center">Sales Man </th>
+  <th class="border text-center">MRC </th>
+  <th class="border text-center">Status </th>
+{% for item in thisyearo %}
+<tr>
+<td class="border text-center">{{item.opportunityno}}</td>
+<td class="border text-center">{{item.opportunity_orders__count}}</td>
+<td class="border text-center">{{item.salesman}}</td>
+<td class="border text-center">{{item.totalmrc}}</td>
+<td class="border text-center">{{item.status}}</td>
+</tr>
+{% endfor %}
+</table>
+</div>
+
+<div class="col-4 ">
+
+  {% if thisyearosalesman %}
+
+  <table class="table">
+    <thead class="thead-dark">
+  <tr>
+
+    <th class="border text-center">Sales Man </th>
+    <th class="border text-center">Total MRC </th>
+
+  {% for item in thisyearosalesman %}
+   {% for person  in allsalesman %}
+     {% if item.salesman == person.id %}
+  <tr>
+  <td class="border text-center">{{person.username}}</td>
+  <td class="border text-center">{{item.Total}}</td>
+
+
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+
+  </table>
+
+  {% else %}
+
+  <div class="alert alert-danger" role="alert">
+    <h4 class="text-center">No Sales This Year  </h4>
+  </div>
+
+  {% endif %}
+</div>
+</div>
+
+<!-- this year end -->
+
+
+<!-- last year start  -->
+
+<div class="alert alert-primary mt-5" role="alert">
+  <h4 class="text-center">Last Year Report </h4>
+</div>
+<div class="row">
+
+<div class="col-3 ">
+
+<div class="card text-white bg-info " style="max-width: 18rem;">
+  <div class="card-header"></div>
+  <div class="card-body">
+    <h5 class="card-title">{% for key, value in lastyearsum.items %}
+    <p>Total MRC: {{ value }} </p>
+    {% endfor %}</h5>
+    <h5 class="card-text">No of Opportunities : {{lastyearcount}}</h5>
+  </div>
+</div>
+
+
+</div>
+
+<div class="col-5">
+
+<table class="table">
+  <thead class="thead-dark">
+<tr>
+  <th class="border text-center">Opportunity </th>
+  <th class="border text-center">No of orders </th>
+  <th class="border text-center">Sales Man </th>
+  <th class="border text-center">MRC </th>
+  <th class="border text-center">Status </th>
+{% for item in lastyearo %}
+<tr>
+<td class="border text-center">{{item.opportunityno}}</td>
+<td class="border text-center">{{item.opportunity_orders__count}}</td>
+<td class="border text-center">{{item.salesman}}</td>
+<td class="border text-center">{{item.totalmrc}}</td>
+<td class="border text-center">{{item.status}}</td>
+</tr>
+{% endfor %}
+</table>
+</div>
+
+<div class="col-4 ">
+
+  {% if lastyearosalesman %}
+
+  <table class="table">
+    <thead class="thead-dark">
+  <tr>
+
+    <th class="border text-center">Sales Man </th>
+    <th class="border text-center">Total MRC </th>
+
+  {% for item in lastyearosalesman %}
+   {% for person  in allsalesman %}
+     {% if item.salesman == person.id %}
+  <tr>
+  <td class="border text-center">{{person.username}}</td>
+  <td class="border text-center">{{item.Total}}</td>
+
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+  <tr>
+  
+  </table>
+
+  {% else %}
+
+  <div class="alert alert-danger" role="alert">
+    <h4 class="text-center">No Sales Last Year  </h4>
+  </div>
+
+  {% endif %}
+</div>
+</div>
+<!-- last year end  -->
+
+
+{% endblock %}

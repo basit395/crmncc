@@ -1,0 +1,37 @@
+{% extends 'crmapp/base.html' %}
+
+{% block content %}
+
+
+
+
+  <br>
+  <div class="container">
+
+    <table class="table mt-5">
+        <thead class="thead-dark">
+      <tr>
+        <th class="text-center">User</th>
+        <th class="text-center">Request</th>
+        <th class="text-center">Creation Date</th>
+        <th class="text-center">Completion</th>
+
+
+      </tr>
+
+      <tr>
+      <td class="border text-center">{{suggestion.requestor}}</td>
+      <td class="border text-center">{{suggestion.requesttext}}</td>
+      <td class="border text-center">{{suggestion.creationdate}}</td>
+      <td class="border text-center">{{suggestion.completion}}</td>
+      </tr>
+
+    </table>
+    <button type="button" class="btn btn-link"><a href="{% url 'suggestionupdate' pk=suggestion.id %}">Update</a></button>
+    {% if not suggestion.completion %}
+    <button type="button" class="btn btn-link"><a href="{% url 'completed' pk=suggestion.id %}">Change To True</a></button>
+    {% endif %}
+
+</div>
+
+{% endblock %}

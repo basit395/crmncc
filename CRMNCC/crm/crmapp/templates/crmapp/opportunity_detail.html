@@ -1,0 +1,220 @@
+{% extends 'crmapp/base.html' %}
+
+{% block content %}
+
+  <br>
+  <div class="container">
+
+
+
+<div class="m-3">
+<span>Position : <small>{{job.jobtitle}}</small></span>
+<br>
+{% if job.jobtitle == 'OperationV' %}
+<button class="btn btn-outline-primary"><a href="{% url 'postopp' pk=opportunitynow.id %}">Change To Post</a></button>
+{% endif %}
+</div>
+<div class="row ml-5">
+
+<div class="column">
+  <button type="button" class="btn btn-danger">
+    <small>Customer</small> <span class="badge badge-light">{{opportunitynow.customer}}</span>
+    <span class="sr-only">unread messages</span>
+  </button>
+
+  <button type="button" class="btn btn-danger">
+    <small>Opportunity No </small><span class="badge badge-light">{{opportunitynow.opportunityno}}</span>
+    <span class="sr-only">unread messages</span>
+  </button>
+
+  <button type="button" class="btn btn-danger">
+    <small>Opportunity No of orders  </small><span class="badge badge-light">{{opportunityorders.count}}</span>
+    <span class="sr-only">unread messages</span>
+  </button>
+
+  <button type="button" class="btn btn-danger">
+    <small>Value </small><span class="badge badge-light">{{mrcsumo}}</span>
+    <span class="sr-only">unread messages</span>
+  </button>
+
+  <button type="button" class="btn btn-danger">
+    <small>Opportunity No of Services  </small><span class="badge badge-light">{{opportunityservices.count}}</span>
+    <span class="sr-only">unread messages</span>
+  </button>
+
+  <button type="button" class="btn btn-danger">
+    <small>Total No of Services</small><span class="badge badge-light">{{totalservices.Total}}</span>
+    <span class="sr-only">unread messages</span>
+  </button>
+</div>
+
+</div>
+
+<table class="table mt-5">
+    <thead class="thead-dark">
+  <tr>
+    <th class="text-center">LMS</th>
+
+    <th class="text-center">Creation Date</th>
+    <th class="text-center">Sales Man</th>
+    <th class="text-center">Job Title</th>
+    <th class="text-center">Customer</th>
+    <th class="text-center">Total NRC</th>
+    <th class="text-center">Total MRC</th>
+    <th class="text-center">Status</th>
+
+  </tr>
+
+  <tr>
+  <td class="border text-center">{{opportunitynow.lms}}</td>
+
+  <td class="border text-center">{{opportunitynow.creationdate}}</td>
+  <td class="border text-center">{{opportunitynow.salesman}}</td>
+  <td class="border text-center">{{opportunitynow.employeejobtitle}}</td>
+  <td class="border text-center">{{opportunitynow.customer}}</td>
+  <td class="border text-center">{{opportunitynow.totalnrc}}</td>
+  <td class="border text-center">{{opportunitynow.totalmrc}}</td>
+  <td class="border text-center">{{opportunitynow.status}}</td>
+
+</table>
+
+<!-- =================Services Start =================== -->
+{% if opportunityservices.count%}
+
+<div class="p-1 mb-2 mt-5 bg-warning text-dark d-flex justify-content-center"><h5 >List Of Services</h5></div>
+<table class="table mt-1">
+    <thead class="thead-light">
+  <tr>
+    <th class="text-center">Service</th>
+    <th class="text-center">No Of Services</th>
+    <th class="text-center">Date</th>
+    <th class="text-center">NRC</th>
+    <th class="text-center">MRC</th>
+    <th class="text-center">Service Category</th>
+    <th class="text-center">Created Services</th>
+    <th class="text-center">Action</th>
+  </tr>
+{% for service in opportunityservices%}
+  <tr>
+  <td class="border text-center">{{service.service}}</td>
+  <td class="border text-center">{{service.noofservices}}</td>
+  <td class="border text-center">{{service.creationdate}}</td>
+  <td class="border text-center">{{service.totalnrc}}</td>
+  <td class="border text-center">{{service.totalmrc}}</td>
+  <td class="border text-center">{{service.servicecategory}}  </td>
+  <td class="border text-center">{{service.createdservices}}  </td>
+  {% if service.noofservices > service.createdservices and opportunitynow.status|stringformat:"s"  == 'Held'  %}
+  <td class="border text-center"><a href="{% url 'newordero' pk=opportunitynow.pk pk1=service.pk %}">Add Order</a></td>
+  {% elif service.noofservices > service.createdservices and opportunitynow.status|stringformat:"s"  == 'Open' %}
+  <td class="border text-center"><a href="{% url 'newordero' pk=opportunitynow.pk pk1=service.pk %}">Add Order</a></td>
+  {% elif service.noofservices > service.createdservices and opportunitynow.status|stringformat:"s"  == 'Validated' %}
+  <td class="border text-center"><a href="{% url 'newordero' pk=opportunitynow.pk pk1=service.pk %}">Add Order</a></td>
+  {% elif service.noofservices > service.createdservices and opportunitynow.status|stringformat:"s"  == 'PostSome' %}
+  <td class="border text-center"><a href="{% url 'newordero' pk=opportunitynow.pk pk1=service.pk %}">Add Order</a></td>
+  {% elif service.noofservices <= service.createdservices %}
+  <td class="border text-center"> Completed</td>
+  {% elif service.noofservices > service.createdservices and opportunitynow.status|stringformat:"s"  == 'Negotiation' %}
+  <td class="border text-center">Sales Stage</td>
+  {% elif service.noofservices > service.createdservices and opportunitynow.status|stringformat:"s"  == 'Proposal' %}
+  <td class="border text-center">Sales Stage</td>
+  {% endif %}
+
+
+
+  </tr>
+{% endfor %}
+</table>
+{% else%}
+
+<h5>There is no Services</h5>
+
+{% endif %}
+
+<br>
+<!-- ======================Services End ===================== -->
+
+{% if opportunityorders.count%}
+
+<div class="p-1 mb-2 mt-5 bg-info text-dark d-flex justify-content-center"><h5 >List Of Orders</h5></div>
+<table class="table mt-1">
+    <thead class="thead-light">
+  <tr>
+
+    <th class="text-center">Order No</th>
+    <th class="text-center">Account No</th>
+    <th class="text-center">Date</th>
+    <th class="text-center">Status</th>
+    <th class="text-center">Service</th>
+    <th class="text-center">Executive</th>
+
+
+  </tr>
+{% for order in opportunityorders%}
+  <tr>
+  <td class="border text-center"><a href="{% url 'orderdetail' pk=order.pk %}">{{order.orderno}}</a></td>
+  <td class="border text-center">{{order.accountno}}</td>
+  <td class="border text-center">{{order.creationdate}}</td>
+  <td class="border text-center">{{order.orderstatus}}</td>
+  <td class="border text-center">{{order.service}}</td>
+  <td class="border text-center">{{order.operationexecutive}}</td>
+
+  </tr>
+
+{% endfor %}
+</table>
+{% else%}
+
+<h5>There is no orders</h5>
+
+{% endif %}
+
+<br>
+
+
+
+<span>
+
+<button  class="btn btn-outline-primary"><a href="{% url 'addservice' pk=opportunitynow.id %}">Add Service</a></button>
+
+</span>
+
+<span>
+
+<button  class="btn btn-outline-primary"><a href="{% url 'opportunityupdate' pk=opportunitynow.id %}">Update</a></button>
+
+</span>
+
+
+<span>{% if opportunitynow.status|stringformat:"s"  == 'Negotiation' %}
+<button type="button" class="btn btn-link"><a href="{% url 'proposal' pk=opportunitynow.id %}">Change To Proposal</a></button>
+{% endif %}</span>
+
+{% if opportunitynow.status|stringformat:"s"  == 'Proposal' and  opportunityservices %}
+<button class="btn btn-outline-primary"><a href="{% url 'document' pk=opportunitynow.id %}">Change To Document</a></button>
+{% endif %}
+
+{% if opportunitynow.status|stringformat:"s"  == 'Operation Validation'  %}
+<button class="btn btn-outline-primary"><a href="{% url 'document' pk=opportunitynow.id %}">Change To Document</a></button>
+{% endif %}
+
+{% if opportunitynow.status|stringformat:"s"  == 'Proposal'  %}
+<button class="btn btn-outline-primary"><a href="{% url 'negotiation' pk=opportunitynow.id %}">Change To Negotiation</a></button>
+{% endif %}
+
+{% if opportunitynow.status|stringformat:"s"  == 'Document' and  opportunityservices %}
+<button class="btn btn-outline-primary"><a href="{% url 'operationvalidation' pk=opportunitynow.id %}">Change To Operation Validation</a></button>
+{% endif %}
+
+{% if opportunitynow.status|stringformat:"s"  == 'Operation Validation' and  opportunityservices %}
+<button class="btn btn-outline-primary"><a href="{% url 'validated' pk=opportunitynow.id %}">Change Validated</a></button>
+{% endif %}
+
+
+
+
+</div>
+
+
+
+
+{% endblock %}

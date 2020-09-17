@@ -1,0 +1,133 @@
+{% extends 'crmapp/base.html' %}
+
+{% block content %}
+
+  <br>
+  <div class="container">
+
+<div class="row bg-dark">
+
+  <div class="col-4">
+
+
+    <div class="card text-light bg-dark m-2 " style="max-width: 18rem;">
+      <div class="card-header text-center text-danger" style="font-size:30px;">Today</div>
+      <div class="card-body">
+        <h5 class="card-title">{% for key, value in todayosum.items %}
+        <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value }} </span> <span class="text-primary" style="font-size:15px;">SAR</span>  </p>
+        {% endfor %}</h5>
+        <h5 class="card-text"><span class="text-success" style="font-size:40px;">{{ todayocount }} </span><span class="text-primary" style="font-size:15px;">Opp</span> </h5>
+      </div>
+    </div>
+
+    </div>
+
+
+
+
+    <div class="col-4">
+      <div class="card text-white bg-dark m-2" style="max-width: 18rem;">
+        <div class="card-header text-center text-danger" style="font-size:30px;">Yesterday </div>
+        <div class="card-body">
+          <h5 class="card-title">{% for key, value in ydayosum.items %}
+            <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value }} </span> <span class="text-primary" style="font-size:15px;">SAR</span>  </p>
+          {% endfor %}       <h5 class="card-text"><span class="text-success" style="font-size:40px;">{{ydayocount}} </span><span class="text-primary" style="font-size:15px;">Opp</span> </h5>
+
+
+        </div>
+      </div>
+
+    </div>
+
+
+<div class="col-4">
+  <div class="card text-white bg-dark m-2" style="max-width: 18rem;">
+    <div class="card-header text-center text-danger" style="font-size:30px;">This Month</div>
+    <div class="card-body">
+      <h5 class="card-title">{% for key, value in thismonthsum.items %}
+        <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value }} </span> <span class="text-primary" style="font-size:15px;">SAR</span>  </p>
+      {% endfor %}</h5>
+ <h5 class="card-text"><span class="text-success" style="font-size:40px;">{{thismonthcount}} </span><span class="text-primary" style="font-size:15px;">Opp</span> </h5>    </div>
+  </div>
+
+
+</div>
+
+
+  </div>
+
+<!-- second row -->
+
+<div class="row bg-dark">
+
+<div class="col-4">
+
+  <div class="card text-white bg-dark m-2" style="max-width: 18rem;">
+    <div class="card-header text-center text-danger" style="font-size:30px;">Last Month</div>
+
+    <div class="card-body">
+      <h5 class="card-title">{% for key, value in lastmonthsum.items %}
+        <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value }} </span> <span class="text-primary" style="font-size:15px;">SAR</span>  </p>
+      {% endfor %}</h5>
+  <h5 class="card-text"><span class="text-success" style="font-size:40px;">{{lastmonthcount}} </span><span class="text-primary" style="font-size:15px;">Opp</span> </h5>
+    </div>
+  </div>
+</div>
+
+  <div class="col-4">
+    <div class="card text-white bg-dark m-2" style="max-width: 18rem;">
+      <div class="card-header text-center text-danger" style="font-size:30px;">This Year</div>
+      <div class="card-body">
+        <h5 class="card-title">{% for key, value in thisyearsum.items %}
+          <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value }} </span> <span class="text-primary" style="font-size:15px;">SAR</span>  </p>
+        {% endfor %}</h5>
+    <h5 class="card-text"><span class="text-success" style="font-size:40px;">{{thisyearcount}} </span><span class="text-primary" style="font-size:15px;">Opp</span> </h5>
+      </div>
+    </div>
+
+  </div>
+
+<div class="col-4">
+  <div class="card text-white bg-dark m-2" style="max-width: 18rem;">
+    <div class="card-header text-center text-danger" style="font-size:30px;">Last Year</div>
+    <div class="card-body">
+      <h5 class="card-title">{% for key, value in lastyearsum.items %}
+        <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value }} </span> <span class="text-primary" style="font-size:15px;">SAR</span>  </p>
+      {% endfor %}</h5>
+    <h5 class="card-text"><span class="text-success" style="font-size:40px;">{{lastyearcount}} </span><span class="text-primary" style="font-size:15px;">Opp</span> </h5>
+    </div>
+  </div>
+
+</div>
+
+
+
+</div>
+
+
+<div class="row bg-dark">
+  <div class="col-4">
+    <div class="card text-white bg-dark m-2" style="max-width: 18rem;">
+      <div class="card-header text-center text-danger" style="font-size:30px;">All The Time</div>
+      <div class="card-body">
+        <h5 class="card-title">{% for key, value in allavg.items %}
+          <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value|floatformat:2 }} </span> <span class="text-primary" style="font-size:15px;">Avg SAR</span>  </p>
+
+        {% endfor %}</h5>
+        <h5 class="card-text">{% for key, value in allsum.items %}
+
+        <p><span class="text-success" style="font-size:40px;">{{ value }} </span> <span class="text-primary" style="font-size:15px;">SAR</span>  </p>        {% endfor %}</h5>
+        <h5 class="card-text"><span class="text-success" style="font-size:40px;">{{allopp.count}} </span><span class="text-primary" style="font-size:15px;">Opp</span> </h5>
+
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+</div>
+
+
+{% endblock %}
