@@ -1,0 +1,75 @@
+{% extends 'crmapp/base.html' %}
+
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+
+
+
+{% if myopportunities %}
+
+<table class="table mt-5">
+    <thead class="thead-dark">
+  <tr>
+    <th class="text-center">Opportunity No</th>
+    <th class="text-center">LMS</th>
+    <th class="text-center">Creation Date</th>
+    <th class="text-center">Sales Man</th>
+    <th class="text-center">Job Title</th>
+    <th class="text-center">Customer</th>
+    <th class="text-center">Total NRC</th>
+    <th class="text-center">Total MRC</th>
+    <th class="text-center">Status</th>
+    <th class="text-center">Source</th>
+    <th class="text-center">Note</th>
+
+
+  </tr>
+  {% for opportunity in opps %}
+  <tr>
+  <td class="border text-center"><a href="{% url 'opportunitydetail' pk=opportunity.pk %}">{{opportunity.opportunityno}}</a></td>
+  <td class="border text-center">{{opportunity.lms}}</td>
+  <td class="border text-center">{{opportunity.creationdate}}</td>
+  <td class="border text-center">{{opportunity.salesman}}</td>
+  <td class="border text-center">{{opportunity.employeejobtitle}}</td>
+  <td class="border text-center">{{opportunity.customer}}</td>
+  <td class="border text-center">{{opportunity.totalnrc}}</td>
+  <td class="border text-center">{{opportunity.totalmrc}}</td>
+  <td class="border text-center">{{opportunity.status}}</td>
+  <td class="border text-center">{{opportunity.source}}</td>
+  <td class="border text-center">{{opportunity.note}}</td>
+
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+<div class="pagination">
+
+
+
+{% if opps.paginator.num_pages > 1 %}
+
+    {% if opps.has_previous %}
+
+        <a href="?page={{ opps.previous_page_number }}">previous</a>
+
+    {% endif %}
+
+    <span class="mx-1">Page {{ opps.number }} of {{ opps.paginator.num_pages }}</span>
+
+    {% if opps.has_next %}
+
+        <a href="?page={{ opps.next_page_number }}">next</a>
+
+    {% endif %}
+
+{% endif %}
+
+</div>
+
+</div>
+{% endblock %}

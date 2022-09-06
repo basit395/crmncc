@@ -1,5 +1,5 @@
 {% extends 'crmapp/base.html' %}
-
+{% load humanize %}
 {% block content %}
 
   <br>
@@ -10,43 +10,80 @@
 <div class="m-3">
 <span>Position : <small>{{job.jobtitle}}</small></span>
 <br>
-{% if job.jobtitle == 'OperationV' %}
-<button class="btn btn-outline-primary"><a href="{% url 'postopp' pk=opportunitynow.id %}">Change To Post</a></button>
-{% endif %}
+
+
+
+
+
 </div>
 <div class="row ml-5">
 
+<h5 class="text-primary mx-2">{{opportunitynow.opportunityno}}</h5>
+
+
+
+
+    <!--<h5 mx-2><a href="{% url 'customerdetail' pk=opportunitynow.customer.id %}">{{opportunitynow.customer}}</a></h5>-->
+
+
+
+
+
+  <!--<button type="button" class="btn btn-light btn-sm">-->
+  <!--  <small class="text-primary">No of Products  </small><span class="badge badge-light">{{opportunityservices.count}}</span>-->
+  <!--  <span class="sr-only">unread messages</span>-->
+  <!--</button>-->
+
+  <!--<button type="button" class="btn btn-light btn-sm">-->
+  <!--  <small class="text-primary">No of Services</small><span class="badge badge-light">{{totalservices.Total}}</span>-->
+  <!--  <span class="sr-only">unread messages</span>-->
+  <!--</button>-->
+
+  <!--<button type="button" class="btn btn-light btn-sm">-->
+  <!--  <small class="text-primary">No of orders  </small><span class="badge badge-light">{{opportunityorders.count}}</span>-->
+  <!--  <span class="sr-only">unread messages</span>-->
+  <!--</button>-->
+
+
+
+
+    <h5 class="mx-4 text-info">{{opportunitynow.status}}</h5>
+
+
 <div class="column">
-  <button type="button" class="btn btn-danger">
-    <small>Customer</small> <span class="badge badge-light">{{opportunitynow.customer}}</span>
-    <span class="sr-only">unread messages</span>
-  </button>
+        {% if opportunitynow.status|stringformat:"s"  == 'Negotiation'  %}
+        <strong><h5 class="ml-1 text-primary">10%</h5></strong>
+        {% endif %}
+        {% if opportunitynow.status|stringformat:"s"  == 'Proposal'  %}
+        <strong><h5 class="ml-1 text-primary">20%</h5></strong>
+        {% endif %}
+        {% if opportunitynow.status|stringformat:"s"  == 'Document'  %}
+        <strong><h5 class="ml-1 text-primary">30%</h5></strong>
+        {% endif %}
+        {% if opportunitynow.status|stringformat:"s"  == 'Operation Validation'  %}
+        <strong><h5 class="ml-1 text-primary">40%</h5></strong>
+        {% endif %}
+        {% if opportunitynow.status|stringformat:"s"  == 'Validated'  %}
+        <strong><h5 class="ml-1 text-primary">50%</h5></strong>
+        {% endif %}
+        {% if opportunitynow.status|stringformat:"s"  == 'Open'  %}
+        <strong><h5 class="ml-1 text-primary">60%</h5></strong>
+        {% endif %}
+        {% if opportunitynow.status|stringformat:"s"  == 'PostSome'  %}
+        <strong><h5 class="ml-1 text-primary">80%</h5></strong>
+        {% endif %}
+        {% if opportunitynow.status|stringformat:"s"  == 'Post'  %}
+        <strong><h5 class="ml-1 text-primary">90%</h5></strong>
+        {% endif %}
+        {% if opportunitynow.status|stringformat:"s"  == 'STC Approval'  %}
+        <strong><h5 class="ml-1 text-primary">55%</h5></strong>
+        {% endif %}
 
-  <button type="button" class="btn btn-danger">
-    <small>Opportunity No </small><span class="badge badge-light">{{opportunitynow.opportunityno}}</span>
-    <span class="sr-only">unread messages</span>
-  </button>
 
-  <button type="button" class="btn btn-danger">
-    <small>Opportunity No of orders  </small><span class="badge badge-light">{{opportunityorders.count}}</span>
-    <span class="sr-only">unread messages</span>
-  </button>
 
-  <button type="button" class="btn btn-danger">
-    <small>Value </small><span class="badge badge-light">{{mrcsumo}}</span>
-    <span class="sr-only">unread messages</span>
-  </button>
-
-  <button type="button" class="btn btn-danger">
-    <small>Opportunity No of Services  </small><span class="badge badge-light">{{opportunityservices.count}}</span>
-    <span class="sr-only">unread messages</span>
-  </button>
-
-  <button type="button" class="btn btn-danger">
-    <small>Total No of Services</small><span class="badge badge-light">{{totalservices.Total}}</span>
-    <span class="sr-only">unread messages</span>
-  </button>
 </div>
+
+
 
 </div>
 
@@ -59,9 +96,12 @@
     <th class="text-center">Sales Man</th>
     <th class="text-center">Job Title</th>
     <th class="text-center">Customer</th>
+    <th class="text-center">CR</th>
     <th class="text-center">Total NRC</th>
     <th class="text-center">Total MRC</th>
-    <th class="text-center">Status</th>
+    <th class="text-center">Expecting Closing Date</th>
+    <th class="text-center">Revenue Before Post</th>
+
 
   </tr>
 
@@ -72,11 +112,163 @@
   <td class="border text-center">{{opportunitynow.salesman}}</td>
   <td class="border text-center">{{opportunitynow.employeejobtitle}}</td>
   <td class="border text-center">{{opportunitynow.customer}}</td>
-  <td class="border text-center">{{opportunitynow.totalnrc}}</td>
-  <td class="border text-center">{{opportunitynow.totalmrc}}</td>
-  <td class="border text-center">{{opportunitynow.status}}</td>
+  <td class="border text-center">{{opportunitynow.customer.cr}}</td>
+  <td class="border text-center">{{opportunitynow.totalnrc|intcomma}}</td>
+  <td class="border text-center">{{mrcsumo|intcomma}}</td>
+
+  <td class="border text-center">{{opportunitynow.expectedclosingdate}}</td>
+  <td class="border text-center">{{opportunitynow.revenue1|intcomma}}</td>
+
 
 </table>
+
+<div class="row ">
+
+
+<div class="col-10 ">
+
+
+
+
+<table class="table table-sm bg-light">
+    <thead class="thead-success">
+  <tr>
+    <th class="border text-center">Creator</th>
+
+    <th class="border text-center">Creation Date</th>
+    <th class="border text-center">Note</th>
+  </tr>
+
+{% for nn in opportunitynow.opportunity_notes.all %}
+
+
+
+  <tr>
+  <td class="border text-center">{{nn.creator}}</td>
+
+  <td class="border text-center">{{nn.creationdate}}</td>
+  <td class="border text-center">{{nn.note}}</td>
+  <tr>
+{% endfor %}
+
+</table>
+
+
+
+
+</div>
+
+
+<div class="col-2">
+<h5 class="m-5 text-info"> <a href="{% url 'opportunitynotes' pk=opportunitynow.id %}"> <svg class="bi" width="32" height="32" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+</svg>Notes</a> </h5>
+</div>
+
+
+</div>
+
+<hr>
+
+<span>
+<button  class="btn btn-outline-primary btn-sm"><a href="{% url 'opportunityupdate' pk=opportunitynow.id %}">Update</a></button>
+</span>
+
+<button type="button" class="btn btn-danger btn-sm">
+  <small></small><a href="{% url 'opportunitydelete' pk=opportunitynow.pk %}" class="text-light"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+</svg> </a>
+  <span class="sr-only">unread messages</span>
+</button>
+
+
+
+<hr>
+
+<span>
+    {% if opportunitynow.customer.cr %}
+        {% if opportunitynow.status|stringformat:"s"  != 'Post' and opportunitynow.status|stringformat:"s"  != 'Lost'  and opportunitynow.customer.cr|get_digit:"10"%}
+        <button  class="btn btn-outline-primary"><a href="{% url 'addservice' pk=opportunitynow.id %}">Add Service</a></button>
+        {% else %}
+        <p class ="text-danger">The CR less than 10 digits  رقم السجل اقل من 10 خانات</p>
+        {% endif %}
+    {% else %}
+    <p class ="text-danger">No CR , please update the customer cr no.</p>
+
+    {% endif %}
+
+
+</span>
+
+
+
+
+
+<hr>
+
+{% if opportunitynow.status|stringformat:"s"  == 'Proposal'  %}
+<button class="btn btn-outline-primary btn-sm"><a href="{% url 'negotiation' pk=opportunitynow.id %}">To Negotiation <small class="text-danger">10%</small></a></button>
+{%else%}
+<button class="btn btn-outline-primary btn-sm" disabled><a>To Negotiation<small class="text-danger">10%</small></a></button>
+{% endif %}
+
+<span>{% if opportunitynow.status|stringformat:"s"  == 'Negotiation' %}
+<button type="button" class="btn btn-outline-primary btn-sm"><a href="{% url 'proposal' pk=opportunitynow.id %}" class="text-dark">To Proposal <small class="text-danger">20%</small></a></button>
+{%else%}
+<button class="btn btn-outline-primary btn-sm" disabled><a>To Proposal<small class="text-danger">20%</small></a></button>
+{% endif %}</span>
+
+
+
+{% if opportunitynow.status|stringformat:"s"  == 'Proposal' and  opportunityservices %}
+<button class="btn btn-outline-primary btn-sm"><a href="{% url 'document' pk=opportunitynow.id %}">To Document<small class="text-danger">30%</small></a></button>
+{%else%}
+<button class="btn btn-outline-primary btn-sm" disabled><a>To Document <small class="text-danger">30%</small></a></button>
+{% endif %}
+
+{% if opportunitynow.status|stringformat:"s"  == 'Document'  or opportunitynow.status|stringformat:"s"  == 'Validated'  or opportunitynow.status|stringformat:"s"  == 'STC Approval'   %}
+            {% if opportunityservices %}
+<button class="btn btn-outline-primary btn-sm"><a href="{% url 'operationvalidation' pk=opportunitynow.id %}">To Operation Validation</a></button>
+            {% endif %}
+{%else%}
+<button class="btn btn-outline-primary btn-sm" disabled><a>To Operation Validation</a></button>
+{% endif %}
+
+
+
+{% if opportunitynow.status|stringformat:"s"  == 'Operation Validation' and  opportunityservices and job.jobtitle == 'SalesManager'%}
+<button class="btn btn-outline-primary btn-sm"><a href="{% url 'validated' pk=opportunitynow.id %}">To Validated</a></button>
+{%else%}
+<button class="btn btn-outline-primary btn-sm" disabled><a>To Validated</a></button>
+{% endif %}
+
+{% if job.jobtitle == 'OperationV' %}
+<span><button class="btn btn-outline-primary btn-sm"><a href="{% url 'postopp' pk=opportunitynow.id %}">To Post</a></button></span>
+{% else %}
+<button class="btn btn-outline-primary btn-sm" disabled><a>To Post</a></button>
+{% endif %}
+
+<span>{% if opportunitynow.status|stringformat:"s"  != 'Post' and opportunitynow.status|stringformat:"s"  != 'Lost' and opportunitynow.status|stringformat:"s"  != 'PostSome'%}
+<button  class="btn btn-outline-primary btn-sm"><a href="{% url 'stcapproval' pk=opportunitynow.id %}" >Change To STC Approval</a></button>
+{% endif %}</span>
+
+
+<span>{% if opportunitynow.status|stringformat:"s"  != 'Post' and opportunitynow.status|stringformat:"s"  != 'Lost' %}
+<button  class="btn btn-danger btn-sm"><a href="{% url 'lost' pk=opportunitynow.id %}" class = "text-light">Change To Lost</a></button>
+{% endif %}</span>
+
+
+{% if opportunitynow.status|stringformat:"s"  == 'Operation Validation'  %}
+<button class="btn btn-outline-primary btn-sm"><a href="{% url 'document' pk=opportunitynow.id %}">Change To Document</a></button>
+{% endif %}
+
+
+
+
+<hr>
+
 
 <!-- =================Services Start =================== -->
 {% if opportunityservices.count%}
@@ -96,11 +288,11 @@
   </tr>
 {% for service in opportunityservices%}
   <tr>
-  <td class="border text-center">{{service.service}}</td>
+  <td class="border text-center"><a href="{% url 'addservicesdetail' pk=service.id %}">{{service.service}}</a></td>
   <td class="border text-center">{{service.noofservices}}</td>
   <td class="border text-center">{{service.creationdate}}</td>
-  <td class="border text-center">{{service.totalnrc}}</td>
-  <td class="border text-center">{{service.totalmrc}}</td>
+  <td class="border text-center">{{service.totalnrc|intcomma}}</td>
+  <td class="border text-center">{{service.totalmrc|intcomma}}</td>
   <td class="border text-center">{{service.servicecategory}}  </td>
   <td class="border text-center">{{service.createdservices}}  </td>
   {% if service.noofservices > service.createdservices and opportunitynow.status|stringformat:"s"  == 'Held'  %}
@@ -126,11 +318,13 @@
 </table>
 {% else%}
 
-<h5>There is no Services</h5>
+<h5>There is no Products</h5>
 
 {% endif %}
 
-<br>
+
+
+<hr>
 <!-- ======================Services End ===================== -->
 
 {% if opportunityorders.count%}
@@ -147,6 +341,17 @@
     <th class="text-center">Service</th>
     <th class="text-center">Executive</th>
 
+    <th class="text-center">Service No</th>
+    <th class="text-center">Add services id</th>
+    <th class="text-center">MRC</th>
+    <th class="text-center">Discount</th>
+    <th class="text-center">New MRC</th>
+    <th class="text-center">Revenue before Post</th>
+    <th class="text-center">Post Revenue</th>
+
+
+
+
 
   </tr>
 {% for order in opportunityorders%}
@@ -157,6 +362,17 @@
   <td class="border text-center">{{order.orderstatus}}</td>
   <td class="border text-center">{{order.service}}</td>
   <td class="border text-center">{{order.operationexecutive}}</td>
+  <td class="border text-center">{{order.serviceno}}</td>
+  <td class="border text-center">{{order.addservices.createdservices}}</td>
+  <td class="border text-center">{{order.mrc|intcomma}}</td>
+  <td class="border text-center">{{order.discount}}</td>
+  <td class="border text-center">{{order.discountmrc|intcomma}}</td>
+  <td class="border text-center">{{order.revenue2|intcomma}}</td>
+  <td class="border text-center">{{order.revenuep|intcomma}}</td>
+
+
+
+
 
   </tr>
 
@@ -172,42 +388,8 @@
 
 
 
-<span>
-
-<button  class="btn btn-outline-primary"><a href="{% url 'addservice' pk=opportunitynow.id %}">Add Service</a></button>
-
-</span>
-
-<span>
-
-<button  class="btn btn-outline-primary"><a href="{% url 'opportunityupdate' pk=opportunitynow.id %}">Update</a></button>
-
-</span>
 
 
-<span>{% if opportunitynow.status|stringformat:"s"  == 'Negotiation' %}
-<button type="button" class="btn btn-link"><a href="{% url 'proposal' pk=opportunitynow.id %}">Change To Proposal</a></button>
-{% endif %}</span>
-
-{% if opportunitynow.status|stringformat:"s"  == 'Proposal' and  opportunityservices %}
-<button class="btn btn-outline-primary"><a href="{% url 'document' pk=opportunitynow.id %}">Change To Document</a></button>
-{% endif %}
-
-{% if opportunitynow.status|stringformat:"s"  == 'Operation Validation'  %}
-<button class="btn btn-outline-primary"><a href="{% url 'document' pk=opportunitynow.id %}">Change To Document</a></button>
-{% endif %}
-
-{% if opportunitynow.status|stringformat:"s"  == 'Proposal'  %}
-<button class="btn btn-outline-primary"><a href="{% url 'negotiation' pk=opportunitynow.id %}">Change To Negotiation</a></button>
-{% endif %}
-
-{% if opportunitynow.status|stringformat:"s"  == 'Document' and  opportunityservices %}
-<button class="btn btn-outline-primary"><a href="{% url 'operationvalidation' pk=opportunitynow.id %}">Change To Operation Validation</a></button>
-{% endif %}
-
-{% if opportunitynow.status|stringformat:"s"  == 'Operation Validation' and  opportunityservices %}
-<button class="btn btn-outline-primary"><a href="{% url 'validated' pk=opportunitynow.id %}">Change Validated</a></button>
-{% endif %}
 
 
 

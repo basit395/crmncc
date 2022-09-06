@@ -1,12 +1,84 @@
 {% extends 'crmapp/base.html' %}
+{% load humanize %}
+
+
 
 {% block content %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
 
   <br>
   <div class="container">
 
+      <div class="row">
+
+          <div class="col">
+                <a href="{% url 'mychart' %}" class="btn btn-info btn-lg">
+                    <span class="glyphicon glyphicon-stats"></span> Graphics
+                </a>
+          </div>
+
+      </div>
+
+<br>
+
+<div class="row">
+    <div class="col">
+
+
+        <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+            <div class="card-header">Post Net MRC  </div>
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text">{{ thisquarterNetMrc|intcomma}}</p>
+                    <p class="card-text">{{ targetach|floatformat:2 }} % </p>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <div class="col">
+
+        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+            <div class="card-header"> Sales Under Process </div>
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text">2022 : {{thisyearopensales|intcomma}}</p>
+                    <p class="card-text">Old : {{oldyearopensales|intcomma}} </p>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="col">
+          <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+            <div class="card-header"> Sales Under Process </div>
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text">2022 : {{thisyear_sales_validation|intcomma}}</p>
+                    <p class="card-text">Old : {{oldyear_sales_validation|intcomma}} </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+<br>
+<!--<p class="text-warning">Our Quarter <span class="text-success" style="font-size:20px;">{{cquarter}} </span> target is : <span class="text-success" style="font-size:20px;">{{target|intcomma}} </span> , the remaining is <span class="text-success" style="font-size:20px;">{{remainingtarget|intcomma}} </span> , we need <span class="text-success" style="font-size:30px;">{{rmsales|intcomma}} </span> Daily sales to achieve the target</p>-->
+
+<!-- first row start -->
 <div class="row bg-dark">
 
+<!-- first column start -->
   <div class="col-4">
 
 
@@ -14,118 +86,249 @@
       <div class="card-header text-center text-danger" style="font-size:30px;">Today</div>
       <div class="card-body">
         <h5 class="card-title">{% for key, value in todayosum.items %}
-        <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value }} </span> <span class="text-primary" style="font-size:15px;">SAR</span>  </p>
+        <p class="text-sm">  <a class="dropdown-item text-success" style="font-size:40px;" href="{% url 'todayop' %}">{{ value|intcomma }} <span class="text-primary" style="font-size:15px;">SAR</span></a>  </p>
         {% endfor %}</h5>
-        <h5 class="card-text"><span class="text-success" style="font-size:40px;">{{ todayocount }} </span><span class="text-primary" style="font-size:15px;">Opp</span> </h5>
+
+
+
+       <h5 class="card-title">{% for key, value in tpost.items %}
+        <!--<p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value|intcomma }} </span> <span class="text-primary" style="font-size:15px;">Post-MRC</span>  </p>-->
+        <p class="text-sm">  <a class="dropdown-item text-success" style="font-size:40px;" href="{% url 'todaypmrc' %}">{{ value|intcomma }} </span> <span class="text-primary" style="font-size:15px;">Post-MRC</span></a>  </p>
+        {% endfor %}</h5>
+
+        <!--<h5 class="card-text"><span class="text-success" style="font-size:40px;">{{ todayocount }} </span><span class="text-primary" style="font-size:15px;">Opp</span> </h5>-->
+        <p class="text-sm">  <a class="dropdown-item text-success" style="font-size:40px;" href="{% url 'todayop' %}">{{ todayocount }} <span class="text-primary" style="font-size:15px;">Opp</span></a>  </p>
+
+        <!--<h5 class="card-text"><span class="text-success" style="font-size:40px;">{{ todayc }} </span><span class="text-primary" style="font-size:15px;">Customer</span> </h5>-->
+        <p class="text-sm">  <a class="dropdown-item text-success" style="font-size:40px;" href="{% url 'todayc' %}">{{ todayc }} <span class="text-primary" style="font-size:15px;">Customer</span></a>  </p>
+
       </div>
     </div>
 
     </div>
 
+<!-- first column end -->
 
-
+<!-- second column start -->
 
     <div class="col-4">
       <div class="card text-white bg-dark m-2" style="max-width: 18rem;">
         <div class="card-header text-center text-danger" style="font-size:30px;">Yesterday </div>
         <div class="card-body">
           <h5 class="card-title">{% for key, value in ydayosum.items %}
-            <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value }} </span> <span class="text-primary" style="font-size:15px;">SAR</span>  </p>
-          {% endfor %}       <h5 class="card-text"><span class="text-success" style="font-size:40px;">{{ydayocount}} </span><span class="text-primary" style="font-size:15px;">Opp</span> </h5>
+          <p class="text-sm">  <a class="dropdown-item text-success" style="font-size:40px;" href="{% url 'yesterdayop' %}">{{ value|intcomma }} <span class="text-primary" style="font-size:15px;">SAR</span></a>  </p>
+
+          {% endfor %}
+
+
+
+      <h5 class="card-title">{% for key, value in ypost.items %}
+        <p class="text-sm">  <a class="dropdown-item text-success" style="font-size:40px;" href="{% url 'yesterdaypostorders' %}">{{ value|intcomma }} </span> <span class="text-primary" style="font-size:15px;">Post-MRC</span></a>  </p>
+
+        {% endfor %}</h5>
+
+               <p class="text-sm">  <a class="dropdown-item text-success" style="font-size:40px;" href="{% url 'yesterdayop' %}">{{ydayocount}}<span class="text-primary" style="font-size:15px;">Opp</span></a>  </p>
+
+               <!--<h5 class="card-text"><span class="text-success" style="font-size:40px;">{{ ydayc }} </span><span class="text-primary" style="font-size:15px;">Customer</span> </h5>-->
+               <p class="text-sm">  <a class="dropdown-item text-success" style="font-size:40px;" href="{% url 'yesterdaycustomers' %}">{{ ydayc }} <span class="text-primary" style="font-size:15px;">Customer</span></a>  </p>
 
 
         </div>
       </div>
 
     </div>
+<!-- second column end -->
 
+<!-- third column start -->
 
-<div class="col-4">
-  <div class="card text-white bg-dark m-2" style="max-width: 18rem;">
-    <div class="card-header text-center text-danger" style="font-size:30px;">This Month</div>
-    <div class="card-body">
-      <h5 class="card-title">{% for key, value in thismonthsum.items %}
-        <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value }} </span> <span class="text-primary" style="font-size:15px;">SAR</span>  </p>
-      {% endfor %}</h5>
- <h5 class="card-text"><span class="text-success" style="font-size:40px;">{{thismonthcount}} </span><span class="text-primary" style="font-size:15px;">Opp</span> </h5>    </div>
+  <div class="col-4">
+    <div class="card text-white bg-dark m-2" style="max-width: 18rem;">
+      <div class="card-header text-center text-danger" style="font-size:30px;">This Week</div>
+      <div class="card-body">
+        <h5 class="card-title">{% for key, value in thisweeksum.items %}
+          <p class="text-sm">  <a class="dropdown-item text-success" style="font-size:40px;" href="{% url 'thisweekop' %}">{{ value|intcomma }} <span class="text-primary" style="font-size:15px;">SAR</span></a>  </p>
+
+        {% endfor %}</h5>
+
+      <h5 class="card-title">{% for key, value in thisweekpost.items %}
+        <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value|intcomma }} </span> <span class="text-primary" style="font-size:15px;">Post-MRC</span>  </p>
+        {% endfor %}</h5>
+
+      <h5 class="card-text"><span class="text-success" style="font-size:40px;">{{thisweekcount}} </span><span class="text-primary" style="font-size:15px;">Opp</span> </h5>
+      <h5 class="card-text"><span class="text-success" style="font-size:40px;">{{ thisweekc }} </span><span class="text-primary" style="font-size:15px;">Customer</span> </h5>
+
+      </div>
+    </div>
+
   </div>
 
+<!-- third column end -->
 
-</div>
+
 
 
   </div>
 
-<!-- second row -->
+  <!-- first row end -->
+
+<!-- second row start-->
 
 <div class="row bg-dark">
 
-<div class="col-4">
+<!-- first column start -->
 
+  <div class="col-4">
+    <div class="card text-white bg-dark m-2" style="max-width: 18rem;">
+      <div class="card-header text-center text-danger" style="font-size:30px;">Last Week</div>
+      <div class="card-body">
+        <h5 class="card-title">{% for key, value in lastweeksum.items %}
+          <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value|intcomma }} </span> <span class="text-primary" style="font-size:15px;">SAR</span>  </p>
+        {% endfor %}</h5>
+
+      <h5 class="card-title">{% for key, value in lastweekpost.items %}
+        <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value|intcomma }} </span> <span class="text-primary" style="font-size:15px;">Post-MRC</span>  </p>
+        {% endfor %}</h5>
+
+      <h5 class="card-text"><span class="text-success" style="font-size:40px;">{{lastweekcount}} </span><span class="text-primary" style="font-size:15px;">Opp</span> </h5>
+      <h5 class="card-text"><span class="text-success" style="font-size:40px;">{{ lastweekc }} </span><span class="text-primary" style="font-size:15px;">Customer</span> </h5>
+
+      </div>
+    </div>
+
+  </div>
+
+
+
+<!-- first column end -->
+<!-- second column start -->
+<div class="col-4">
+<div class="card text-white bg-dark m-2" style="max-width: 18rem;">
+  <div class="card-header text-center text-danger" style="font-size:30px;">This Month</div>
+  <div class="card-body">
+    <h5 class="card-title">{% for key, value in thismonthsum.items %}
+      <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value|intcomma }} </span> <span class="text-primary" style="font-size:15px;">SAR</span>  </p>
+    {% endfor %}</h5>
+
+      <h5 class="card-title">{% for key, value in thismonthpost.items %}
+        <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value|intcomma }} </span> <span class="text-primary" style="font-size:15px;">Post-MRC</span>  </p>
+      {% endfor %}</h5>
+
+<h5 class="card-text"><span class="text-success" style="font-size:40px;">{{thismonthcount}} </span><span class="text-primary" style="font-size:15px;">Opp</span> </h5>
+<h5 class="card-text"><span class="text-success" style="font-size:40px;">{{ thismonthc }} </span><span class="text-primary" style="font-size:15px;">Customer</span> </h5>
+
+</div>
+
+</div>
+</div>
+  <!-- second column end -->
+  <!-- third column start -->
+  <div class="col-4">
   <div class="card text-white bg-dark m-2" style="max-width: 18rem;">
     <div class="card-header text-center text-danger" style="font-size:30px;">Last Month</div>
 
     <div class="card-body">
       <h5 class="card-title">{% for key, value in lastmonthsum.items %}
-        <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value }} </span> <span class="text-primary" style="font-size:15px;">SAR</span>  </p>
+        <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value|intcomma }} </span> <span class="text-primary" style="font-size:15px;">SAR</span>  </p>
       {% endfor %}</h5>
+
+      <h5 class="card-title">{% for key, value in lastmonthpost.items %}
+        <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value|intcomma }} </span> <span class="text-primary" style="font-size:15px;">Post-MRC</span>  </p>
+      {% endfor %}</h5>
+
   <h5 class="card-text"><span class="text-success" style="font-size:40px;">{{lastmonthcount}} </span><span class="text-primary" style="font-size:15px;">Opp</span> </h5>
+  <h5 class="card-text"><span class="text-success" style="font-size:40px;">{{ lastmonthc }} </span><span class="text-primary" style="font-size:15px;">Customer</span> </h5>
+
     </div>
   </div>
 </div>
 
+<!-- third column end -->
+
+
+</div>
+<!-- second row end -->
+<!-- third row start -->
+
+<div class="row bg-dark">
+  <!-- first column start -->
   <div class="col-4">
     <div class="card text-white bg-dark m-2" style="max-width: 18rem;">
       <div class="card-header text-center text-danger" style="font-size:30px;">This Year</div>
       <div class="card-body">
         <h5 class="card-title">{% for key, value in thisyearsum.items %}
-          <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value }} </span> <span class="text-primary" style="font-size:15px;">SAR</span>  </p>
+          <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value|intcomma }} </span> <span class="text-primary" style="font-size:15px;">SAR</span>  </p>
         {% endfor %}</h5>
+
+        <h5 class="card-title">{% for key, value in thisyearpost.items %}
+          <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value|intcomma }} </span> <span class="text-primary" style="font-size:15px;">Post-MRC</span>  </p>
+        {% endfor %}</h5>
+
     <h5 class="card-text"><span class="text-success" style="font-size:40px;">{{thisyearcount}} </span><span class="text-primary" style="font-size:15px;">Opp</span> </h5>
+    <h5 class="card-text"><span class="text-success" style="font-size:40px;">{{ thisyearc }} </span><span class="text-primary" style="font-size:15px;">Customer</span> </h5>
+
       </div>
     </div>
 
   </div>
-
+  <!-- first column end -->
+<!-- second column start -->
 <div class="col-4">
   <div class="card text-white bg-dark m-2" style="max-width: 18rem;">
     <div class="card-header text-center text-danger" style="font-size:30px;">Last Year</div>
     <div class="card-body">
       <h5 class="card-title">{% for key, value in lastyearsum.items %}
-        <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value }} </span> <span class="text-primary" style="font-size:15px;">SAR</span>  </p>
+        <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value|intcomma }} </span> <span class="text-primary" style="font-size:15px;">SAR</span>  </p>
       {% endfor %}</h5>
-    <h5 class="card-text"><span class="text-success" style="font-size:40px;">{{lastyearcount}} </span><span class="text-primary" style="font-size:15px;">Opp</span> </h5>
-    </div>
-  </div>
 
-</div>
-
-
-
-</div>
-
-
-<div class="row bg-dark">
-  <div class="col-4">
-    <div class="card text-white bg-dark m-2" style="max-width: 18rem;">
-      <div class="card-header text-center text-danger" style="font-size:30px;">All The Time</div>
-      <div class="card-body">
-        <h5 class="card-title">{% for key, value in allavg.items %}
-          <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value|floatformat:2 }} </span> <span class="text-primary" style="font-size:15px;">Avg SAR</span>  </p>
-
+      <h5 class="card-title">{% for key, value in lastyearpost.items %}
+          <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value|intcomma }} </span> <span class="text-primary" style="font-size:15px;">Post-MRC</span>  </p>
         {% endfor %}</h5>
-        <h5 class="card-text">{% for key, value in allsum.items %}
-
-        <p><span class="text-success" style="font-size:40px;">{{ value }} </span> <span class="text-primary" style="font-size:15px;">SAR</span>  </p>        {% endfor %}</h5>
-        <h5 class="card-text"><span class="text-success" style="font-size:40px;">{{allopp.count}} </span><span class="text-primary" style="font-size:15px;">Opp</span> </h5>
 
 
-      </div>
+    <h5 class="card-text"><span class="text-success" style="font-size:40px;">{{lastyearcount}} </span><span class="text-primary" style="font-size:15px;">Opp</span> </h5>
+    <h5 class="card-text"><span class="text-success" style="font-size:40px;">{{ lastyearc }} </span><span class="text-primary" style="font-size:15px;">Customer</span> </h5>
+
     </div>
-
   </div>
+
 </div>
 
+  <!-- second column end -->
+
+<!-- third column start -->
+<div class="col-4">
+  <div class="card text-white bg-dark m-2" style="max-width: 18rem;">
+    <div class="card-header text-center text-danger" style="font-size:30px;">All The Time</div>
+    <div class="card-body">
+      <h5 class="card-title">{% for key, value in allavg.items %}
+        <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value|floatformat:2 }} </span> <span class="text-primary" style="font-size:15px;">Avg SAR</span>  </p>
+
+      {% endfor %}</h5>
+
+      <h5 class="card-text">{% for key, value in allsum.items %}
+      <p><span class="text-success" style="font-size:40px;">{{ value|intcomma }} </span> <span class="text-primary" style="font-size:15px;">SAR</span>  </p>        {% endfor %}</h5>
+
+
+
+
+      <h5 class="card-text">{% for key, value in allpost.items %}
+      <p><span class="text-success" style="font-size:40px;">{{ value|intcomma }} </span> <span class="text-primary" style="font-size:15px;">Post-MRC</span>  </p>        {% endfor %}</h5>
+
+
+
+      <h5 class="card-text"><span class="text-success" style="font-size:40px;">{{allopp.count}} </span><span class="text-primary" style="font-size:15px;">Opp</span> </h5>
+      <h5 class="card-text"><span class="text-success" style="font-size:40px;">{{ allc }} </span><span class="text-primary" style="font-size:15px;">Customer</span> </h5>
+
+
+
+    </div>
+  </div>
+
+</div>
+<!-- third column end  -->
+
+</div>
+<!-- third row end -->
 
 </div>
 

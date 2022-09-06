@@ -1,0 +1,163 @@
+{% extends 'crmapp/base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+
+<br>
+<br>
+<br>
+
+<div class="container">
+
+            <hr>
+
+          <form class=""  method="GET" >
+                <div class="form-row">
+
+                      <div class="form-group col-md-10 mb-0">
+                        {{ myfilter.form.customer|as_crispy_field }}
+                      </div>
+                </div>
+
+                <div class="form-row">
+                      <div class="form-group col-md-3 mb-0">
+                        {{ myfilter.form.creator|as_crispy_field }}
+                      </div>
+
+                      <div class="form-group col-md-3 mb-0">
+                        {{ myfilter.form.activity|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-3 mb-0">
+                        {{ myfilter.form.creation_year|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-3 mb-0">
+                        {{ myfilter.form.creation_month|as_crispy_field }}
+                      </div>
+                </div>
+
+<br>
+          <input type="submit" name="" value="Search">
+        </form>
+
+
+
+
+<h4 class="text-center m-1 text-success mt-3">No of My activities : {{myactivityrecords.count}}</h4>
+
+{% if myactivityrecords %}
+
+<table class="table ">
+    <thead class="thead-dark">
+  <tr>
+    <th class="text-center">Activity</th>
+    <th class="text-center">Customer</th>
+    <th class="text-center">Creation Date</th>
+    <th class="text-center">Sales Man</th>
+
+   </tr>
+  {% for ar in opps1 %}
+  <tr>
+
+  <td class="border text-center">{{ar.activity}}</td>
+  <td class="border text-center">{{ar.customer}}</td>
+  <td class="border text-center">{{ar.creationdate}}</td>
+  <td class="border text-center">{{ar.creator}}</td>
+
+  </tr>
+  {% endfor %}
+</table>
+
+{% endif %}
+
+<div class="pagination">
+
+{% if opps1.paginator.num_pages > 1 %}
+
+    {% if opps1.has_previous %}
+
+        <a href="?page={{ opps1.previous_page_number }}">previous</a>
+
+    {% endif %}
+
+    <span class="mx-1">Page {{ opps1.number }} of {{ opps1.paginator.num_pages }}</span>
+
+    {% if opps1.has_next %}
+
+        <a href="?page={{ opps1.next_page_number }}">next</a>
+
+    {% endif %}
+
+{% endif %}
+
+</div>
+
+
+<!-- All Customers -->
+{% if user.user_profile.jobtitle|stringformat:"s" == 'CEO' or user.user_profile.jobtitle|stringformat:"s" == 'GM' or user.user_profile.jobtitle|stringformat:"s" == 'General Manager' or user.user_profile.jobtitle|stringformat:"s" == 'SalesManager' or user.user_profile.jobtitle|stringformat:"s" == 'Board' or user.user_profile.jobtitle|stringformat:"s" == 'OperationV' %}
+
+<h4 class="text-center m-1 text-success">All Activities : {{activityrecords.count}}</h4>
+
+
+
+</div>
+
+<div class="container">
+
+
+{% if activityrecords %}
+
+<table class="table ">
+    <thead class="thead-dark">
+  <tr>
+    <th class="text-center">Activity</th>
+    <th class="text-center">Customer</th>
+    <th class="text-center">Creation Date</th>
+    <th class="text-center">Sales Man</th>
+
+   </tr>
+  {% for ar in opps %}
+  <tr>
+
+  <td class="border text-center">{{ar.activity}}</td>
+  <td class="border text-center">{{ar.customer}}</td>
+  <td class="border text-center">{{ar.creationdate}}</td>
+  <td class="border text-center">{{ar.creator}}</td>
+
+  </tr>
+  {% endfor %}
+</table>
+
+{% endif %}
+<div class="pagination">
+
+{% if opps.paginator.num_pages > 1 %}
+
+    {% if opps.has_previous %}
+
+        <a href="?page={{ opps.previous_page_number }}">previous</a>
+
+    {% endif %}
+
+    <span class="mx-1">Page {{ opps.number }} of {{ opps.paginator.num_pages }}</span>
+
+    {% if opps.has_next %}
+
+        <a href="?page={{ opps.next_page_number }}">next</a>
+
+    {% endif %}
+
+{% endif %}
+
+</div>
+{% endif %}
+
+
+
+</div>
+
+
+
+  {% endblock %}

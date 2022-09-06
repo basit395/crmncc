@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  {% block title %} {%endblock%}
+
+
+</head>
+  <body>
+
+
+
+
+
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+
+<button  class="btn  text-white"><a  class="nav-link text-white" href="{% url 'home' %}" >Home</a></button>
+
+
+  <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   Deals
+  </a>
+   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'dealslist' %}">Deals List</a>
+          <a class="dropdown-item" href="{% url 'dealnew' %}">New Deals</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'fcustomerslist' %}">Customers</a>
+          <a class="dropdown-item" href="{% url 'fcustomernew' %}">Add New Customer</a>
+          <a class="dropdown-item" href=""></a>
+        </div>
+
+<div class="btn-group">
+  <button type="button" class="btn btn-info">Services</button>
+  <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="{% url 'fservicelist' %}">Services</a>
+    <a class="dropdown-item" href="{% url 'fservicenew' %}">Add New Service</a>
+
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#"></a>
+     <a class="dropdown-item" href=""></a>
+  </div>
+</div>
+
+<div class="btn-group">
+  <button type="button" class="btn btn-info">Invoices</button>
+  <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="{% url 'finvoicelist' %}">Invoices List</a>
+
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="{% url 'fpaymentnew' %}">New Payment</a>
+     <a class="dropdown-item" href=""></a>
+  </div>
+</div>
+
+
+{% if user.username %}
+<button  class="btn btn-outline-dark text-white">{{user.username}}</a></button>
+<a class="nav-link text-danger" href="{% url 'logout' %}">Logout<span class="sr-only">(current)</span></a>
+{% else %}
+<a class="nav-link text-white" href="{% url 'login' %}">Login<span class="sr-only">(current)</span></a>
+{% endif %}
+
+
+
+</nav>
+
+
+
+
+
+
+{% block content %}
+  {% endblock %}
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+{% block javascript %}
+
+{% endblock %}
+
+
+  </body>
+</html>

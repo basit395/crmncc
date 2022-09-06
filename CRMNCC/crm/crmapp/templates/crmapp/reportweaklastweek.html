@@ -1,0 +1,205 @@
+{% extends 'crmapp/base.html' %}
+
+{% block content %}
+
+
+
+<div class="container">
+
+
+<h2 class="text-center m-5 text-primary">Last Week Low Perfomance Report </h2>
+
+<div class="row">
+
+
+
+
+
+
+
+
+<div class="col-4">
+
+
+
+<h4 class="text-center m-1 text-danger">Zero Performance</h4>
+
+<table class="table">
+  <thead class="thead-dark">
+<tr>
+
+  <th class="border text-center">Sales Man </th>
+  <th class="border text-center">Total MRC </th>
+
+{% for person in allsalesman %}
+
+
+{% if person.id not in lastweekosid %}
+
+<tr>
+<td class="border text-center">{{person.username}}</td>
+<td class="border text-center">zero</td>
+
+{% endif %}
+{% endfor %}
+
+</table>
+</div>
+
+<div class="col-4">
+
+<h4 class="text-center m-1 text-warning">Week Performance</h4>
+
+<table class="table">
+  <thead class="thead-dark">
+<tr>
+
+  <th class="border text-center">Sales Man </th>
+  <th class="border text-center">Total MRC </th>
+
+{% for person in allsalesman %}
+  {% for item in lastweekos %}
+
+  {% if item.salesman == person.id and item.Total < 3000 %}
+<tr>
+
+<td class="border text-center">{{person.username}}</td>
+<td class="border text-center">{{item.Total}}</td>
+
+
+      {% endif %}
+    {% endfor %}
+        {% endfor %}
+
+</table>
+</div>
+
+
+<!-- good -->
+<div class="col-4">
+
+<h4 class="text-center m-1 text-success">Good Performance</h4>
+
+<table class="table">
+  <thead class="thead-dark">
+<tr>
+
+  <th class="border text-center">Sales Man </th>
+  <th class="border text-center">Total MRC </th>
+
+{% for person in allsalesman %}
+  {% for item in lastweekos %}
+
+  {% if item.salesman == person.id and item.Total >= 3000 %}
+<tr>
+
+<td class="border text-center">{{person.username}}</td>
+<td class="border text-center">{{item.Total}}</td>
+
+
+      {% endif %}
+    {% endfor %}
+        {% endfor %}
+
+</table>
+</div>
+
+
+</div>
+
+
+<h4 class="text-center my-5 text-primary">Sales Executives VS New Customers Report</h4>
+
+<div class="row bg-light">
+    <div class="col-4">
+        <h4 class="text-center m-1 text-danger">Zero Customers</h4>
+
+            <table class="table">
+            <thead class="thead-dark">
+            <tr>
+
+            <th class="border text-center">Sales Man </th>
+            <th class="border text-center">No Of Customers </th>
+
+                {% for person in allsalesman %}
+
+
+                    {% if person.id not in lastweekcsid %}
+
+                    <tr>
+                    <td class="border text-center">{{person.username}}</td>
+                    <td class="border text-center">zero</td>
+
+            {% endif %}
+            {% endfor %}
+
+        </table>
+        </div>
+
+                <div class="col-4">
+
+                <h4 class="text-center m-1 text-warning">Week New Customers</h4>
+
+
+                <table class="table">
+                  <thead class="thead-dark">
+                <tr>
+
+                  <th class="border text-center">Sales Man </th>
+                  <th class="border text-center">No Of Customers </th>
+
+
+                  {% for item in lastweekcs %}
+
+
+                <tr>
+
+                <td class="border text-center">{{item.creator}}</td>
+                <td class="border text-center">{{item.Total}}</td>
+
+
+
+                    {% endfor %}
+
+
+                </table>
+                </div>
+
+
+<!-- good -->
+<div class="col-4">
+
+<h4 class="text-center m-1 text-success">Good New Customers</h4>
+
+<table class="table">
+  <thead class="thead-dark">
+<tr>
+
+  <th class="border text-center">Sales Man </th>
+  <th class="border text-center">No Of Customers </th>
+
+{% for person in allsalesman %}
+  {% for item in lastweekcs %}
+
+      {% if item.creator == person.id and item.Total >= 15 %}
+<tr>
+
+<td class="border text-center">{{person.username}}</td>
+<td class="border text-center">{{item.Total}}</td>
+
+
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+
+</table>
+</div>
+
+
+</div>
+</div>
+
+
+
+
+{% endblock %}

@@ -8,16 +8,18 @@
   <br>
   <div class="container">
 
-<h5>Opportunity : {{addservices.opportunity}}</h5>
+<h5>Opportunity : <a href="{% url 'opportunitydetail' pk=addservices.opportunity.pk %}">{{addservices.opportunity}}</a></h5>
+
 <th class="text-center"></th>
 
     <table class="table mt-5">
         <thead class="thead-dark">
       <tr>
 
-        <th class="text-center">Service</th>
+        <th class="text-center">Product</th>
         <th class="text-center">Date</th>
         <th class="text-center">Service Category</th>
+        <th class="text-center">Quantity</th>
         <th class="text-center">Total NRC</th>
         <th class="text-center">Total MRC</th>
 
@@ -27,6 +29,7 @@
       <td class="border text-center">{{addservices.service}}</td>
       <td class="border text-center">{{addservices.creationdate}}</td>
       <td class="border text-center">{{addservices.servicecategory}}</td>
+      <td class="border text-center">{{addservices.noofservices}}</td>
       <td class="border text-center">{{addservices.totalnrc}}</td>
       <td class="border text-center">{{addservices.totalmrc}}</td>
 
@@ -34,22 +37,17 @@
 
     </table>
 
-    <button type="button" class="btn btn-link"><a href="{% url 'orderupdate' pk=order.id %}">Update</a></button>
-    <br>
-    {% if order.status|stringformat:"s"  == 'Open' or order.status|stringformat:"s"  == 'Held'%}
-    <button type="button" class="btn btn-link"><a href="{% url 'changetopost' pk=order.id %}">Change To Post</a></button>
-    {% endif %}
-    {% if order.status|stringformat:"s"  == 'Operation Validation' %}
-    <button type="button" class="btn btn-link"><a href="{% url 'cancel' pk=order.id %}">Change To Cancel </a></button>
-    {% endif %}
-    <br>
-    {% if order.status|stringformat:"s"  == 'Operation Validation' %}
-    <button type="button" class="btn btn-link"><a href="{% url 'open' pk=order.id %}">Change To Open </a></button>
-    {% endif %}
-    <br>
-    {% if order.status|stringformat:"s"  == 'Open' %}
-    <button type="button" class="btn btn-link"><a href="{% url 'held' pk=order.id %}">Change To Held </a></button>
-    {% endif %}
+    <button type="button" class="btn btn-danger">
+      <small></small><a href="{% url 'addservicedelete1' pk=addservices.pk %}" class="text-light">Delete </a>
+      <span class="sr-only">unread messages</span>
+    </button>
+
+    <button type="button" class="btn btn-info">
+      <small></small><a href="{% url 'addservicesupdate' pk=addservices.pk %}" class="text-light">Update </a>
+      <span class="sr-only">unread messages</span>
+    </button>
+
+
 </div>
 
 {% endblock %}

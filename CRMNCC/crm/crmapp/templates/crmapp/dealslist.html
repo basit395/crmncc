@@ -1,0 +1,87 @@
+{% extends 'crmapp/based.html' %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+
+
+
+<hr>
+  <h4 class="text-center m-1 text-success">No of Deals : {{dealslist1.count}}  </h4>
+  <h4 class="text-center m-1 text-success">MRC SAR : <span class="text-primary">{{summ|intcomma}}</span>  </h4>
+  <h4 class="text-center m-1 text-success">Revenue Since 2021 : <span class="text-primary">{{deals_rsum|intcomma}}</span> </h4>
+  <h4 class="text-center m-1 text-success">Gnet Since 2021 : <span class="text-info">{{deals_ourrsum|floatformat:2}}</span> </h4>
+  {{allinvoices}}
+
+<hr>
+
+
+
+
+
+
+
+
+  {% if dealslist1 %}
+
+  <table class="table  table-sm">
+      <thead class="thead-dark">
+    <tr>
+      <th class="text-center"><small>Deal No</small></th>
+      <th class="text-center">Creation Date</th>
+      <th class="text-center">Creator</th>
+      <th class="text-center">Broker</th>
+      <th class="text-center">Customer</th>
+      <th class="text-center">Service</th>
+      <th class="text-center">Total NRC</th>
+      <th class="text-center">Total MRC</th>
+      <th class="text-center">Commission</th>
+      <th class="text-center">Broker Commission</th>
+      <th class="text-center">Net Commission</th>
+
+      <th class="text-center">Status</th>
+      <th class="text-center">Activation Closing Date</th>
+      <th class="text-center">Cancelling Date</th>
+      <th class="text-center">Revenue</th>
+      <th class="text-center">Note</th>
+      <th class="text-center">Type</th>
+      <th class="text-center">Provider</th>
+      <th class="text-center">Reference No</th>
+
+
+    </tr>
+    {% for opportunity in dealslist1 %}
+    <tr>
+    <td class="border text-center"><a href="{% url 'dealdetail' pk=opportunity.pk %}">{{opportunity.dealno}}</a></td>
+    <td class="border text-center">{{opportunity.creationdate|date:"j, n, Y"}}</td>
+    <td class="border text-center">{{opportunity.creator}}</td>
+    <td class="border text-center"><small>{{opportunity.broker}}</small></td>
+    <td class="border text-center"><small>{{opportunity.customer}}</small></td>
+    <td class="border text-center"><small>{{opportunity.service}}</small></td>
+    <td class="border text-center">{{opportunity.totalnrc}}</td>
+    <td class="border text-center">{{opportunity.totalmrc|intcomma}}</td>
+    <td class="border text-center">{{opportunity.ourcommission}}</td>
+    <td class="border text-center">{{opportunity.brokercommission}}</td>
+    <td class="border text-center">{{opportunity.netcommission}}</td>
+    <td class="border text-center">{{opportunity.status}}</td>
+    <td class="border text-center">{{opportunity.activationdate|date:"j, n, Y"}}</td>
+    <td class="border text-center">{{opportunity.cancellationdate|date:"j, n, Y"}}</td>
+    <td class="border text-center">{{opportunity.revenuep|floatformat:2 }}</td>
+    <td class="border text-center">{{opportunity.note}}</td>
+    <td class="border text-center">{{opportunity.commissiontype}}</td>
+    <td class="border text-center">{{opportunity.provider}}</td>
+    <td class="border text-center">{{opportunity.referenceno}}</td>
+
+
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+
+
+
+
+
+{% endblock %}

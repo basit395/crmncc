@@ -1,0 +1,111 @@
+{% extends 'crmapp/base.html' %}
+{% load humanize %}
+{% block content %}
+
+
+
+
+  <br>
+  <div class="container">
+
+<h4><span style = "color:blue;">Customer Name :</span> {{mycustomer}}</h4>
+<h4><span style = "color:blue;">CR :</span> {{mycustomer.cr}}</h4>
+<h4><span style = "color:blue;">Mobile  :</pan> {{mycustomer.phone}}</h4>
+<h4><span style = "color:blue;">Opportunity : </pan>{{myopportunity}}</h4>
+
+
+<th class="text-center"></th>
+
+    <table class="table mt-5">
+        <thead class="thead-dark">
+      <tr>
+        <th class="text-center">Account</th>
+        <th class="text-center">Date</th>
+        <th class="text-center">No Of Orders</th>
+        <th class="text-center">No Of Bills</th>
+        <th class="text-center">Bills Value</th>
+        <th class="text-center">Payment Date</th>
+        <th class="text-center">Payments Notes</th>
+
+      </tr>
+      <tr>
+      <td class="border text-center">{{myaccount.accountno}}</td>
+      <td class="border text-center">{{myaccount.creationdate}}</td>
+      <td class="border text-center">{{myaccount.nooforders}}</td>
+      <td class="border text-center">{{myaccount.noofbills}}</td>
+      <td class="border text-center">{{myaccount.billsvalue}}</td>
+      <td class="border text-center">{{myaccount.paymentdate}}</td>
+      <td class="border text-center">{{myaccount.notes}}</td>
+
+      </tr>
+
+    </table>
+
+
+    <button type="button" class="btn btn-info">
+      <small></small><a href="{% url 'accountupdate' pk=myaccount.pk %}" class="text-light">Update </a>
+      <span class="sr-only">unread messages</span>
+    </button>
+
+<br>
+
+
+<div class="p-1 mb-2 mt-5 bg-info text-dark d-flex justify-content-center"><h5 >List Of Orders</h5></div>
+<table class="table mt-1">
+    <thead class="thead-light">
+  <tr>
+
+    <th class="text-center">Order No</th>
+    <th class="text-center">Account No</th>
+    <th class="text-center">Act Date</th>
+    <th class="text-center">Status</th>
+    <th class="text-center">Service</th>
+    <th class="text-center">Executive</th>
+
+    <th class="text-center">Service No</th>
+    <th class="text-center">Add services id</th>
+    <th class="text-center">MRC</th>
+    <th class="text-center">Discount</th>
+    <th class="text-center">New MRC</th>
+    <th class="text-center">Revenue before Post</th>
+    <th class="text-center">Post Revenue</th>
+
+
+
+
+
+  </tr>
+{% for order in orderlists %}
+  <tr>
+  <td class="border text-center"><a href="{% url 'orderdetail' pk=order.pk %}">{{order.orderno}}</a></td>
+  <td class="border text-center">{{order.accountno}}</td>
+  <td class="border text-center"><sm>{{order.activationdate}}</sm></td>
+  <td class="border text-center">{{order.orderstatus}}</td>
+  <td class="border text-center"><sm>{{order.service}}</sm></td>
+  <td class="border text-center">{{order.operationexecutive}}</td>
+  <td class="border text-center">{{order.serviceno}}</td>
+  <td class="border text-center">{{order.addservices.createdservices}}</td>
+  <td class="border text-center">{{order.mrc|intcomma}}</td>
+  <td class="border text-center">{{order.discount}}</td>
+  <td class="border text-center">{{order.discountmrc|intcomma}}</td>
+  <td class="border text-center">{{order.revenue2|intcomma}}</td>
+  <td class="border text-center">{{order.revenuep|intcomma}}</td>
+
+
+
+
+
+  </tr>
+
+{% endfor %}
+</table>
+
+
+
+
+
+
+
+</div>
+
+{% endblock %}

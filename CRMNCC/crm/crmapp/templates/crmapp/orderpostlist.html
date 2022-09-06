@@ -1,11 +1,29 @@
 {% extends 'crmapp/base.html' %}
 
+{% load crispy_forms_tags %}
+
+{% load humanize %}
 
 {% block content %}
 
 
 
 <div class="container mt-5">
+
+
+  <h4 class="text-center m-1 text-success">Post Orders : <span class="text-danger" >{{orderpostlist.count}}</span></h4>
+  <h4 class="text-center m-1 text-success">MRC : <span class="text-danger" >{{mrcsumo|intcomma}}</span></h4>
+
+
+<div class="col-6">
+
+        <form class=""  method="GET">
+          {{myfilter.form|crispy}}
+          <input type="submit" name="" value="Search">
+        </form>
+
+</div>
+
 
 
 
@@ -17,27 +35,70 @@
   <tr>
     <th class="text-center">Order No</th>
     <th class="text-center">Opportunity</th>
-    <th class="text-center">Date</th>
+    <th class="text-center">Creation Date</th>
+
+    <th class="text-center">Activation Date</th>
     <th class="text-center">Status</th>
+
     <th class="text-center">Service</th>
-    <th class="text-center">Executive</th>
+    <th class="text-center">MRC</th>
+    <th class="text-center">Discount</th>
+    <th class="text-center">MRC after discount</th>
+    <th class="text-center">Revenue</th>
+    <th class="text-center">Sales Man</th>
+    <th class="text-center">Operation User</th>
+    <th class="text-center">AAA</th>
 
 
   </tr>
-  {% for order in orderpostlist %}
+  {% for order in opps %}
   <tr>
   <td class="border text-center"><a href="{% url 'orderdetail' pk=order.id %}">{{order.orderno}}</a></td>
   <td class="border text-center">{{order.opportunity}}</td>
   <td class="border text-center">{{order.creationdate}}</td>
-  <td class="border text-center">{{order.status}}</td>
+
+  <td class="border text-center">{{order.activationdate}}</td>
+  <td class="border text-center">{{order.orderstatus}}</td>
+
   <td class="border text-center">{{order.service}}</td>
+  <td class="border text-center">{{order.mrc}}</td>
+  <td class="border text-center">{{order.discount}}</td>
+  <td class="border text-center">{{order.discountmrc}}</td>
+  <td class="border text-center">{{order.revenuep}}</td>
+  <td class="border text-center">{{order.opportunity.salesman}}</td>
   <td class="border text-center">{{order.operationexecutive}}</td>
+  <td class="border text-center">{{order.commission}}</td>
 
   </tr>
   {% endfor %}
 </table>
 
 {% endif %}
+
+
+<div class="pagination">
+
+{% if opps.paginator.num_pages > 1 %}
+
+    {% if opps.has_previous %}
+
+        <a href="?page={{ opps.previous_page_number }}">previous</a>
+
+    {% endif %}
+
+    <span class="mx-1">Page {{ opps.number }} of {{ opps.paginator.num_pages }}</span>
+
+    {% if opps.has_next %}
+
+        <a href="?page={{ opps.next_page_number }}">next</a>
+
+    {% endif %}
+
+{% endif %}
+
+</div>
+
+
 
 </div>
 

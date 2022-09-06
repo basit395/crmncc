@@ -30,13 +30,13 @@
 
 
   <tr>
-  <td class="border text-center"><a href="">{{staff.first_name}}-{{staff.last_name}}</a></td>
+  <td class="border text-center"><a href="{% url 'usercustomers' pk=staff.id %}">{{staff.first_name}}-{{staff.last_name}}</a></td>
   <td class="border text-center">{{staff.username}}</td>
   <td class="border text-center">{{staff.email}}</td>
   <td class="border text-center">{{staff.is_active}}</td>
   <td class="border text-center">{{profile.jobtitle}}</td>
-  <td class="border text-center">{{staff.salesman_opportunities.count}}</td>
-  </tr>
+  <td class="border text-center"><a href="{% url 'useropportunities' pk=staff.id %}">{{staff.salesman_opportunities.count}}</a></td>
+
       {% endif %}
     {% endfor %}
   {% endfor %}

@@ -1,5 +1,6 @@
 {% extends 'crmapp/base.html' %}
-
+{% load humanize %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 
@@ -7,9 +8,93 @@
 
 <div class="container mt-5">
 
+    <div class="col-6">
+
+        <form class=""  method="GET">
+
+          {{myfilter.form|crispy}}
+          <input type="submit" name="" value="Search">
+        </form>
+
+</div>
+
+<hr>
+  <h4 class="text-center m-1 text-success">No of My Opportunities : {{myopportunities.count}}</h4>
 
 
-{% if opportunitylist %}
+
+  {% if myopportunities %}
+
+  <table class="table mt-5">
+      <thead class="thead-dark">
+    <tr>
+      <th class="text-center">Opportunity No</th>
+      <th class="text-center">LMS</th>
+      <th class="text-center">Creation Date</th>
+      <th class="text-center">Sales Man</th>
+      <th class="text-center">Job Title</th>
+      <th class="text-center">Customer</th>
+      <th class="text-center">Total NRC</th>
+      <th class="text-center">Total MRC</th>
+      <th class="text-center">Status</th>
+      <th class="text-center">Source</th>
+      <th class="text-center">Expecting Closing Date</th>
+      <th class="text-center">Revenue With No Post</th>
+      <th class="text-center">Note</th>
+
+
+
+    </tr>
+    {% for opportunity in opps1 %}
+    <tr>
+    <td class="border text-center"><a href="{% url 'opportunitydetail' pk=opportunity.pk %}">{{opportunity.opportunityno}}</a></td>
+    <td class="border text-center">{{opportunity.lms}}</td>
+    <td class="border text-center">{{opportunity.creationdate|date:"j, n, Y"}}</td>
+    <td class="border text-center">{{opportunity.salesman}}</td>
+    <td class="border text-center"><small>{{opportunity.employeejobtitle}}</small></td>
+    <td class="border text-center">{{opportunity.customer}}</td>
+    <td class="border text-center">{{opportunity.totalnrc}}</td>
+    <td class="border text-center">{{opportunity.totalmrc|intcomma}}</td>
+    <td class="border text-center">{{opportunity.status}}</td>
+    <td class="border text-center">{{opportunity.source}}</td>
+    <td class="border text-center">{{opportunity.expectedclosingdate|date:"j, n, Y"}}</td>
+    <td class="border text-center">{{opportunity.revenue1|intcomma}}</td>
+    <td class="border text-center">{{opportunity.note}}</td>
+
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+
+<div class="pagination">
+
+{% if opps1.paginator.num_pages > 1 %}
+
+    {% if opps1.has_previous %}
+
+        <a href="?page={{ opps1.previous_page_number }}">previous</a>
+
+    {% endif %}
+
+    <span class="mx-1">Page {{ opps1.number }} of {{ opps1.paginator.num_pages }}</span>
+
+    {% if opps1.has_next %}
+
+        <a href="?page={{ opps1.next_page_number }}">next</a>
+
+    {% endif %}
+
+{% endif %}
+
+</div>
+
+
+
+  {% if user.user_profile.jobtitle|stringformat:"s" == 'CEO' or user.user_profile.jobtitle|stringformat:"s" == 'GM' or user.user_profile.jobtitle|stringformat:"s" == 'General Manager' or user.user_profile.jobtitle|stringformat:"s" == 'SalesManager' or user.user_profile.jobtitle|stringformat:"s" == 'Board'%}
+
+  <h4 class="text-center m-1 text-success">No of All Opportunities : {{opportunitylist.count}}</h4>
+
+    {% if opportunitylist %}
 
 <table class="table mt-5">
     <thead class="thead-dark">
@@ -23,22 +108,58 @@
     <th class="text-center">Total NRC</th>
     <th class="text-center">Total MRC</th>
     <th class="text-center">Status</th>
+    <th class="text-center">Source</th>
+    <th class="text-center">Expecting Closing Date</th>
+    <th class="text-center">Revenue With No Post</th>
+
 
   </tr>
-  {% for opportunity in opportunitylist %}
+  {% for opportunity in opps %}
   <tr>
   <td class="border text-center"><a href="{% url 'opportunitydetail' pk=opportunity.pk %}">{{opportunity.opportunityno}}</a></td>
   <td class="border text-center">{{opportunity.lms}}</td>
-  <td class="border text-center">{{opportunity.creationdate}}</td>
+  <td class="border text-center">{{opportunity.creationdate|date:"j, n, Y"}}</td>
   <td class="border text-center">{{opportunity.salesman}}</td>
   <td class="border text-center">{{opportunity.employeejobtitle}}</td>
   <td class="border text-center">{{opportunity.customer}}</td>
   <td class="border text-center">{{opportunity.totalnrc}}</td>
-  <td class="border text-center">{{opportunity.totalmrc}}</td>
+  <td class="border text-center">{{opportunity.totalmrc|intcomma}}</td>
   <td class="border text-center">{{opportunity.status}}</td>
+  <td class="border text-center">{{opportunity.source}}</td>
+  <td class="border text-center">{{opportunity.expectedclosingdate|date:"j, n, Y"}}</td>
+  <td class="border text-center">{{opportunity.revenue1|intcomma}}</td>
+
   </tr>
   {% endfor %}
 </table>
+{% endif %}
+
+
+<div class="pagination">
+
+
+
+{% if opps.paginator.num_pages > 1 %}
+
+    {% if opps.has_previous %}
+
+        <a href="?page={{ opps.previous_page_number }}">previous</a>
+
+    {% endif %}
+
+    <span class="mx-1">Page {{ opps.number }} of {{ opps.paginator.num_pages }}</span>
+
+    {% if opps.has_next %}
+
+        <a href="?page={{ opps.next_page_number }}">next</a>
+
+    {% endif %}
+
+{% endif %}
+
+
+
+</div>
 {% endif %}
 </div>
 {% endblock %}

@@ -1,0 +1,52 @@
+
+{% extends 'crmapp/base.html' %}
+
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+
+
+
+
+{% if salesteamlist %}
+
+<table class="table mt-5">
+    <thead class="thead-dark">
+  <tr>
+    <th class="text-center">Name</th>
+    <th class="text-center">Sales</th>
+    <th class="text-center">Post</th>
+  </tr>
+  {% for xx in mylist %}
+
+
+
+  <tr>
+  <td class="border text-center"><a href="{% url 'salesmandetail' pk=xx.idd %}">{{xx.name}}</a></td>
+  <td class="border text-center">{{xx.mrc}}</td>
+  <td class="border text-center">{{xx.post}}</td>
+
+  {% endfor %}
+</table>
+
+
+
+
+{% endif %}
+
+
+
+
+
+
+</div>
+
+
+
+  {% endblock %}
+
+
+

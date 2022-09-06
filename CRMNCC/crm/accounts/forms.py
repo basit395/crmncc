@@ -10,3 +10,7 @@ class SignupForm(UserCreationForm):
     class Meta:
         model = User
         fields  =['username','email']
+
+
+class resetForm(forms.Form):
+    myemail = forms.EmailField(max_length = 200)

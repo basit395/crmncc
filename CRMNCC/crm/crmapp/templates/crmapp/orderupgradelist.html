@@ -1,0 +1,63 @@
+{% extends 'crmapp/base.html' %}
+
+{% load humanize %}
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+
+
+  <h4 class="text-center m-1 text-success">Upgrade Orders : <span class="text-danger" >{{orderupgradelist.count}}</span></h4>
+
+
+
+{% if orderupgradelist %}
+
+<table class="table mt-5">
+    <thead class="thead-dark">
+  <tr>
+    <th class="text-center">Order No</th>
+    <th class="text-center">Opportunity</th>
+    <th class="text-center">Creation Date</th>
+    <th class="text-center">Open Date</th>
+    <th class="text-center">Activation Date</th>
+    <th class="text-center">Status</th>
+    <th class="text-center">Dealcategort</th>
+    <th class="text-center">Service</th>
+    <th class="text-center">Service Out</th>
+    <th class="text-center">MRC</th>
+    <th class="text-center">Revenue</th>
+    <th class="text-center">Sales Man</th>
+    <th class="text-center">Operation User</th>
+
+
+  </tr>
+  {% for order in orderupgradelist %}
+  <tr>
+  <td class="border text-center"><a href="{% url 'orderdetail' pk=order.id %}">{{order.orderno}}</a></td>
+  <td class="border text-center">{{order.opportunity}}</td>
+  <td class="border text-center">{{order.creationdate}}</td>
+  <td class="border text-center">{{order.opendate}}</td>
+  <td class="border text-center">{{order.activationdate}}</td>
+  <td class="border text-center">{{order.orderstatus}}</td>
+  <td class="border text-center">{{order.dealcategory}}</td>
+  <td class="border text-center">{{order.service}}</td>
+  <td class="border text-center">{{order.serviceout}}</td>
+  <td class="border text-center">{{order.mrc}}</td>
+  <td class="border text-center">{{order.revenuep}}</td>
+  <td class="border text-center">{{order.opportunity.salesman}}</td>
+  <td class="border text-center">{{order.operationexecutive}}</td>
+
+  </tr>
+  {% endfor %}
+</table>
+
+{% endif %}
+
+</div>
+
+
+
+  {% endblock %}

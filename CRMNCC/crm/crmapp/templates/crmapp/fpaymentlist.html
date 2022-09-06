@@ -1,0 +1,41 @@
+{% extends 'crmapp/based.html' %}
+
+{% block content %}
+
+
+
+
+  <br>
+
+  <div class="container">
+
+    <h5>{{fpaymentlist.count}}</h5>
+
+    <table class="table mt-5">
+        <thead class="thead-dark">
+      <tr>
+
+        <th class="text-center">Invoice</th>
+        <th class="text-center">Payment date</th>
+        <th class="text-center">Payment</th>
+        <th class="text-center">Note</th>
+
+      </tr>
+
+{% for pp in fpaymentlist %}
+      <tr>
+
+      <td class="border text-center">{{pp.invoiceno}}</td>
+      <td class="border text-center">{{pp.paymentdate}}</td>
+      <td class="border text-center"> <a href="{% url 'fpaymentdetail' pk=pp.id %}">{{pp.payment}}</a></td>
+      <td class="border text-center">{{pp.notes}}</td>
+
+      </tr>
+{% endfor %}
+
+    </table>
+  <br>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,116 @@
+{% load static %}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" type = "text/css" href="{% static 'css/main.css' %}" >
+
+
+
+
+
+
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+
+
+<div class="container">
+    <div class="row bg-info">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="row p-3 bg-light">
+                        <div class="col-md-6">
+                            <h5 class="text-primary ml-3">Gnet For telecommunication Services</h5>
+
+                            <img  id="logo-icon" src="/static/images/FullColor_1280x1024_72dpi.jpg" width="75" height="75">
+
+                        </div>
+
+                        <div class="col-md-6 text-right">
+                            <p class="font-weight-bold ">Invoice #{{myinvoice.invoiceno}}</p>
+                            <p class="text-muted">Due to: {{myinvoice.year}} - {{myinvoice.month}}</p>
+                        </div>
+                    </div>
+
+                    <hr class="my-5">
+
+                    <div class="row pb-5 p-5">
+                        <div class="col-md-6">
+                            <p class="font-weight-bold mb-4">Billed To</p>
+                            <p>FastData Co.</p>
+                            <p>Jeddah, KSA</p>
+                            <p class="mb-1"></p>
+                        </div>
+
+                        <div class="col-md-6 text-right">
+                            <p class="font-weight-bold mb-4">Payment Details</p>
+                            <p class="mb-1"><span class="text-muted">Mohamed Bin Saad RD  </span> </p>
+                            <p class="mb-1"><span class="text-muted">Building No 23 Unit #2 </span></p>
+                            <p class="mb-1"><span class="text-muted">Riyadh KSA  </span> </p>
+                            <p class="mb-1"><span class="text-muted">Account: </span> SA97 8000 0362 6080 1656 1658</p>
+                        </div>
+                    </div>
+
+                    <div class="row p-5">
+                        <div class="col-md-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="border-0 text-uppercase small font-weight-bold">ID</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">customer</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Description</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Amount</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Quantity</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for xx in myinvoice.invoice_items.all %}
+                                    <tr>
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{xx.deal.customer}}</td>
+                                        <td>{{xx.deal.service}}</td>
+                                        <td>{{xx.itemvalue}}</td>
+                                        <td>1</td>
+                                        <td>{{xx.itemvalue}}</td>
+                                    </tr>
+                                    {% endfor %}
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row-reverse bg-dark text-white p-4">
+                        <div class="py-3 px-5 text-right">
+                            <div class="mb-2">Grand Total</div>
+                            <div class="h2 font-weight-light">{{myinvoice.value}}   SAR</div>
+                        </div>
+
+                        <div class="py-3 px-5 text-right">
+                            <div class="mb-2">TAX</div>
+                            <div class="h2 font-weight-light">0%</div>
+                        </div>
+
+                        <div class="py-3 px-5 text-right">
+                            <div class="mb-2">Sub - Total amount</div>
+                            <div class="h2 font-weight-light">{{myinvoice.value}}   SAR</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-light mt-5 mb-5 text-center small">by : <a class="text-light" target="_blank" href="http://totoprayogo.com">totoprayogo.com</a></div>
+
+</div>
+
+
+
+
+

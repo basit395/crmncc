@@ -1,0 +1,39 @@
+{% extends 'crmapp/base.html' %}
+
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+
+
+
+
+{% if expensecategorylist %}
+
+<table class="table mt-5">
+    <thead class="thead-dark">
+  <tr>
+    <th class="text-center">Expense Category</th>
+    <th class="text-center">Amount</th>
+
+
+
+  </tr>
+  {% for expensecategory in expensecategorylist %}
+  <tr>
+  <td class="border text-center"><a href="{% url 'expensecategorydetail' pk=expensecategory.id %}">{{expensecategory.expensecategoryname}}</a></td>
+  <td class="border text-center"></td>
+
+  </tr>
+  {% endfor %}
+</table>
+
+{% endif %}
+
+</div>
+
+
+
+  {% endblock %}

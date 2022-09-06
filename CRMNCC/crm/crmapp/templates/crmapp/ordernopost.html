@@ -1,0 +1,50 @@
+{% extends 'crmapp/base.html' %}
+
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+
+
+
+
+{% if ordernopost %}
+
+<h5 style="color:red">There are {{ordernopost.count}} orders still not post</h5>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th class="text-center">Order No</th>
+    <th class="text-center">Opportunity</th>
+        <th class="text-center">Customer</th>
+    <th class="text-center">Date</th>
+    <th class="text-center">Status</th>
+    <th class="text-center">Service</th>
+    <th class="text-center">Operation User</th>
+
+
+  </tr>
+  {% for order in ordernopost %}
+  <tr>
+  <td class="border text-center"><a href="{% url 'orderdetail' pk=order.id %}">{{order.orderno}}</a></td>
+  <td class="border text-center"><a href="{% url 'opportunitydetail' pk=order.opportunity.id %}">{{order.opportunity}}</a></td></td>
+  <td class="border text-center">{{order.opportunity.customer}}</td>
+  <td class="border text-center">{{order.creationdate}}</td>
+  <td class="border text-center">{{order.orderstatus}}</td>
+  <td class="border text-center">{{order.service}}</td>
+  <td class="border text-center">{{order.operationexecutive}}</td>
+
+  </tr>
+  {% endfor %}
+</table>
+
+{% endif %}
+
+</div>
+
+
+
+  {% endblock %}

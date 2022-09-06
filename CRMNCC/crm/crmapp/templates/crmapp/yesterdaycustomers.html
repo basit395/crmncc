@@ -1,0 +1,68 @@
+{% extends 'crmapp/base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+
+<div class="container mt-3">
+
+
+
+
+</div>
+
+<div class="container">
+
+
+
+ <h4 class="text-center m-1 text-success mt-3">No of customers : {{yesterdaycustomers.count}}</h4>
+
+{% if yesterdaycustomers %}
+
+<table class="table ">
+    <thead class="thead-dark">
+  <tr>
+    <th class="text-center">ID</th>
+    <th class="text-center">Customer</th>
+    <th class="text-center">CR</th>
+    <th class="text-center">Creation Date</th>
+    <th class="text-center">Creator</th>
+    <th class="text-center">No of Opportunities</th>
+    <th class="text-center">Phone</th>
+    <th class="text-center">Email</th>
+
+
+
+  </tr>
+  {% for customer in yesterdaycustomers %}
+  <tr>
+  <td class="border text-center">{{customer.id}}</td>
+  <td class="border text-center"><a href="{% url 'customerdetail' pk=customer.id %}" class="text-primary">{{customer.customername}}</a></td>
+  <td class="border text-center">{{customer.cr}}</td>
+  <td class="border text-center">{{customer.creationdate}}</td>
+  <td class="border text-center">{{customer.creator}}</td>
+  <td class="border text-center">{{customer.customer_opportunities.count}}</td>
+  <td class="border text-center">{{customer.phone}}</td>
+  <td class="border text-center">{{customer.email}}</td>
+
+
+  </tr>
+  {% endfor %}
+</table>
+
+{% endif %}
+
+
+
+
+
+
+
+
+</div>
+
+
+
+  {% endblock %}

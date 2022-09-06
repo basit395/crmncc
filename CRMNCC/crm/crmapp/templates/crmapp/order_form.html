@@ -4,20 +4,52 @@
 
 {% block content %}
 
+<style>
+
+input {max-width: 12em};
+
+
+</style>
+
+
 <div class="container">
 
   <br>
 
-    <h5 style="color:Tomato;">New Order</h5>
+    <h6 style="color:Blue;">Order No : {{thisorder.orderno}}</h6>
 
-    <form method="POST" class="post-form">
+    <br>
+
+    <form method="post">
 
     {% csrf_token %}
+
     {{form|crispy}}
+
 
     <button type="submit" class="btn btn-primary mb-2">Save</button>
 
     </form>
+
+
+<script>
+
+order = document.getElementById('id_dealcategory');
+order.addEventListener("change", myFunction);
+disabled = document.getElementById("id_serviceout");
+   disabled.disabled = true;
+
+function myFunction() {
+  var x = document.getElementById("id_dealcategory").value;
+
+    if (x == 'n') {
+        document.getElementById("id_serviceout").disabled = true;
+    }
+    else {
+        document.getElementById("id_serviceout").disabled = false;
+    }
+}
+</script>
 
 </div>
 

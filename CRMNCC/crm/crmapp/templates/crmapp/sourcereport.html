@@ -1,0 +1,32 @@
+{% extends 'crmapp/base.html' %}
+
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+
+{{creatorreport}}
+
+
+<h5>No of Sources : {{sourcelist.count}}</h5>
+
+
+
+{%for ss in sourcelist %}
+
+<p style="display:inline-block;">{{ss.leadsourcename}}</p>
+<p style="display:inline-block;">{{ss.source_customers.count}}</p>
+
+<br>
+
+{% endfor %}
+
+
+</div>
+
+</div>
+
+
+{% endblock %}

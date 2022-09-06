@@ -1,0 +1,65 @@
+{% extends 'crmapp/base.html' %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+
+
+
+<hr>
+  <h4 class="text-center m-1 text-success">No of Post Orders : {{thisweekpostorders.count}}</h4>
+
+
+
+  {% if thisweekpostorders %}
+
+  <table class="table mt-5">
+      <thead class="thead-dark">
+    <tr>
+        <th class="text-center">Order No</th>
+        <th class="text-center">Opportunity</th>
+        <th class="text-center">Creation Date</th>
+
+        <th class="text-center">Activation Date</th>
+        <th class="text-center">Status</th>
+
+        <th class="text-center">Service</th>
+        <th class="text-center">MRC</th>
+        <th class="text-center">Discount</th>
+        <th class="text-center">MRC after discount</th>
+        <th class="text-center">Revenue</th>
+        <th class="text-center">Sales Man</th>
+        <th class="text-center">Operation User</th>
+        <th class="text-center">AAA</th>
+
+
+
+    </tr>
+    {% for order in thisweekpostorders %}
+    <tr>
+   <td class="border text-center"><a href="{% url 'orderdetail' pk=order.id %}">{{order.orderno}}</a></td>
+   <td class="border text-center">{{order.opportunity}}</td>
+   <td class="border text-center">{{order.creationdate}}</td>
+
+   <td class="border text-center">{{order.activationdate}}</td>
+   <td class="border text-center">{{order.orderstatus}}</td>
+
+   <td class="border text-center">{{order.service}}</td>
+   <td class="border text-center">{{order.mrc}}</td>
+   <td class="border text-center">{{order.discount}}</td>
+   <td class="border text-center">{{order.discountmrc}}</td>
+   <td class="border text-center">{{order.revenuep}}</td>
+   <td class="border text-center">{{order.opportunity.salesman}}</td>
+   <td class="border text-center">{{order.operationexecutive}}</td>
+   <td class="border text-center">{{order.commission}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+
+</div>
+{% endblock %}

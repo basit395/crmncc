@@ -1,0 +1,118 @@
+{% extends 'crmapp/base.html' %}
+
+{% block content %}
+
+
+
+
+  <div class="container">
+<th class="text-center"></th>
+<div class="alert alert-primary mt-5" role="alert">
+  <h4 class="text-center">Current month Report  {{cmonth}} / {{cyear}}</h4>
+</div>
+<div class="row">
+<div class="col-3 ">
+<div class="card text-white bg-info " style="max-width: 18rem;">
+  <div class="card-header"><strong class="text-dark" style="font-size: 40px">{{thismontho.count}} </strong><span>Opp</span></div>
+  <div class="card-body">
+    <h5 class="card-title">{% for key, value in thismonthsum.items %}
+    <p><strong class="text-dark" style="font-size: 40px">{{ value }} </strong><span>SAR</span></p>
+    {% endfor %}</h5>
+    <h5 class="card-text"></h5>
+  </div>
+</div>
+
+
+</div>
+
+<div class="col-5">
+
+<table class="table">
+  <thead class="thead-dark">
+<tr>
+  <th class="border text-center">Opportunity </th>
+  <th class="border text-center">No of orders </th>
+  <th class="border text-center">Sales Man </th>
+  <th class="border text-center">MRC </th>
+  <th class="border text-center">Status </th>
+
+{% for item in opps %}
+<tr>
+<td class="border text-center">{{item.opportunityno}}</td>
+<td class="border text-center">{{item.opportunity_orders__count}}</td>
+<td class="border text-center">{{item.salesman}}</td>
+<td class="border text-center">{{item.totalmrc}}</td>
+<td class="border text-center">{{item.status}}</td>
+</tr>
+{% endfor %}
+</table>
+
+<div class="pagination">
+
+
+
+{% if opps.paginator.num_pages > 1 %}
+
+    {% if opps.has_previous %}
+
+        <a href="?page={{ opps.previous_page_number }}">previous</a>
+
+    {% endif %}
+
+    <span class="mx-1">Page {{ opps.number }} of {{ opps.paginator.num_pages }}</span>
+
+    {% if opps.has_next %}
+
+        <a href="?page={{ opps.next_page_number }}">next</a>
+
+    {% endif %}
+
+{% endif %}
+
+</div>
+
+
+</div>
+
+<div class="col-4 ">
+
+  {% if thismonthos %}
+
+  <table class="table">
+    <thead class="thead-dark">
+  <tr>
+
+    <th class="border text-center">Sales Man </th>
+    <th class="border text-center">Total MRC </th>
+
+  {% for item in thismonthos %}
+   {% for person  in sss %}
+    {% if item.salesman == person.id %}
+
+  <tr>
+
+  <td class="border text-center">{{person.username}}</td>
+  <td class="border text-center">{{item.Total}}</td>
+
+  </tr>
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+  </table>
+
+  {% else %}
+
+  <div class="alert alert-danger" role="alert">
+    <h4 class="text-center">No Sales Current Month </h4>
+  </div>
+
+  {% endif %}
+</div>
+</div>
+
+
+
+
+
+
+{% endblock %}

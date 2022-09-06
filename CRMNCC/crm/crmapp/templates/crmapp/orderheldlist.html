@@ -1,0 +1,50 @@
+{% extends 'crmapp/base.html' %}
+
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+
+
+
+
+{% if orderheldlist %}
+
+<table class="table mt-5">
+    <thead class="thead-dark">
+  <tr>
+    <th class="text-center">Order No</th>
+    <th class="text-center">Opportunity</th>
+    <th class="text-center">Creation Date</th>
+    <th class="text-center">Open Date</th>
+    <th class="text-center">Activation Date</th>
+    <th class="text-center">Status</th>
+    <th class="text-center">Service</th>
+    <th class="text-center">Operation User</th>
+
+
+  </tr>
+  {% for order in orderheldlist %}
+  <tr>
+  <td class="border text-center"><a href="{% url 'orderdetail' pk=order.id %}">{{order.orderno}}</a></td>
+  <td class="border text-center">{{order.opportunity}}</td>
+  <td class="border text-center">{{order.creationdate}}</td>
+  <td class="border text-center">{{order.opendate}}</td>
+  <td class="border text-center">{{order.activationdate}}</td>
+  <td class="border text-center">{{order.orderstatus}}</td>
+  <td class="border text-center">{{order.service}}</td>
+  <td class="border text-center">{{order.operationexecutive}}</td>
+
+  </tr>
+  {% endfor %}
+</table>
+
+{% endif %}
+
+</div>
+
+
+
+  {% endblock %}

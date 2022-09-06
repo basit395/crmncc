@@ -1,0 +1,42 @@
+{% extends 'crmapp/based.html' %}
+
+{% block content %}
+
+
+
+
+  <br>
+
+  <div class="container">
+
+    <h5>{{fpayment.payment}}</h5>
+
+    <table class="table mt-5">
+        <thead class="thead-dark">
+      <tr>
+
+        <th class="text-center">Invoice</th>
+        <th class="text-center">Payment date</th>
+        <th class="text-center">Payment</th>
+        <th class="text-center">Note</th>
+
+
+
+
+      </tr>
+
+      <tr>
+
+      <td class="border text-center">{{fpayment.invoiceno}}</td>
+      <td class="border text-center">{{fpayment.paymentdate}}</td>
+      <td class="border text-center">{{fpayment.payment}}</td>
+      <td class="border text-center">{{fpayment.notes}}</td>
+
+      </tr>
+
+    </table>
+  <br>
+    <button  class="btn btn-outline-primary"><a href="{% url 'fpaymentupdate' pk=fpayment.id %}">Update</a></button>
+</div>
+
+{% endblock %}

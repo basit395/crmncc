@@ -1,0 +1,42 @@
+{% extends 'crmapp/based.html' %}
+
+{% block content %}
+
+
+
+
+  <br>
+
+  <div class="container">
+
+<h5>{{fservice.servicename}}</h5>
+
+    <table class="table mt-5">
+        <thead class="thead-dark">
+      <tr>
+
+        <th class="text-center">Service</th>
+        <th class="text-center">nrc</th>
+        <th class="text-center">mrc</th>
+        <th class="text-center">commission</th>
+
+
+
+
+      </tr>
+
+      <tr>
+
+      <td class="border text-center">{{fservice.servicename}}</td>
+      <td class="border text-center">{{fservice.nrc}}</td>
+      <td class="border text-center">{{fservice.mrc}}</td>
+      <td class="border text-center">{{fservice.commission}}</td>
+
+      </tr>
+
+    </table>
+  <br>
+    <button  class="btn btn-outline-primary"><a href="{% url 'fserviceupdate' pk=fservice.id %}">Update</a></button>
+</div>
+
+{% endblock %}

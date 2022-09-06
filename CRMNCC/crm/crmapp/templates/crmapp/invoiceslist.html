@@ -1,0 +1,48 @@
+{% extends 'crmapp/base.html' %}
+
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+
+
+
+{% if invoiceslist %}
+
+<table class="table mt-5">
+    <thead class="thead-dark">
+  <tr>
+    <th class="text-center">Invoice No</th>
+    <th class="text-center">Creation Date</th>
+    <th class="text-center">Invoice Date</th>
+    <th class="text-center">STC Email Date</th>
+    <th class="text-center">Related Year</th>
+    <th class="text-center">Related Period</th>
+    <th class="text-center">Amount</th>
+    <th class="text-center">Purchase No</th>
+    <th class="text-center">Receipt No</th>
+    <th class="text-center">Deposit Date</th>
+
+
+  </tr>
+  {% for invoices in invoiceslist %}
+  <tr>
+  <td class="border text-center"><a href="{% url 'invoicedetail' pk=invoices.pk %}">{{invoices.invoice_no}}</a></td>
+  <td class="border text-center">{{invoices.creationdate}}</td>
+  <td class="border text-center">{{invoices.invoicedate}}</td>
+  <td class="border text-center">{{invoices.stcemaildate}}</td>
+  <td class="border text-center">{{invoices.relatedyear}}</td>
+
+  <td class="border text-center">{{invoices.relatedperiod}}</td>
+  <td class="border text-center">{{invoices.amount}}</td>
+  <td class="border text-center">{{invoices.purchaseno}}</td>
+  <td class="border text-center">{{invoices.receiptno}}</td>
+  <td class="border text-center">{{invoices.bankdepoitdate}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+</div>
+{% endblock %}

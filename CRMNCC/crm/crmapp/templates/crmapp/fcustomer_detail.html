@@ -1,0 +1,91 @@
+{% extends 'crmapp/based.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}<title>{{fcustomer.customername}}</title> {%endblock%}
+
+{% block content %}
+
+
+
+
+  <br>
+  <div class="container">
+
+
+
+<div class="row">
+<div class="column ">
+
+
+<button class = "btn btn-primary btn-lg">{{fcustomer.customername}}</button>
+
+
+
+</div>
+
+
+
+<div class="column">
+
+
+
+</div>
+<table class="table mt-4">
+    <thead class="thead-dark">
+  <tr>
+
+    <th class="text-center">CR</th>
+    <th class="text-center">Creation Date</th>
+    <th class="text-center">Activity</th>
+
+    <th class="text-center">No of Deals</th>
+  </tr>
+
+  <tr>
+
+  <td class="border text-center">{{fcustomer.cr}}</td>
+  <td class="border text-center">{{fcustomer.creationdate}}</td>
+  <td class="border text-center">{{fcustomer.activity}}</td>
+
+  <td class="border text-center">{{fcustomer.fcustomer_deals.count}}</td>
+  </tr>
+
+</table>
+
+{% if fcustomer.fcustomer_deals.all %}
+
+<button class = "btn btn-primary btn-lg">Deals List</button>
+
+    <table class="table mt-2">
+      <thead class="thead-light">
+        <tr>
+
+            <th class="text-center">Opportunity No</th>
+            <th class="text-center">Creation Date</th>
+            <th class="text-center">Total MRC</th>
+
+        </tr>
+       {% for opp in fcustomer.fcustomer_deals.all %}
+        <tr>
+            <td class="border text-center"><a href="">{{opp.dealno}}</a></td>
+            <td class="border text-center">{{opp.creationdate}}</td>
+            <td class="border text-center">{{opp.totalmrc}}</td>
+
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endif %}
+<button type="button" class="btn btn-warning btn-sm m-1"><a href="{% url 'fcustomerupdate' pk=fcustomer.id %}" class="text-light">Update</a></button>
+<br>
+
+
+
+
+
+
+</div>
+</div>
+
+{% endblock %}

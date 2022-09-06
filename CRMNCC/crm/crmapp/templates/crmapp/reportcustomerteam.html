@@ -1,0 +1,507 @@
+{% extends 'crmapp/base.html' %}
+
+{% block content %}
+
+
+
+
+  <br>
+  <div class="container">
+
+  <h4 class="text-center">Customer Report</h4>
+<br>
+
+<!-- first row -->
+<div class="row bg-light my-5">
+
+
+<!-- first row first column start -->
+<div class="col-6">
+  <div class="text-center">
+
+  <span class="text-center text-success m-2 h3"> Today </span><span><small><strong style="color:red;">{{todayc.count}}</strong></small></span></span></div>
+  {% if todaycsalesman %}
+
+  <table class="table">
+    <thead>
+  <tr>
+
+    <th class="text-center">Sales Man </th>
+    <th class="text-center">No of Customers </th>
+
+  {% for item in todaycsalesman %}
+      {% for person  in allsalesman %}
+        {% if item.creator == person.id %}
+  <tr>
+  <td class="text-center">{{person.username}}</td>
+  <td class="text-center">{{item.Total}}</td>
+
+  </tr>
+        {% endif %}
+
+        <span>{{person.username}}-- {{person__user_customers.count}}</span>
+      {% endfor %}
+
+  {% endfor %}
+  </table>
+
+  {% else %}
+
+  <table class="table">
+    <thead>
+      <tr>
+       <th class="text-center">Sales Man </th>
+       <th class="text-center">No of Customers </th>
+     <tr>
+      <td class="text-center">No Customers Today</td>
+      <td class="text-center">Zero</td>
+     </tr>
+  </table>
+
+  {% endif %}
+
+</div>
+
+<!-- first row second column start -->
+<div class="col-6">
+  <div class="text-center">
+
+  <span class="text-center text-success m-2 h3"> Yesterday </span><span><small><strong style="color:red;">{{ydayc.count}}</strong></small></span></span></div>
+  {% if ydaycsalesman %}
+
+  <table class="table">
+    <thead>
+  <tr>
+
+    <th class="text-center">Sales Man </th>
+    <th class="text-center">No of Customers </th>
+
+  {% for item in ydaycsalesman %}
+      {% for person  in allsalesman %}
+        {% if item.creator == person.id %}
+  <tr>
+  <td class="text-center">{{person.username}}</td>
+  <td class="text-center">{{item.Total}}</td>
+
+  </tr>
+        {% endif %}
+      {% endfor %}
+  {% endfor %}
+  </table>
+
+  {% else %}
+
+
+  <table class="table">
+    <thead>
+  <tr>
+
+    <th class="text-center">Sales Man </th>
+    <th class="text-center">No of Customers </th>
+
+
+  <tr>
+  <td class="text-center">No Customers Yesterday</td>
+  <td class="text-center">Zero</td>
+
+  </tr>
+  </table>
+
+  {% endif %}
+
+</div>
+
+<!-- first row second column end -->
+
+
+
+</div>
+
+<!-- second row start-->
+<div class="row my-5">
+
+<!-- second row first column start-->
+<div class="col-6">
+  <div class="text-center">
+
+  <span class="text-center text-success m-2 h3"> This week </span><span><small><strong style="color:red;">{{thisweekc.count}}</strong></small></span></span></div>
+  {% if thisweekcsalesman %}
+
+  <table class="table">
+    <thead>
+  <tr>
+
+    <th class="text-center">Sales Man </th>
+    <th class="text-center">No of Customers </th>
+
+  {% for item in thisweekcsalesman %}
+      {% for person  in allsalesman %}
+        {% if item.creator == person.id %}
+  <tr>
+  <td class="text-center">{{person.username}}</td>
+  <td class="text-center">{{item.Total}}</td>
+
+  </tr>
+        {% endif %}
+      {% endfor %}
+  {% endfor %}
+  </table>
+
+  {% else %}
+
+
+  <table class="table">
+    <thead>
+  <tr>
+
+    <th class="text-center">Sales Man </th>
+    <th class="text-center">No of Customers </th>
+
+
+  <tr>
+  <td class="text-center">No Customers This Week</td>
+  <td class="text-center">Zero</td>
+
+  </tr>
+  </table>
+
+  {% endif %}
+
+</div>
+<!-- second row first column end-->
+<!-- second row second column start -->
+<div class="col-6">
+  <div class="text-center">
+
+  <span class="text-center text-success m-2 h3"> Last week </span><span><small><strong style="color:red;">{{lastweekc.count}}</strong></small></span></span></div>
+  {% if lastweekcsalesman %}
+
+  <table class="table">
+    <thead>
+  <tr>
+
+    <th class="text-center">Sales Man </th>
+    <th class="text-center">No of Customers </th>
+
+  {% for item in lastweekcsalesman %}
+      {% for person  in allsalesman %}
+        {% if item.creator == person.id %}
+  <tr>
+  <td class="text-center">{{person.username}}</td>
+  <td class="text-center">{{item.Total}}</td>
+
+  </tr>
+        {% endif %}
+      {% endfor %}
+  {% endfor %}
+  </table>
+
+  {% else %}
+
+
+  <table class="table">
+    <thead>
+  <tr>
+
+    <th class="text-center">Sales Man </th>
+    <th class="text-center">No of Customers </th>
+
+
+  <tr>
+  <td class="text-center">No Customers Last Week</td>
+  <td class="text-center">Zero</td>
+
+  </tr>
+  </table>
+
+  {% endif %}
+
+</div>
+
+<!-- second row second column end -->
+
+
+
+</div>
+<!-- second row end -->
+
+
+<!-- third row start -->
+<div class="row bg-light my-5">
+
+<!-- third row first column start -->
+<div class="col-6">
+  <div class="text-center">
+
+  <span class="text-center text-success m-2 h3"> This Month </span><span><small><strong style="color:red;">{{thismonthc.count}}</strong></small></span></span></div>
+  {% if thismonthcsalesman %}
+
+  <table class="table">
+    <thead>
+  <tr>
+
+    <th class="text-center">Sales Man </th>
+    <th class="text-center">No of Customers </th>
+
+  {% for item in thismonthcsalesman %}
+      {% for person  in allsalesman %}
+        {% if item.creator == person.id %}
+  <tr>
+  <td class="text-center">{{person.username}}</td>
+  <td class="text-center">{{item.Total}}</td>
+
+  </tr>
+        {% endif %}
+      {% endfor %}
+  {% endfor %}
+  </table>
+
+  {% else %}
+
+
+  <table class="table">
+    <thead>
+  <tr>
+
+    <th class="text-center">Sales Man </th>
+    <th class="text-center">No of Customers </th>
+
+
+  <tr>
+  <td class="text-center">No Customers This Month</td>
+  <td class="text-center">Zero</td>
+
+  </tr>
+  </table>
+
+  {% endif %}
+
+</div>
+<!-- third row first column end -->
+<!-- third row second column start -->
+<div class="col-6">
+  <div class="text-center">
+
+  <span class="text-center text-success m-2 h3"> Last Month </span><span><small><strong style="color:red;">{{lastmonthc.count}}</strong></small></span></span></div>
+  {% if lastmonthcsalesman %}
+
+  <table class="table">
+    <thead>
+  <tr>
+
+    <th class="text-center">Sales Man </th>
+    <th class="text-center">No of Customers </th>
+
+  {% for item in lastmonthcsalesman %}
+      {% for person  in allsalesman %}
+        {% if item.creator == person.id %}
+  <tr>
+  <td class="text-center">{{person.username}}</td>
+  <td class="text-center">{{item.Total}}</td>
+
+  </tr>
+        {% endif %}
+      {% endfor %}
+  {% endfor %}
+  </table>
+
+  {% else %}
+
+
+  <table class="table">
+    <thead>
+  <tr>
+
+    <th class="text-center">Sales Man </th>
+    <th class="text-center">No of Customers </th>
+
+
+  <tr>
+  <td class="text-center">No Customers Last Month</td>
+  <td class="text-center">Zero</td>
+
+  </tr>
+  </table>
+
+  {% endif %}
+
+</div>
+
+<!-- third row second column end -->
+
+
+
+</div>
+<!-- third row end -->
+
+<!-- fourth row start -->
+<div class="row my-5">
+
+
+  <div class="col-6">
+    <div class="text-center">
+
+    <span class="text-center text-success m-2 h3"> This Year </span><span><small><strong style="color:red;">{{thisyearc.count}}</strong></small></span></span></div>
+    {% if thisyearcsalesman %}
+
+    <table class="table">
+      <thead>
+    <tr>
+
+      <th class="text-center">Sales Man </th>
+      <th class="text-center">No of Customers </th>
+
+    {% for item in thisyearcsalesman %}
+        {% for person  in allsalesman %}
+          {% if item.creator == person.id %}
+    <tr>
+    <td class="text-center">{{person.username}}</td>
+    <td class="text-center">{{item.Total}}</td>
+
+    </tr>
+          {% endif %}
+        {% endfor %}
+    {% endfor %}
+    </table>
+
+    {% else %}
+
+
+    <table class="table">
+      <thead>
+    <tr>
+
+      <th class="text-center">Sales Man </th>
+      <th class="text-center">No of Customers </th>
+
+
+    <tr>
+    <td class="text-center">No Customers This Year</td>
+    <td class="text-center">Zero</td>
+
+    </tr>
+    </table>
+
+    {% endif %}
+
+  </div>
+
+<!-- fourth row second column start -->
+<div class="col-6">
+  <div class="text-center">
+
+  <span class="text-center text-success m-2 h3"> Last Year </span><span><small><strong style="color:red;">{{lastyearc.count}}</strong></small></span></span></div>
+  {% if lastyearcsalesman %}
+
+  <table class="table">
+    <thead>
+  <tr>
+
+    <th class="text-center">Sales Man </th>
+    <th class="text-center">No of Customers </th>
+
+  {% for item in lastyearcsalesman %}
+      {% for person  in allsalesman %}
+        {% if item.creator == person.id %}
+  <tr>
+  <td class="text-center">{{person.username}}</td>
+  <td class="text-center">{{item.Total}}</td>
+
+  </tr>
+        {% endif %}
+      {% endfor %}
+  {% endfor %}
+  </table>
+
+  {% else %}
+
+
+  <table class="table">
+    <thead>
+  <tr>
+
+    <th class="text-center">Sales Man </th>
+    <th class="text-center">No of Customers </th>
+
+
+  <tr>
+  <td class="text-center">No Customers Last Year</td>
+  <td class="text-center">Zero</td>
+
+  </tr>
+  </table>
+
+  {% endif %}
+
+</div>
+
+<!-- fourth row second column end -->
+
+
+
+</div>
+<!-- fourth row end -->
+
+<!-- last row start -->
+
+
+
+
+<<div class="col-12  bg-light my-5">
+  <div class="text-center">
+
+  <span class="text-center text-success m-2 h3"> All </span><span><small><strong style="color:red;">{{allc.count}}</strong></small></span></span></div>
+  {% if allcsalesman %}
+
+  <table class="table">
+    <thead>
+  <tr>
+
+    <th class="text-center">Sales Man </th>
+    <th class="text-center">No of Customers </th>
+
+  {% for item in allcsalesman %}
+      {% for person  in allsalesman %}
+        {% if item.creator == person.id %}
+  <tr>
+  <td class="text-center">{{person.username}}</td>
+  <td class="text-center">{{item.Total}}</td>
+
+  </tr>
+        {% endif %}
+      {% endfor %}
+  {% endfor %}
+  </table>
+
+  {% else %}
+
+
+  <table class="table">
+    <thead>
+  <tr>
+
+    <th class="text-center">Sales Man </th>
+    <th class="text-center">No of Customers </th>
+
+
+  <tr>
+  <td class="text-center">No Customers </td>
+  <td class="text-center">Zero</td>
+
+  </tr>
+  </table>
+
+  {% endif %}
+
+</div>
+
+
+<!-- last row end -->
+
+</div>
+
+
+
+
+
+{% endblock %}

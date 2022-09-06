@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <meta charset="utf-8">
+  {% block title %} {%endblock%}
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+  <body>
+
+
+  <div class="container mt-2">
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+
+    <a class="nav-link" href="{% url 'home' %}">Home<span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="{% url 'customerslist' %}"> Customers <span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="{% url 'opportunitylist' %}"> Opportunities <span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="{% url 'order' %}">Orders<span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="{% url 'servicelist' %}">Services<span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="{% url 'stafflist' %}">Team <span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="{% url 'report' %}">Reports<span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="{% url 'suggestion' %}">Requests<span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="{% url 'dashboard' %}">DashBoard<span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="{% url 'orderpost' %}">Post Orders<span class="sr-only">(current)</span></a>
+    {% if user.username %}
+
+
+    <button  class="btn btn-outline-primary">{{user.username}}</a></button>
+
+    <a class="nav-link" href="{% url 'logout' %}">Logout<span class="sr-only">(current)</span></a>
+    {% else %}
+    <a class="nav-link" href="{% url 'login' %}">Login<span class="sr-only">(current)</span></a>
+    {% endif %}
+
+
+
+
+
+
+
+  </nav>
+
+  <!-- Example single danger button -->
+<!-- <div class="btn-group">
+  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Action
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#">Separated link</a>
+  </div>
+  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Report
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#">Separated link</a>
+  </div>
+</div> -->
+
+
+</div>
+
+
+
+{% block content %}
+  {% endblock %}
+
+
+
+  </body>
+</html>

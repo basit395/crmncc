@@ -1,0 +1,170 @@
+{% extends 'crmapp/base.html' %}
+{% load humanize %}
+
+{% block content %}
+  <br>
+
+  <div class="container">
+    <div class="row">
+        <div class="col-3 ">
+            <button type="button" class="btn btn-primary" >{{cyear}} Report </button>
+        </div>
+         <div class="col-2">
+        </div>
+        <div class="col-4">
+            <button type="button" class="btn btn-light" >{{nameme.0.first_name}} {{nameme.0.last_name}} </button>
+        </div>
+        <div class="col-3">
+          <button type="button" class="btn btn-primary" >
+            <a href="{% url 'stafforderlist' pk=nameme.0.id%}" class="text-light">Post orders list</a>
+          </button>
+        </div>
+    </div>
+
+<table class="table mt-5">
+    <thead class="thead-success">
+        <tr>
+            <th class="text-center text-primary">Month</th>
+            <th class="text-center text-primary">Opportynity MRC</th>
+            <th class="text-center text-primary">Post MRC</th>
+        </tr>
+        {% for zz1,zz2,zz3 in list4 %}
+        <tr>
+            <td class="border text-center"><strong>{{zz1}}</strong></td>
+            <td class="border text-center text-warning"><strong>{{zz3|intcomma}}</strong></td>
+            <td class="border text-center text-success"><strong>{{zz2|intcomma}}</strong></td>
+        </tr>
+        {% endfor %}
+</table>
+
+<table class="table mt-5">
+      <thead class="thead-light">
+    <tr>
+      <th class="text-center">Subject</th>
+      <th class="text-center">YTD</th>
+      <th class="text-center">Weekly</th>
+      <th class="text-center">Assessment</th>
+    </tr>
+    <tr>
+    <td class="border text-center">No Of Customers</td>
+    <td class="border text-center">{{customerme.count}}</td>
+    <td class="border text-center">{{wcustomer|floatformat:2}}</td>
+    {% if wcustomer < 10 %}
+    <td class="border text-center text-dangerr">Weak </td>
+    {% endif %}
+    </tr>
+    <tr>
+    <td class="border text-center">No Of Opportunities</td>
+    <td class="border text-center">{{opportunityme.count}}</td>
+    <td class="border text-center">{{wopportunity|floatformat:2}}</td>
+    {% if wopportunity < 4 %}
+    <td class="border text-center text-danger">Weak </td>
+    {% endif %}
+    </tr>
+    <tr>
+    <td class="border text-center">MRC Of Opportunities</td>
+    <td class="border text-center">{{opportunitymest}}</td>
+    <td class="border text-center">{{wopportunitymest|floatformat:2}}</td>
+    {% if wopportunitymest < 3000 %}
+    <td class="border text-center text-danger">Weak </td>
+    {% endif %}
+    </tr>
+    <tr>
+    <td class="border text-center">No Of orders</td>
+    <td class="border text-center">{{orderme.count}}</td>
+    <td class="border text-center">{{worderme|floatformat:2}}</td>
+    {% if worderme < 8 %}
+    <td class="border text-center text-danger">Weak </td>
+    {% endif %}
+    </tr>
+
+    <tr>
+    <td class="border text-center">MRC Of orders</td>
+    <td class="border text-center">{{ordermest|floatformat:2}}</td>
+    <td class="border text-center">{{wordermest|floatformat:2}}</td>
+    {% if worderme < 2000 %}
+    <td class="border text-center text-danger">Weak </td>
+    {% endif %}
+    </tr>
+
+    <tr>
+    <td class="border text-center">No Of Post orders</td>
+    <td class="border text-center">{{ordermepost.count}}</td>
+    <td class="border text-center">{{wordermepost|floatformat:2}}</td>
+    {% if worderme < 8 %}
+    <td class="border text-center text-danger">Weak </td>
+    {% endif %}
+    </tr>
+
+    <tr>
+    <td class="border text-center">MRC Of Post orders</td>
+    <td class="border text-center">{{ordermepostst|floatformat:2}}</td>
+    <td class="border text-center">{{wordermepostst|floatformat:2}}</td>
+    {% if worderme < 2000 %}
+    <td class="border text-center text-danger">Weak </td>
+    {% endif %}
+    </tr>
+
+    <tr>
+    <td class="border text-center">Revenue Of Post orders</td>
+    <td class="border text-center">{{orderpostrevenuet|floatformat:2}}</td>
+    <td class="border text-center">{{worderpostrevenuet|floatformat:2}}</td>
+    </tr>
+
+  </table>
+
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            <button type="button" class="btn btn-default" aria-label="Left Align">
+              <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+            </button>
+
+<hr>
+
+<table class="table mt-5">
+      <thead class="thead-dark">
+    <tr>
+      <th class="text-center">Service Category</th>
+      <th class="text-center">MRC</th>
+    </tr>
+{% for mm in ordservicecategory %}
+    <tr>
+    <td class="border text-center">{{mm.servicecategory}}</td>
+    <td class="border text-center">{{mm.Total|floatformat:2}}</td>
+    </tr>
+{% endfor %}
+</table>
+
+<hr>
+
+{% if oppstages %}
+
+<table class="table mt-5">
+    <thead class="thead-dark">
+  <tr>
+
+            <th class="text-center">Stage</th>
+            <th class="text-center">MRC</th>
+
+  </tr>
+  {% for xx in oppstages %}
+   {% for yy in myoperationstatus %}
+            {% if xx.status == yy.id %}
+   <tr>
+    <td class="border text-center"><a href="{% url 'salesmanoperationstage' pk=yy.id pk1=pk1 %}">{{yy.operationstatusname}}</a></td>
+    <td class="border text-center">{{xx.Total|intcomma}}</td>
+   </tr>
+        {% endif %}
+    {% endfor %}
+  {% endfor %}
+
+</table>
+
+ {% endif %}
+
+</div>
+
+{% endblock %}
+
+
+
+

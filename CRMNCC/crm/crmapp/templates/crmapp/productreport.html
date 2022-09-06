@@ -1,0 +1,45 @@
+{% extends 'crmapp/base.html' %}
+
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+
+
+
+
+<h5>No of Products : {{productreport.count}}</h5>
+
+<table class="table mt-5">
+    <thead class="thead-dark">
+    <tr>
+    <th class="text-center">Product</th>
+    <th class="text-center">No of Orders</th>
+
+
+    </tr>
+
+
+
+  {%for dd in productreport %}
+    {% for ser in servicelist %}
+      {% if dd.service == ser.id %}
+  <tr>
+    <td class="border text-center">{{ser.servicename}} </td>
+    <td class="border text-center">{{dd.Total}}</td>
+
+      {% endif %}
+      {% endfor %}
+{% endfor %}
+
+  </table>
+
+
+</div>
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,52 @@
+
+{% extends 'crmapp/base.html' %}
+
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+
+
+
+
+{% if myreport %}
+
+<table class="table mt-5">
+    <thead class="thead-dark">
+  <tr>
+
+    <th class="text-center">Customer</th>
+    <th class="text-center">Post</th>
+  </tr>
+  {% for xx in myreport %}
+
+
+
+  <tr>
+
+  <td class="border text-center">{{xx.getcustomername}}</td>
+  <td class="border text-center">{{xx.Total}}</td>
+
+  {% endfor %}
+</table>
+
+
+
+
+{% endif %}
+
+
+
+
+
+
+</div>
+
+
+
+  {% endblock %}
+
+
+

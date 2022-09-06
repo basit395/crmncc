@@ -1,0 +1,96 @@
+{% extends 'crmapp/base.html' %}
+{% load humanize %}
+{% block content %}
+
+
+
+<div class="container">
+
+
+
+
+
+<h2 class="text-center m-5 text-primary">Yearly Expenses report </h2>
+
+<div class="row bg-transparent">
+
+
+
+
+
+<table class="table">
+  <thead class="thead-dark">
+<tr>
+
+  <th class="border text-center">Year </th>
+  <th class="border text-center">Total of Expenses </th>
+  <th class="border text-center">Total of Invoices </th>
+
+
+{% for i in n  %}
+
+
+<tr>
+
+{% if forloop.counter0 == 0 %}
+
+<td class="border text-center">{{allyears.0|intcomma}}</td>
+<td class="border text-center">{{exp.0|intcomma}}</td>
+<td class="border text-center">{{invo.0|intcomma}}</td>
+{% endif %}
+
+{% if forloop.counter0 == 1 %}
+<td class="border text-center">{{allyears.1|intcomma}}</td>
+<td class="border text-center">{{exp.1|intcomma}}</td>
+<td class="border text-center">{{invo.1|intcomma}}</td>
+{% endif %}
+
+{% if forloop.counter0 == 2 %}
+<td class="border text-center">{{allyears.2|intcomma}}</td>
+<td class="border text-center">{{exp.2|intcomma}}</td>
+<td class="border text-center">{{invo.2|intcomma}}</td>
+{% endif %}
+
+{% if forloop.counter0 == 3 %}
+<td class="border text-center">{{allyears.3|intcomma}}</td>
+<td class="border text-center">{{exp.3|intcomma}}</td>
+<td class="border text-center">{{invo.3|intcomma}}</td>
+{% endif %}
+
+{% if forloop.counter0 == 4 %}
+<td class="border text-center">{{allyears.4|intcomma}}</td>
+<td class="border text-center">{{exp.4|intcomma}}</td>
+<td class="border text-center">{{invo.4|intcomma}}</td>
+{% endif %}
+
+{% if forloop.counter0 == 5 %}
+<td class="border text-center">{{allyears.5|intword}}</td>
+<td class="border text-center">{{exp.5|intword}}</td>
+<td class="border text-center">{{invo.5|intword}}</td>
+{% endif %}
+
+{% if forloop.counter0 == 6 %}
+<td class="border text-center">{{allyears.6|intcomma}}</td>
+<td class="border text-center">{{exp.6|intcomma}}</td>
+<td class="border text-center">{{invo.6|intcomma}}</td>
+{% endif %}
+
+{% if forloop.counter0 == 7 %}
+<td class="border text-center">{{allyears.7|intcomma}}</td>
+<td class="border text-center">{{exp.7|intcomma}}</td>
+<td class="border text-center">{{invo.7|intcomma}}</td>
+{% endif %}
+
+{% endfor %}
+</table>
+
+
+
+</div>
+
+</div>
+
+
+
+
+{% endblock %}

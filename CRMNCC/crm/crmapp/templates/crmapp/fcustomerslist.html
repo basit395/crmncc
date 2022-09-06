@@ -1,0 +1,43 @@
+{% extends 'crmapp/based.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<div class="container mt-3">
+  <button  class="btn-success  text-light mb-3"><a class="text-light "href="{% url 'fcustomernew' %}">Add Customer</a></button>
+<hr>
+
+<h4 class="text-center m-1 text-success">All customers : {{fcustomerslist.count}}</h4>
+</div>
+
+{% if fcustomerslist %}
+
+<table class="table ">
+  <thead class="thead-dark">
+<tr>
+  <th class="text-center">ID</th>
+  <th class="text-center">Customer</th>
+  <th class="text-center">CR</th>
+  <th class="text-center">Creation Date</th>
+  <th class="text-center">Creator</th>
+  <th class="text-center">No of deals</th>
+
+</tr>
+{% for customer in fcustomerslist %}
+<tr>
+<td class="border text-center">{{customer.id}}</td>
+<td class="border text-center"><a href="{% url 'fcustomerdetail' pk=customer.id %}" class="text-primary">{{customer.customername}}</a></td>
+<td class="border text-center">{{customer.cr}}</td>
+<td class="border text-center">{{customer.creationdate}}</td>
+<td class="border text-center">{{customer.creator}}</td>
+<td class="border text-center">{{customer.customer_deals.count}}</td>
+
+</tr>
+{% endfor %}
+</table>
+
+{% endif %}
+
+</div>
+
+{% endblock %}

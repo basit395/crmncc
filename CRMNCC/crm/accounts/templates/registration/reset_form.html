@@ -1,0 +1,17 @@
+{% extends "crmapp/base.html" %}
+
+
+{% block title %}Reset Email{% endblock %}
+
+{% block content %}
+
+<div class="container">
+<h1>Reset password</h1>
+<p>Use the form below to Reset your password.</p>
+<form action="." method="post">
+{{ form.as_p }}
+<p><input type="submit" value="Change"></p>
+{% csrf_token %}
+</form>
+</div>
+{% endblock %}

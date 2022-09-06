@@ -1,0 +1,56 @@
+{% extends 'crmapp/base.html' %}
+{% load humanize %}
+{% block content %}
+
+
+
+
+  <br>
+  <div class="container">
+
+
+<th class="text-center"></th>
+
+    <table class="table mt-5">
+        <thead class="thead-dark">
+      <tr>
+
+
+
+
+
+        <th class="text-center">Account</th>
+        <th class="text-center">Date</th>
+        <th class="text-center">No Of Orders</th>
+        <th class="text-center">No Of Bills</th>
+        <th class="text-center">Bills Value</th>
+        <th class="text-center">Payment Date</th>
+        <th class="text-center">Payments Notes</th>
+
+
+      </tr>
+
+      <tr>
+      <td class="border text-center">{{accounts.accountno}}</td>
+      <td class="border text-center">{{accounts.creationdate}}</td>
+      <td class="border text-center">{{accounts.nooforders}}</td>
+      <td class="border text-center">{{accounts.noofbills}}</td>
+      <td class="border text-center">{{accounts.billsvalue}}</td>
+      <td class="border text-center">{{accounts.paymentdate}}</td>
+      <td class="border text-center">{{accounts.notes}}</td>
+
+      </tr>
+
+    </table>
+
+
+
+    <button type="button" class="btn btn-info">
+      <small></small><a href="{% url 'accountupdate' pk=accounts.pk %}" class="text-light">Update </a>
+      <span class="sr-only">unread messages</span>
+    </button>
+
+
+</div>
+
+{% endblock %}

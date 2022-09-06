@@ -24,31 +24,6 @@
 {% endfor %}
 
 
-    <table class="table mt-5">
-        <thead class="thead-dark">
-      <tr>
-        <th class="text-center">Sales Man</th>
-        <th class="text-center">No of Opportunities</th>
-        <th class="text-center">Total</th>
-        <th class="text-center">Value / Opportunity</th>
-      </tr>
-
-      {% for sal in allsalesman %}
-      <tr>
-      <td class="border text-center">{{sal.username}}</td>
-      <td class="border text-center">{{sal.salesman_opportunities.count }}</td>
-      {% for person in all2 %}
-          {% if sal.id == person.salesman  %}
-      <td class="border text-center">{{person.Total }}</td>
-          {% endif %}
-      {% endfor %}
-      <td class="border text-center"></td>
-
-      </tr>
-      {% endfor %}
-
-    </table>
-
 <!-- today -->
 <div class="alert alert-primary" role="alert">
   <h4 class="text-center">Today Report</h4>
@@ -86,7 +61,7 @@
 
 {% for item in todayo %}
 <tr>
-<td class="border text-center">{{item.opportunityno}}</td>
+<td class="border text-center"><a href="{% url 'opportunitydetail' pk=item.id %}">{{item.opportunityno}}</a></td>
 <td class="border text-center">{{item.opportunity_orders__count}}</td>
 <td class="border text-center">{{item.salesman}}</td>
 <td class="border text-center">{{item.totalmrc}}</td>
@@ -169,7 +144,7 @@
 
 {% for item in ydayo %}
 <tr>
-<td class="border text-center">{{item.opportunityno}}</td>
+<td class="border text-center"><a href="{% url 'opportunitydetail' pk=item.id %}">{{item.opportunityno}}</a></td>
 <td class="border text-center">{{item.opportunity_orders__count}}</td>
 <td class="border text-center">{{item.salesman}}</td>
 <td class="border text-center">{{item.totalmrc}}</td>
@@ -206,7 +181,7 @@
   {% else %}
 
   <div class="alert alert-danger" role="alert">
-    <h4 class="text-center">No Sales Today </h4>
+    <h4 class="text-center">No Sales Yesterday </h4>
   </div>
 
   {% endif %}
@@ -249,9 +224,9 @@
   <th class="border text-center">MRC </th>
   <th class="border text-center">Status </th>
 
-{% for item in thismontho %}
+{% for item in opps %}
 <tr>
-<td class="border text-center">{{item.opportunityno}}</td>
+<td class="border text-center"><a href="{% url 'opportunitydetail' pk=item.id %}">{{item.opportunityno}}</a></td>
 <td class="border text-center">{{item.opportunity_orders__count}}</td>
 <td class="border text-center">{{item.salesman}}</td>
 <td class="border text-center">{{item.totalmrc}}</td>
@@ -259,6 +234,32 @@
 </tr>
 {% endfor %}
 </table>
+
+<div class="pagination">
+
+
+
+{% if opps.paginator.num_pages > 1 %}
+
+    {% if opps.has_previous %}
+
+        <a href="?page={{ opps.previous_page_number }}">previous</a>
+
+    {% endif %}
+
+    <span class="mx-1">Page {{ opps.number }} of {{ opps.paginator.num_pages }}</span>
+
+    {% if opps.has_next %}
+
+        <a href="?page={{ opps.next_page_number }}">next</a>
+
+    {% endif %}
+
+{% endif %}
+
+</div>
+
+
 </div>
 
 <div class="col-4 ">
@@ -335,7 +336,7 @@
   <th class="border text-center">Status </th>
 {% for item in lastmontho %}
 <tr>
-<td class="border text-center">{{item.opportunityno}}</td>
+<td class="border text-center"><a href="{% url 'opportunitydetail' pk=item.id %}">{{item.opportunityno}}</a></td>
 <td class="border text-center">{{item.opportunity_orders__count}}</td>
 <td class="border text-center">{{item.salesman}}</td>
 <td class="border text-center">{{item.totalmrc}}</td>
@@ -418,7 +419,7 @@
   <th class="border text-center">Status </th>
 {% for item in thisyearo %}
 <tr>
-<td class="border text-center">{{item.opportunityno}}</td>
+<td class="border text-center"><a href="{% url 'opportunitydetail' pk=item.id %}">{{item.opportunityno}}</a></td>
 <td class="border text-center">{{item.opportunity_orders__count}}</td>
 <td class="border text-center">{{item.salesman}}</td>
 <td class="border text-center">{{item.totalmrc}}</td>
@@ -426,6 +427,11 @@
 </tr>
 {% endfor %}
 </table>
+
+
+
+
+
 </div>
 
 <div class="col-4 ">
@@ -500,7 +506,7 @@
   <th class="border text-center">Status </th>
 {% for item in lastyearo %}
 <tr>
-<td class="border text-center">{{item.opportunityno}}</td>
+<td class="border text-center"><a href="{% url 'opportunitydetail' pk=item.id %}">{{item.opportunityno}}</a></td>
 <td class="border text-center">{{item.opportunity_orders__count}}</td>
 <td class="border text-center">{{item.salesman}}</td>
 <td class="border text-center">{{item.totalmrc}}</td>
@@ -532,7 +538,7 @@
     {% endfor %}
   {% endfor %}
   <tr>
-  
+
   </table>
 
   {% else %}
@@ -545,6 +551,32 @@
 </div>
 </div>
 <!-- last year end  -->
+
+
+    <table class="table mt-5">
+        <thead class="thead-dark">
+      <tr>
+        <th class="text-center">Sales Man</th>
+        <th class="text-center">No of Opportunities</th>
+        <th class="text-center">Total</th>
+        <th class="text-center">Value / Opportunity</th>
+      </tr>
+
+      {% for sal in allsalesman %}
+      <tr>
+      <td class="border text-center">{{sal.username}}</td>
+      <td class="border text-center">{{sal.salesman_opportunities.count }}</td>
+      {% for person in all2 %}
+          {% if sal.id == person.salesman  %}
+      <td class="border text-center">{{person.Total }}</td>
+          {% endif %}
+      {% endfor %}
+      <td class="border text-center"></td>
+
+      </tr>
+      {% endfor %}
+
+    </table>
 
 
 {% endblock %}

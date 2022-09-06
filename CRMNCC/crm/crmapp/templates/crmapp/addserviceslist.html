@@ -8,7 +8,6 @@
 <div class="container mt-5">
 
 
-<button  class="btn-primary text-light"><a class="text-light "href="{% url 'newopportunity' %}">Add Service</a></button>
 
 
 {% if mylist %}
@@ -27,7 +26,7 @@
   </tr>
   {% for service in mylist %}
   <tr>
-  <td class="border text-center"><a href="{% url 'opportunitydetail' pk=opportunity.id %}">{{service.opportunity}}</a></td>
+  <td class="border text-center"><a href="{% url 'opportunitydetail' pk=service.opportunity.id %}">{{service.opportunity}}</a></td>
   <td class="border text-center">{{service.creationdate}}</td>
   <td class="border text-center">{{service.service}}</td>
   <td class="border text-center">{{service.servicecategory}}</td>

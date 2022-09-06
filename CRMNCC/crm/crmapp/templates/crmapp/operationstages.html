@@ -1,0 +1,48 @@
+{% extends 'crmapp/base.html' %}
+
+{% load humanize %}
+{% block content %}
+
+
+
+<div class="container mt-5">
+
+
+<h4>{{cyear}}</h4>
+
+{% if myopportunitiessum %}
+
+<table class="table mt-5">
+    <thead class="thead-dark">
+  <tr>
+
+            <th class="text-center">Stage</th>
+            <th class="text-center">MRC</th>
+
+  </tr>
+  {% for xx in myopportunitiessum %}
+   {% for yy in myoperationstatus %}
+            {% if xx.status == yy.id %}
+   <tr>
+    <td class="border text-center"><a href="{% url 'operationstagedetail' pk=yy.id %}">{{yy.operationstatusname}}</a></td>
+    <td class="border text-center">{{xx.Total|intcomma}}</td>
+   </tr>
+        {% endif %}
+    {% endfor %}
+  {% endfor %}
+
+</table>
+
+ {% endif %}
+
+</div>
+
+
+
+  {% endblock %}
+
+
+
+
+
+

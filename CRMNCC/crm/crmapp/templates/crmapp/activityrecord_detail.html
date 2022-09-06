@@ -1,0 +1,49 @@
+{% extends 'crmapp/base.html' %}
+
+{% block content %}
+
+
+
+
+  <br>
+  <div class="container">
+
+<h5>Activity  : <a href="">{{activityrecord.activity}}</a></h5>
+
+<th class="text-center"></th>
+
+    <table class="table mt-5">
+        <thead class="thead-dark">
+      <tr>
+
+        <th class="text-center">Activity</th>
+        <th class="text-center">Date</th>
+        <th class="text-center">Customer</th>
+
+
+      </tr>
+
+      <tr>
+      <td class="border text-center">{{activityrecord.activity}}</td>
+      <td class="border text-center">{{activityrecord.creationdate}}</td>
+      <td class="border text-center">{{activityrecord.customer}}</td>
+
+
+      </tr>
+
+    </table>
+
+    <button type="button" class="btn btn-danger">
+      <small></small><a href="" class="text-light">Delete </a>
+      <span class="sr-only">unread messages</span>
+    </button>
+
+    <button type="button" class="btn btn-info">
+      <small></small><a href="" class="text-light">Update </a>
+      <span class="sr-only">unread messages</span>
+    </button>
+
+
+</div>
+
+{% endblock %}

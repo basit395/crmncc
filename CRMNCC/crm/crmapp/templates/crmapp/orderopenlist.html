@@ -1,0 +1,62 @@
+{% extends 'crmapp/base.html' %}
+{% load humanize %}
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+
+        <h5 class="card-title">{% for key, value in orderopenlists.items %}
+        <p class="text-sm"> <span class="text-success" style="font-size:40px;">{{ value|intcomma }} </span> <span class="text-primary" style="font-size:15px;">SAR</span>  </p>
+        {% endfor %}</h5>
+
+
+
+
+{% if orderopenlist %}
+
+<table class="table mt-5">
+    <thead class="thead-dark">
+  <tr>
+    <th class="text-center">Order No</th>
+    <th class="text-center">Opportunity</th>
+    <th class="text-center">Creation Date</th>
+    <th class="text-center">Open Date</th>
+    <th class="text-center">Activation Date</th>
+    <th class="text-center">Status</th>
+    <th class="text-center">Service</th>
+    <th class="text-center">MRC</th>
+    <th class="text-center">Circuit No</th>
+    <th class="text-center">Sales Man</th>
+    <th class="text-center">Customer</th>
+    <th class="text-center">Operation User</th>
+
+
+  </tr>
+  {% for order in orderopenlist %}
+  <tr>
+  <td class="border text-center"><a href="{% url 'orderdetail' pk=order.id %}">{{order.orderno}}</a></td>
+  <td class="border text-center"><a href="{% url 'opportunitydetail' pk=order.opportunity.id %}">{{order.opportunity}}</a></td></td>
+  <td class="border text-center">{{order.creationdate}}</td>
+  <td class="border text-center">{{order.opendate}}</td>
+  <td class="border text-center">{{order.activationdate}}</td>
+  <td class="border text-center">{{order.orderstatus}}</td>
+  <td class="border text-center">{{order.service}}</td>
+  <td class="border text-center">{{order.discountmrc}}</td>
+  <td class="border text-center">{{order.circuitno}}</td>
+  <td class="border text-center">{{order.opportunity.salesman}}</td>
+  <td class="border text-center">{{order.opportunity.customer}}</td>
+  <td class="border text-center">{{order.operationexecutive}}</td>
+
+  </tr>
+  {% endfor %}
+</table>
+
+{% endif %}
+
+</div>
+
+
+
+  {% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'crmapp/base.html' %}
+
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+
+<p><b>Today Operation Orders : {{cdo.count}}</b></p>
+<p><b>Yesterday Operation Orders : {{ydo.count}}</b></p>
+<hr>
+<h3 style="border:2px solid;border-radius: 25px;background-color: coral;text-align: center;">Operation Report</h3>
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+    <th class="text-center">Year</th>
+    <th class="text-center">Month</th>
+    <th class="text-center">Operation Executive</th>
+    <th class="text-center">Count</th>
+    </tr>
+    {% for rr in monthlyorders %}
+         {% for uu in allusers %}
+             {% if uu.pk == rr.operationexecutive %}
+
+                <tr>
+
+                    <td class="border text-center">{{rr.creationdate__year}}</td>
+                    <td class="border text-center">{{rr.creationdate__month}}</td>
+                    <td class="border text-center">{{uu.username}}</td>
+                    <td class="border text-center">{{rr.count}}</td>
+
+                </tr>
+             {% endif %}
+        {% endfor %}
+    {% endfor %}
+
+<!--context = {'cdo':cdo,'ydo':ydo,'cdost':cdost,'ydost':ydost} -->
+
+
+  </table>
+
+</div>
+
+</div>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+

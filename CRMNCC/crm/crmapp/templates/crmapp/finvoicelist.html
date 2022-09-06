@@ -1,0 +1,67 @@
+{% extends 'crmapp/based.html' %}
+
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+
+
+
+<div class="row" >
+    <div class="col-4">
+        <button type="button" class="btn btn-lg btn-primary" >Total Due Amount</button>
+        <button type="button" class="btn btn-secondary btn-lg" disabled>{{allinvoices}}</button>
+    </div>
+
+    <div class="col-4">
+        <button type="button" class="btn btn-lg btn-success" >Total Paid Amount</button>
+        <button type="button" class="btn btn-secondary btn-lg" disabled>{{allpaid}}</button>
+    </div>
+
+    <div class="col-4">
+        <button type="button" class="btn btn-lg btn-danger" >Total Remaining Amount</button>
+        <button type="button" class="btn btn-secondary btn-lg" disabled>{{unpaidamount}}</button>
+    </div>
+
+</div>
+
+{% if finvoicelist %}
+
+<table class="table mt-5">
+    <thead >
+  <tr>
+    <th class="text-center">Invoice No</th>
+    <th class="text-center">Year</th>
+    <th class="text-center">Month</th>
+    <th class="text-center">Paid</th>
+    <th class="text-center">Value</th>
+    <th class="text-center">Recieved Payment</th>
+    <th class="text-center">Remaining Payment</th>
+  </tr>
+  {% for invoice in finvoicelist %}
+  <tr >
+    <td class="border text-center"><a href="{% url 'finvoicedetail' pk=invoice.id %}"> <strong>{{invoice.invoiceno}}</strong></a></td>
+    <td class="border text-center"><strong >{{invoice.year}}</strong></td>
+    <td class="border text-center">{{invoice.month}}</td>
+    <td class="border text-center">{{invoice.paid}}</td>
+    <td class="border text-center">{{invoice.value}}</td>
+    <td class="border text-center">{{invoice.recievedamount}}</td>
+    <td class="border text-center">{{invoice.remainingamount}}</td>
+
+  </tr>
+  {% endfor %}
+</table>
+
+{% else %}
+
+<p>There are no Invoices yet.</p>
+
+{% endif %}
+
+</div>
+
+
+
+  {% endblock %}

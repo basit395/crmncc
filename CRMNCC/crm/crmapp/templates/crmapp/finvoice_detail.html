@@ -1,0 +1,72 @@
+{% extends 'crmapp/based.html' %}
+
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+
+
+
+<table class="table mt-5">
+    <thead class="thead-dark">
+  <tr>
+    <th class="text-center">Invoice No</th>
+    <th class="text-center">Year</th>
+    <th class="text-center">Month</th>
+    <th class="text-center">Paid</th>
+    <th class="text-center">Value</th>
+    <th class="text-center">Recieved Payment</th>
+    <th class="text-center">Remaining Payment</th>
+  </tr>
+
+  <tr>
+    <td class="border text-center"><a href="">{{finvoice.invoiceno}}</a></td>
+    <td class="border text-center">{{finvoice.year}}</td>
+    <td class="border text-center">{{finvoice.month}}</td>
+    <td class="border text-center">{{finvoice.paid}}</td>
+    <td class="border text-center">{{finvoice.value}}</td>
+    <td class="border text-center">{{finvoice.recievedamount}}</td>
+    <td class="border text-center">{{finvoice.remainingamount}}</td>
+    <td class="border text-center"></td>
+  </tr>
+
+</table>
+<!--=============================-->
+<table class="table mt-5">
+    <thead class="thead-dark">
+  <tr>
+    <th class="text-center">Deal</th>
+    <th class="text-center">Value</th>
+    <th class="text-center">Service</th>
+    <th class="text-center">Activation Date</th>
+
+  </tr>
+    {% for item in finvoice.invoice_items.all %}
+  <tr>
+    <td class="border text-center">{{item.deal.customer}}</td>
+    <td class="border text-center">{{item.itemvalue}}</td>
+    <td class="border text-center">{{item.deal.service}}</td>
+    <td class="border text-center">{{item.deal.activationdate}}</td>
+
+
+  </tr>
+    {% endfor %}
+</table>
+
+<br>
+    <button type="button" class="btn btn-info">
+      <small></small><a href="{% url 'finvoicetemplate' pk=finvoice.pk %}" class="text-light">Show Invoice </a>
+      <span class="sr-only">unread messages</span>
+    </button>
+<button type="button" class="btn btn-info">
+      <small></small><a href="{% url 'topdf' pk=finvoice.pk %}" class="text-light">PDF </a>
+      <span class="sr-only">unread messages</span>
+    </button>
+
+</div>
+
+
+
+  {% endblock %}

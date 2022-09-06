@@ -1,0 +1,65 @@
+{% extends 'crmapp/base.html' %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<h4></h4>
+
+<div class="container">
+
+<hr>
+  <h4 class="text-center m-1 text-success">Total Post Commission : {{commissiontotal|floatformat:0|intcomma}}  </h4>
+  <h4 class="text-center m-1 text-success">No of Post Orders : <span class="text-primary">{{orderpostlist.count}}</span>  </h4>
+  <h4 class="text-center m-1 text-success">MRC Per Post Order : <span class="text-primary">{{mrcperorder|floatformat:2}}</span>  </h4>
+  <h4 class="text-center m-1 text-success">Commission Per Post Order : <span class="text-primary">{{comperorder|floatformat:2}}</span>  </h4>
+  <h4 class="text-center m-1 text-success">Commission Per MRC : <span class="text-primary">{{comratio|floatformat:2}}</span>  </h4>
+
+
+
+<hr>
+
+
+
+
+
+<div class="row">
+
+
+
+<div class="col-11">
+
+
+  {% if commissionreport %}
+
+  <table class="table  table-sm">
+      <thead class="thead-dark">
+    <tr>
+      <th class="text-center"><small>Year</small></th>
+      <th class="text-center">Month</th>
+      <th class="text-center">Post Commission</th>
+
+
+
+    </tr>
+    {% for opportunity in commissionreport %}
+    <tr>
+
+    <td class="border text-center">{{opportunity.activationdate__year}}</td>
+    <td class="border text-center">{{opportunity.activationdate__month}}</td>
+    <td class="border text-center"><small>{{opportunity.Total|floatformat:0|intcomma}}</small></td>
+
+
+
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+</div>
+  <div class="col-1">
+  </div>
+
+</div>
+</div>
+{% endblock %}

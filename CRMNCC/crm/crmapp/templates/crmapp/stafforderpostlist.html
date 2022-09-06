@@ -1,0 +1,58 @@
+{% extends 'crmapp/base.html' %}
+
+{% load humanize %}
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+
+
+  <h4 class="text-center m-1 text-success">{{myuser.first_name}} : <span class="text-success" >{{myuser.last_name}}</span></h4>
+  <h4 class="text-center m-1 text-success">Post Orders : <span class="text-danger" >{{orderlist.count}}</span></h4>
+  <h4 class="text-center m-1 text-success">MRC : <span class="text-danger" >{{mrcsumoo|intcomma}}</span></h4>
+  <h4 class="text-center m-1 text-success">Post Revenue : <span class="text-danger" >{{revsumoo|intcomma}}</span></h4>
+  <h4 class="text-center m-1 text-success">% : <span class="text-danger" >{{rratio|intcomma}}</span></h4>
+
+
+
+{% if orderlist %}
+
+<table class="table mt-5">
+    <thead class="thead-dark">
+  <tr>
+    <th class="text-center">Order No</th>
+    <th class="text-center">Opportunity</th>
+    <th class="text-center">Account No</th>
+    <th class="text-center">Creation Date</th>
+    <th class="text-center">Activation Date</th>
+    <th class="text-center">Service</th>
+    <th class="text-center">MRC</th>
+    <th class="text-center">Revenue</th>
+
+
+
+  </tr>
+  {% for order in orderlist %}
+  <tr>
+  <td class="border text-center"><a href="{% url 'orderdetail' pk=order.id %}">{{order.orderno}}</a></td>
+  <td class="border text-center">{{order.opportunity}}</td>
+  <td class="border text-center">{{order.accountno}}</td>
+  <td class="border text-center">{{order.creationdate}}</td>
+  <td class="border text-center">{{order.activationdate}}</td>
+  <td class="border text-center">{{order.service}}</td>
+  <td class="border text-center">{{order.mrc}}</td>
+  <td class="border text-center">{{order.revenuep}}</td>
+
+  </tr>
+  {% endfor %}
+</table>
+
+{% endif %}
+
+</div>
+
+
+
+  {% endblock %}

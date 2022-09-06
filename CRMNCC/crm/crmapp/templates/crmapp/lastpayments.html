@@ -1,0 +1,56 @@
+{% extends 'crmapp/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+
+
+{% if mylist %}
+
+  <h6 class="text danger"></h6>  No of Paid accounts Accounts : {{mylist.count}}
+
+<table class="table mt-5">
+    <thead class="thead-dark">
+  <tr>
+    <th class="text-center">Account No</th>
+    <th class="text-center">No of Orders</th>
+    <th class="text-center">No of Post Orders</th>
+    <th class="text-center">Activation Date</th>
+    <th class="text-center">No of Bills</th>
+    <th class="text-center">Total Bills Amount</th>
+    <th class="text-center">Payment Date</th>
+    <th class="text-center">Payment</th>
+    <th class="text-center">Note</th>
+
+  </tr>
+  {% for xx in mylist %}
+  <tr>
+  <td class="border text-center"><a href="{% url 'accountdetail1' pk=xx.pk %} ">{{xx.accountno}}</a></td>
+  <td class="border text-center">{{xx.nooforders}}</td>
+  <td class="border text-center">{{xx.noofpostorders}}</td>
+  <td class="border text-center">{{xx.activationdate}}</td>
+  <td class="border text-center">{{xx.noofbills}}</td>
+  <td class="border text-center">{{xx.billsvalue}}</td>
+  <td class="border text-center">{{xx.paymentdate}}</td>
+  <td class="border text-center">{{xx.payment}}</td>
+  <td class="border text-center">{{xx.notes}}</td>
+
+
+  </tr>
+  {% endfor %}
+</table>
+
+{% endif %}
+
+
+</div>
+
+
+
+  {% endblock %}
+
+

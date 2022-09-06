@@ -5,7 +5,13 @@
   <br>
   <div class="container">
 
-<h5>Order No : {{order.orderno}}</h5>
+
+
+
+<h6>{{myorder.service}} =  {{myaddservices.createdservices}} of {{myaddservices.noofservices}}</h6>
+<h6>There is  {{myordercount}} order with th no = {{myorder.orderno}} </h6>
+
+<h5 class="text-center">Order No : {{myorder.orderno}}</h5>
 <th class="text-center"></th>
 
     <table class="table mt-5">
@@ -17,37 +23,93 @@
         <th class="text-center">Status</th>
         <th class="text-center">Service</th>
         <th class="text-center">Executive</th>
+        <th class="text-center">Service No</th>
+        <th class="text-center">MRC</th>
+        <th class="text-center">Discount</th>
+        <th class="text-center">New MRC</th>
+        <th class="text-center">Revenue before Post</th>
+        <th class="text-center">Post Revenue</th>
+        <th class="text-center">Activation Date</th>
+
 
 
       </tr>
 
       <tr>
-      <td class="border text-center"><a href="{% url 'opportunitydetail' pk=order.opportunity.id%}">{{order.opportunity}}</a></td>
-      <td class="border text-center">{{order.creationdate}}</td>
-      <td class="border text-center">{{order.orderstatus}}</td>
-      <td class="border text-center">{{order.service}}</td>
-      <td class="border text-center">{{order.operationexecutive}}</td>
+      <td class="border text-center"><a href="{% url 'opportunitydetail' pk=myorder.opportunity.id%}">{{myorder.opportunity}}</a></td>
+      <td class="border text-center">{{myorder.creationdate}}</td>
+      <td class="border text-center">{{myorder.orderstatus}}</td>
+      <td class="border text-center">{{myorder.service}}</td>
+      <td class="border text-center">{{myorder.operationexecutive}}</td>
+
+      <td class="border text-center">{{myorder.serviceno}}</td>
+      <td class="border text-center">{{myorder.mrc}}</td>
+      <td class="border text-center">{{myorder.discount}}</td>
+      <td class="border text-center">{{myorder.discountmrc}}</td>
+      <td class="border text-center">{{myorder.revenue2}}</td>
+      <td class="border text-center">{{myorder.revenuep}}</td>
+      <td class="border text-center">{{myorder.activationdate}}</td>
 
       </tr>
 
     </table>
 
-    <button type="button" class="btn btn-link"><a href="{% url 'orderupdate' pk=order.id %}">Update</a></button>
-    <br>
-    {% if order.orderstatus|stringformat:"s"  == 'open' or order.status|stringformat:"s"  == 'held'%}
-    <button type="button" class="btn btn-link"><a href="{% url 'changetopost' pk=order.id %}">Change To Post</a></button>
+
+
+<span>
+<button  ><a href="{% url 'orderupdate' pk=myorder.id %}">Update</a></button>
+</span>
+
+
+
+
+<!--    444444-->
+
+
+    {% if myaddservices.createdservices < myaddservices.noofservices %}
+    <button>
+    <span><a href="{% url 'orderdouble' pk=myorder.opportunity.id pk1=myorder.pk %}" class="text-success"><strong>Double Order</strong></a></span></button>
+    <button> <span><a href="{% url 'orderdouble1' pk=myorder.opportunity.id pk1=myorder.pk %}" class="text-success"><strong>Double Order With Diffrent Account No</strong></a></span></button>
+    <button> <span><a href="{% url 'orderdouble2' pk=myorder.opportunity.id pk1=myorder.pk %}" class="text-success"><strong>Double Order With Diffrent Order and Account No</strong></a></span></button>
+
+    {% else %}
+
+    <span><a  class="text-success"><strong>Double Order</strong></a></span>
+    <span><a  class="text-success"><strong>Double Order With Diffrent Account No</strong></a></span>
+    <span><a  class="text-success"><strong>Double Order With Diffrent Order and Account No</strong></a></span>
     {% endif %}
-    {% if order.status|stringformat:"s"  == 'Operation Validation' %}
-    <button type="button" class="btn btn-link"><a href="{% url 'cancel' pk=order.id %}">Change To Cancel </a></button>
+
+
+
+    <hr>
+    {% if myorder.orderstatus|stringformat:"s"  == 'open' or myorder.orderstatus|stringformat:"s"  == 'held'%}
+    <button  class="btn btn-success"><a href="{% url 'changetopost' pk=myorder.id %}" class="text-dark">To Post</a></button>
+    {% else %}
+    <button  class="btn btn-success"><a>To Post</a></button>
     {% endif %}
-    <br>
-    {% if order.status|stringformat:"s"  == 'Operation Validation' %}
-    <button type="button" class="btn btn-link"><a href="{% url 'open' pk=order.id %}">Change To Open </a></button>
+    {% if myorder.orderstatus|stringformat:"s"  == 'Operation Validation' or myorder.orderstatus|stringformat:"s"  == 'open'%}
+    <button type="button" class="btn btn-success"><span><a href="{% url 'cancel' pk=myorder.id %}" class="text-dark">To Cancel </a></span></button>
+    {% else %}
+    <button type="button" class="btn btn-success"><span><a ></a>To Cancel </a></span></button>
     {% endif %}
-    <br>
-    {% if order.status|stringformat:"s"  == 'Open' %}
-    <button type="button" class="btn btn-link"><a href="{% url 'held' pk=order.id %}">Change To Held </a></button>
+
+    {% if myorder.orderstatus|stringformat:"s"  == 'Operation Validation' %}
+    <button type="button" class="btn btn-success"><a href="{% url 'open' pk=myorder.id %}" class="text-dark">To Open </a></button>
+    {% else %}
+     <button class="btn btn-success"><a  class="text-dark">To Open </a></button>
     {% endif %}
+
+    {% if myorder.orderstatus|stringformat:"s"  == 'open' %}
+    <button type="button" class="btn btn-success"><a href="{% url 'held' pk=myorder.id %}" class="text-dark">To Held </a></button>
+    {% else %}
+     <button type="button" class="btn btn-success"><a  class="text-dark">To Held </a></button>
+    {% endif %}
+
+    <button type="button" class="btn btn-danger btn-sm">
+      <!-- new -->
+      <a href="{% url 'orderdelete1' pk=myorder.pk %}" class="text-light">Delete </a>
+      <span class="sr-only">unread messages</span>
+    </button>
 </div>
 
 {% endblock %}

@@ -21,5 +21,6 @@ urlpatterns = [
     path('accounts/', include('accounts.urls',namespace='accounts')),
     path('admin/', admin.site.urls),
     path('crmapp/', include('crmapp.urls')),
+    path('myemail/', include('myemail.urls')),
 
 ]

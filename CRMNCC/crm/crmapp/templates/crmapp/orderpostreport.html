@@ -1,0 +1,134 @@
+{% extends 'crmapp/base.html' %}
+
+{% load humanize %}
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+
+<div class="row">
+
+   <div class="col-6">
+        <div class="alert alert-success text-center" role="alert">
+            <h3>Total Post MRC  {{mrcsumo|intcomma}} </h3>
+        </div>
+   </div>
+
+   <div class="col-6">
+        <div class="alert alert-success text-center" role="alert">
+            <h3>Total Post MRC Afterdiscount {{discountmrcsumo|intcomma}} </h3>
+        </div>
+   </div>
+
+
+
+
+   <div class="col-6">
+        <div class="alert alert-success text-center" role="alert">
+            <h3>Total Bill Payments {{totalpayment|intcomma}}</h3>
+        </div>
+   </div>
+
+   <div class="col-6">
+        <div class="alert alert-success text-center" role="alert">
+            <h3> Payments Targit {{paymenttarget|intcomma}}</h3>
+        </div>
+   </div>
+
+   <div class="col-6">
+        <div class="alert alert-success text-center" role="alert">
+            <h3> Payments % {{paymentpercentage|intcomma}}</h3>
+        </div>
+   </div>
+
+</div>
+<hr>
+<div class="alert alert-primary text-center" role="alert">
+  <h3>Quarterly Commission in {{cyear}}</h3>
+</div>
+
+
+
+<table class="table mt-5">
+    <thead class="thead-dark">
+  <tr>
+        <th class="text-center">Quarter</th>
+        <th class="text-center">Discounted MRC</th>
+        <th class="text-center">Channel Commission</th>
+
+  </tr>
+
+  <tr>
+    <td class="border text-center">1</td>
+    <td class="border text-center">{{q1|intcomma}}</td>
+    <td class="border text-center">{{q1p|intcomma}}</td>
+  </tr>
+  <tr>
+    <td class="border text-center">2</td>
+    <td class="border text-center">{{q2|intcomma}}</td>
+    <td class="border text-center">{{q2p|intcomma}}</td>
+  </tr>
+  <tr>
+    <td class="border text-center">3</td>
+    <td class="border text-center">{{q3|intcomma}}</td>
+    <td class="border text-center">{{q3p|intcomma}}</td>
+  </tr>
+  <tr>
+    <td class="border text-center">4</td>
+    <td class="border text-center">{{q4|intcomma}}</td>
+    <td class="border text-center">{{q4p|intcomma}}</td>
+  </tr>
+</table>
+
+
+
+
+
+<hr>
+<div class="alert alert-primary text-center" role="alert">
+  <h3>Monthly Post MRC in {{cyear}}</h3>
+</div>
+
+{% if reportx %}
+
+<table class="table mt-5">
+    <thead class="thead-dark">
+  <tr>
+        <th class="text-center">Month</th>
+        <th class="text-center">Post MRC</th>
+        <th class="text-center">Discounted MRC</th>
+        <th class="text-center">Payment</th>
+        <th class="text-center">Channel Payment</th>
+
+  </tr>
+  {% for xx in reportx %}
+  <tr>
+    <td class="border text-center">{{xx.month}}</td>
+    <td class="border text-center">{{xx.post|intcomma}}</td>
+    <td class="border text-center">{{xx.discountmrc|intcomma}}</td>
+    <td class="border text-center">{{xx.payment|intcomma}}</td>
+    <td class="border text-center">{{xx.channelp|intcomma}}</td>
+
+
+  </tr>
+  {% endfor %}
+</table>
+
+{% endif %}
+
+
+
+
+</div>
+
+
+
+
+
+
+  {% endblock %}
+
+
+

@@ -1,15 +1,145 @@
 {% extends 'crmapp/base.html' %}
 
+{% load crispy_forms_tags %}
+
 
 {% block content %}
 
 
+<div class="container mt-5">
 
-<div class="container mt-3">
+    <div class = "card bg-light w-50">
+        <div class = "card-body">
+            <form class=""  method="GET" >
+                <div class="form-row">
+                      <div class="form-group col-md-6 mb-0">
+                        {{ myfilter.form.customername|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-6 mb-0">
+                        {{ myfilter.form.cr|as_crispy_field }}
+                      </div>
+                </div>
+                <div class="form-row">
+                      <div class="form-group col-md-4 mb-0 mt-4">
+                        <button type="submit" class="btn btn-primary rounded">Search</button>
+                      </div>
+                </div>
+        <br>
+        </form>
 
-  <h5  style="color:blue;width:200px;">No of customers : {{customerslist.count}}</h5>
+        </div>
+    </div>
+</div>
 
-  <button  class="btn-success  text-light mb-3"><a class="text-light "href="{% url 'customernew' %}">Add Customer</a></button>
+<div class="container">
+<button  class="btn-success rounded  text-light my-3"><a class="text-light" href="{% url 'customernew' %}">Add Customer</a></button>
+
+<hr>
+
+ <h4 class="text-center m-1 text-success mt-3">No of My customers : {{mycustomers.count}}</h4>
+
+{% if mycustomers %}
+
+<table class="table ">
+    <thead class="thead-dark">
+  <tr>
+    <th class="text-center">ID</th>
+    <th class="text-center">Customer</th>
+    <th class="text-center">CR</th>
+    <th class="text-center">Creation Date</th>
+    <th class="text-center">Creator</th>
+    <th class="text-center">No of Opportunities</th>
+    <th class="text-center">Phone</th>
+    <th class="text-center">Email</th>
+
+
+
+  </tr>
+  {% for customer in opps1 %}
+  <tr>
+  <td class="border text-center">{{customer.id}}</td>
+  <td class="border text-center"><a href="{% url 'customerdetail' pk=customer.id %}" class="text-primary">{{customer.customername}}</a></td>
+  <td class="border text-center">{{customer.cr}}</td>
+  <td class="border text-center">{{customer.creationdate}}</td>
+  <td class="border text-center">{{customer.creator}}</td>
+  <td class="border text-center">{{customer.customer_opportunities.count}}</td>
+  <td class="border text-center">{{customer.phone}}</td>
+  <td class="border text-center">{{customer.email}}</td>
+
+
+  </tr>
+  {% endfor %}
+</table>
+
+{% endif %}
+
+<div class="pagination">
+
+{% if opps1.paginator.num_pages > 1 %}
+
+    {% if opps1.has_previous %}
+
+        <a href="?page={{ opps1.previous_page_number }}">previous</a>
+
+    {% endif %}
+
+    <span class="mx-1">Page {{ opps1.number }} of {{ opps1.paginator.num_pages }}</span>
+
+    {% if opps1.has_next %}
+
+        <a href="?page={{ opps1.next_page_number }}">next</a>
+
+    {% endif %}
+
+{% endif %}
+
+</div>
+
+
+<!--assigned customers-->
+
+{% if myassignedcustomers %}
+
+<h4>Customers Assigned To me</h4>
+
+<table class="table ">
+    <thead class="thead-dark">
+  <tr>
+    <th class="text-center">ID</th>
+    <th class="text-center">Customer</th>
+    <th class="text-center">CR</th>
+    <th class="text-center">Creation Date</th>
+    <th class="text-center">Creator</th>
+    <th class="text-center">No of Opportunities</th>
+    <th class="text-center">Phone</th>
+    <th class="text-center">Email</th>
+
+
+  </tr>
+  {% for customer in myassignedcustomers %}
+  <tr>
+  <td class="border text-center">{{customer.id}}</td>
+  <td class="border text-center"><a href="{% url 'customerdetail' pk=customer.id %}" class="text-primary">{{customer.customername}}</a></td>
+  <td class="border text-center">{{customer.cr}}</td>
+  <td class="border text-center">{{customer.creationdate}}</td>
+  <td class="border text-center">{{customer.creator}}</td>
+  <td class="border text-center">{{customer.customer_opportunities.count}}</td>
+  <td class="border text-center">{{customer.phone}}</td>
+  <td class="border text-center">{{customer.email}}</td>
+
+  </tr>
+  {% endfor %}
+</table>
+
+{% endif %}
+
+
+<!-- All Customers -->
+{% if user.user_profile.jobtitle|stringformat:"s" == 'CEO' or user.user_profile.jobtitle|stringformat:"s" == 'GM' or user.user_profile.jobtitle|stringformat:"s" == 'General Manager' or user.user_profile.jobtitle|stringformat:"s" == 'SalesManager' or user.user_profile.jobtitle|stringformat:"s" == 'Board' or user.user_profile.jobtitle|stringformat:"s" == 'OperationV' or user.user_profile.jobtitle|stringformat:"s" == 'OperationExecutive'%}
+
+<h4 class="text-center m-1 text-success">All customers : {{customerslist.count}}</h4>
+
+
 
 </div>
 
@@ -19,23 +149,59 @@
 {% if customerslist %}
 
 <table class="table ">
-    <thead class="thead-dark">
-  <tr>
-    <th class="text-center">Customer</th>
-    <th class="text-center">CR</th>
-    <th class="text-center">Creation Date</th>
-  </tr>
-  {% for customer in customerslist %}
-  <tr>
-  <td class="border text-center"><a href="{% url 'customerdetail' pk=customer.id %}" class="text-primary">{{customer.customername}}</a></td>
-  <td class="border text-center">{{customer.cr}}</td>
-  <td class="border text-center">{{customer.creationdate}}</td>
-  </tr>
-  {% endfor %}
+  <thead class="thead-dark">
+<tr>
+  <th class="text-center">ID</th>
+  <th class="text-center">Customer</th>
+  <th class="text-center">CR</th>
+  <th class="text-center">Creation Date</th>
+  <th class="text-center">Creator</th>
+  <th class="text-center">No of Opportunities</th>
+  <th class="text-center">Phone</th>
+<th class="text-center">Email</th>
+
+
+</tr>
+{% for customer in opps %}
+<tr>
+<td class="border text-center">{{customer.id}}</td>
+<td class="border text-center"><a href="{% url 'customerdetail' pk=customer.id %}" class="text-primary">{{customer.customername}}</a></td>
+<td class="border text-center">{{customer.cr}}</td>
+<td class="border text-center">{{customer.creationdate}}</td>
+<td class="border text-center">{{customer.creator}}</td>
+<td class="border text-center">{{customer.customer_opportunities.count}}</td>
+<td class="border text-center">{{customer.phone}}</td>
+  <td class="border text-center">{{customer.email}}</td>
+
+</tr>
+{% endfor %}
 </table>
 
 {% endif %}
 
+
+<div class="pagination">
+
+{% if opps.paginator.num_pages > 1 %}
+
+    {% if opps.has_previous %}
+
+        <a href="?page={{ opps.previous_page_number }}">previous</a>
+
+    {% endif %}
+
+    <span class="mx-1">Page {{ opps.number }} of {{ opps.paginator.num_pages }}</span>
+
+    {% if opps.has_next %}
+
+        <a href="?page={{ opps.next_page_number }}">next</a>
+
+    {% endif %}
+
+{% endif %}
+
+</div>
+{% endif %}
 </div>
 
 

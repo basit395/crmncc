@@ -18,7 +18,8 @@
 <div class="column ">
 
 
-<h5>{{customer.customername}}</h5>
+<button class = "btn btn-primary btn-lg">{{customer.customername}}</button>
+
 
 
 </div>
@@ -38,6 +39,7 @@
     <th class="text-center">Creation Date</th>
     <th class="text-center">Activity</th>
     <th class="text-center">Branches</th>
+    <th class="text-center">No of Opportunities</th>
   </tr>
 
   <tr>
@@ -46,17 +48,48 @@
   <td class="border text-center">{{customer.creationdate}}</td>
   <td class="border text-center">{{customer.activity}}</td>
   <td class="border text-center">{{customer.branches}}</td>
+  <td class="border text-center">{{customer.customer_opportunities.count}}</td>
   </tr>
 
 </table>
-<button type="button" class="btn btn-info mt-5 mr-2"><a href="{% url 'customerupdate' pk=customer.id %}" class="text-light">Update</a></button>
+
+{% if customer.customer_opportunities.all %}
+
+<button class = "btn btn-primary btn-lg">Opportunities List</button>
+
+    <table class="table mt-2">
+      <thead class="thead-light">
+        <tr>
+
+            <th class="text-center">Opportunity No</th>
+            <th class="text-center">Creation Date</th>
+            <th class="text-center">Total MRC</th>
+
+        </tr>
+       {% for opp in customer.customer_opportunities.all %}
+        <tr>
+            <td class="border text-center"><a href="{% url 'opportunitydetail' pk=opp.id %}">{{opp.opportunityno}}</a></td>
+            <td class="border text-center">{{opp.creationdate}}</td>
+            <td class="border text-center">{{opp.totalmrc}}</td>
+
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endif %}
+<button type="button" class="btn btn-warning btn-sm m-1"><a href="{% url 'customerupdate' pk=customer.id %}" class="text-light">Update</a></button>
 <br>
-<button type="button" class="btn btn-success mt-5"><a href="{% url 'newopportunityc' pk=customer.id %}" class="text-light" >New Opportunity</a></button>
+<button type="button" class="btn btn-warning btn-sm m-1"><a href="{% url 'newopportunityc' pk=customer.id %}" class="text-light" >New Opportunity</a></button>
+<button type="button" class="btn btn-warning btn-sm m-1"><a href="{% url 'newactivityrecordc' pk=customer.id %}" class="text-light" >New Activity</a></button>
 
 
 <div class="column"></div>
 
-
+{% if user.user_profile.jobtitle|stringformat:"s" == 'CEO' or user.user_profile.jobtitle|stringformat:"s" == 'GM' or user.user_profile.jobtitle|stringformat:"s" == 'General Manager' or user.user_profile.jobtitle|stringformat:"s" == 'SalesManager' or user.user_profile.jobtitle|stringformat:"s" == 'Board'%}
+<button type="button" class="btn btn-warning btn-sm m-1">
+<a href="{% url 'assignedto' pk=customer.id %}">Assigned To</a>
+</button>
+{% endif %}
 </div>
 </div>
 

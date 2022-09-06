@@ -1,0 +1,54 @@
+{% extends 'crmapp/base.html' %}
+
+
+{% block content %}
+
+
+<div class="container mt-3">
+
+<div class = "row">
+    <div class = "col-6">
+  <h5  style="color:blue;width:200px;">No of customers : {{usercustomers.count}}</h5>
+    </div>
+     <div class = "col-6">
+<a href="{% url 'salesmandetail' pk=pk %}"><h4>Sales Man Dashboard</h4></a>
+</div>
+</div>
+
+</div>
+
+<div class="container">
+
+
+{% if usercustomers %}
+
+<table class="table ">
+    <thead class="thead-dark">
+  <tr>
+    <th class="text-center">Customer</th>
+    <th class="text-center">CR</th>
+    <th class="text-center">Creation Date</th>
+    <th class="text-center">Creator</th>
+    <th class="text-center">No of Opportunities</th>
+
+
+  </tr>
+  {% for customer in usercustomers %}
+  <tr>
+  <td class="border text-center"><a href="{% url 'customerdetail' pk=customer.id %}" class="text-primary">{{customer.customername}}</a></td>
+  <td class="border text-center">{{customer.cr}}</td>
+  <td class="border text-center">{{customer.creationdate}}</td>
+  <td class="border text-center">{{customer.creator}}</td>
+  <td class="border text-center">{{customer.customer_opportunities.count}}</td>
+
+  </tr>
+  {% endfor %}
+</table>
+
+{% endif %}
+
+</div>
+
+
+
+  {% endblock %}

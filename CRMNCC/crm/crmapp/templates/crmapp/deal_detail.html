@@ -1,0 +1,101 @@
+{% extends 'crmapp/based.html' %}
+{% load humanize %}
+{% block content %}
+
+  <br>
+
+
+
+
+
+
+<h5 class="text-primary " style="margin-left:2px;">{{dealnow.dealno}}</h5>
+
+    <h5 class="text-info" style="margin-left:2px;">{{dealnow.status}}</h5>
+
+
+
+<table class="table" style="margin-left:2px;">
+      <thead class="thead-dark">
+    <tr>
+
+      <th class="text-center">Creation Date</th>
+      <th class="text-center">Creator</th>
+      <th class="text-center">Broker</th>
+      <th class="text-center">Customer</th>
+      <th class="text-center">Total NRC</th>
+      <th class="text-center">Total MRC</th>
+      <th class="text-center">Commission</th>
+      <th class="text-center">Broker Commission</th>
+
+
+
+
+    </tr>
+
+    <tr>
+
+    <td class="border text-center">{{dealnow.creationdate|date:"j, n, Y"}}</td>
+    <td class="border text-center">{{dealnow.creator}}</td>
+    <td class="border text-center"><small>{{dealnow.broker}}</small></td>
+    <td class="border text-center">{{dealnow.customer}}</td>
+    <td class="border text-center">{{dealnow.totalnrc}}</td>
+    <td class="border text-center">{{dealnow.totalmrc|intcomma}}</td>
+    <td class="border text-center">{{dealnow.ourcommission}}</td>
+    <td class="border text-center">{{dealnow.brokercommission}}</td>
+
+
+
+    </tr>
+
+  </table>
+
+<br>
+
+
+  <table class="table" style="margin-left:2px;">
+      <thead class="thead-dark">
+    <tr>
+
+
+      <th class="text-center">Activation Closing Date</th>
+      <th class="text-center">Cancelling Date</th>
+      <th class="text-center">Revenue</th>
+      <th class="text-center">Note</th>
+      <th class="text-center">Reference No</th>
+
+
+
+    </tr>
+
+    <tr>
+
+    <td class="border text-center">{{dealnow.activationdate|date:"j, n, Y"}}</td>
+    <td class="border text-center">{{dealnow.cancellationdate|date:"j, n, Y"}}</td>
+    <td class="border text-center">{{dealnow.revenue|intcomma}}</td>
+    <td class="border text-center">{{dealnow.note}}</td>
+    <td class="border text-center">{{dealnow.referenceno}}</td>
+
+
+    </tr>
+
+  </table>
+
+<br>
+
+    <button type="button" class="btn btn-danger" style="margin-left:2px;">
+      <small></small><a href="{% url 'dealdelete' pk=dealnow.pk %}" class="text-light">Delete </a>
+      <span class="sr-only">unread messages</span>
+    </button>
+
+     <button type="button" class="btn btn-info">
+      <small></small><a href="{% url 'dealupdate' pk=dealnow.pk %}" class="text-light">Update </a>
+      <span class="sr-only">unread messages</span>
+    </button>
+
+
+
+
+
+
+{% endblock %}

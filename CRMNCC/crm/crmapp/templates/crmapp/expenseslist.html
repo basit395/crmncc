@@ -1,0 +1,51 @@
+{% extends 'crmapp/base.html' %}
+
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+
+
+
+
+{% if expenseslist %}
+
+<table class="table mt-5">
+    <thead class="thead-dark">
+  <tr>
+
+            <th class="text-center">Creation Date</th>
+            <th class="text-center">Creator</th>
+            <th class="text-center">Category</th>
+            <th class="text-center">Amount</th>
+            <th class="text-center">Year</th>
+            <th class="text-center">Month</th>
+            <th class="text-center">Note</th>
+
+
+
+
+  </tr>
+  {% for expenses in expenseslist %}
+  <tr>
+    <td class="border text-center">{{expenses.creationdate}}</td>
+    <td class="border text-center">{{expenses.creator}}</td>
+    <td class="border text-center">{{expenses.Category}}</td>
+    <td class="border text-center">{{expenses.amount}}</td>
+    <td class="border text-center">{{expenses.year}}</td>
+    <td class="border text-center">{{expenses.month}}</td>
+    <td class="border text-center">{{expenses.note}}</td>
+
+  </tr>
+  {% endfor %}
+</table>
+
+{% endif %}
+
+</div>
+
+
+
+  {% endblock %}

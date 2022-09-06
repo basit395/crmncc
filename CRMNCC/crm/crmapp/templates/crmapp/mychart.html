@@ -1,0 +1,144 @@
+{% extends 'crmapp/base.html' %}
+
+
+{% block content %}
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<div class="row">
+   
+   <div class="col">
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+   </div>
+   
+   <div class="col">
+             <div>
+                  <canvas id="secondch"></canvas>
+            </div>
+   </div>
+    
+</div>
+
+
+<!--opportunity stages -->
+<div class="row">
+   
+   <div class="col">
+    <div>
+        <canvas id="thirdch"></canvas>
+       
+    </div>
+   </div>
+   
+   <div class="col">
+             <div>
+                    <canvas id="fourthch"></canvas>
+            </div>
+   </div>
+    
+</div>
+
+<!--Months Chart-->
+
+<script>
+    const data = {
+    labels: {{ll|safe}},
+    datasets: [{
+      label: 'MRC VS Months In This Year',
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      data: {{xx|safe}} ,
+    }]
+  };
+
+  const config = {
+    type: 'bar',
+    data: data,
+    options: {}
+  };
+
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+
+    const data2 = {
+    labels: {{ll2|safe}},
+    datasets: [{
+      label: 'MRC VS Years In',
+      backgroundColor: 'rgb(99, 255, 132)',
+      borderColor: 'rgb(99, 255, 132)',
+      data: {{xx2|safe}} ,
+    }]
+  };
+
+  const config2 = {
+    type: 'bar',
+    data: data2,
+    options: {}
+  };
+
+  const secondch = new Chart(
+    document.getElementById('secondch'),
+    config2
+  );
+  
+  
+  const data3 = {
+    labels: {{ll3|safe}},
+    datasets: [{
+      label: 'Opportunities VS Stages',
+      backgroundColor: 'rgb(132, 99, 255)',
+      borderColor: 'rgb(132, 99, 255)',
+      data: {{xx3|safe}} ,
+    }]
+  };
+
+  const config3 = {
+    type: 'bar',
+    data: data3,
+    options: {}
+  };
+
+  const thirdch = new Chart(
+    document.getElementById('thirdch'),
+    config3
+  ); 
+  
+ const data4 = {
+    labels: {{ll4|safe}},
+    datasets: [{
+      label: 'Post VS Salesman',
+      backgroundColor: 'rgb(255, 99, 255)',
+      borderColor: 'rgb(255, 99, 255)',
+      data: {{xx4|safe}} ,
+    }]
+  };
+
+  const config4 = {
+    type: 'bar',
+    data: data4,
+    options: {}
+  };
+
+  const fourthch = new Chart(
+    document.getElementById('fourthch'),
+    config4
+  ); 
+  
+</script>
+
+
+<!--========-->
+
+<!--========-->
+
+
+
+{% endblock %}

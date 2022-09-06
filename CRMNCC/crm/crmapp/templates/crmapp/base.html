@@ -1,82 +1,236 @@
+{% load crmapp_tags %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    <meta charset="utf-8">
+
+
   {% block title %} {%endblock%}
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
+
   <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top bottom-margin:5px;">
 
+        <button  class="btn  text-white"><a  class="nav-link text-white" href="{% url 'home' %}" >Home</a></button>
 
-  <div class="container mt-2">
-  <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+      <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+       Customers
+      </a>
+       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'customerslist' %}">Customer List</a>
+          <!--<a class="dropdown-item" href="{% url 'activityrecordnew' %}">Add Activity</a>-->
+          <a class="dropdown-item" href="{% url 'activityrecordlist' %}">Activities List</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'sourcereport' %}">Sources Report</a>
+          <a class="dropdown-item" href="{% url 'opportunityhotlead' %}">Hot Lead</a>
+          <a class="dropdown-item" href="{% url 'customeroneback' %}">One Back</a>
+          {% if user.username|stringformat:"s" == 'basit395' or user.username|stringformat:"s" == 'riyadh' %}
+          <a class="dropdown-item" href="{% url 'dealslist' %}">Add Customer</a>
+          {% endif %}
+        </div>
 
-    <a class="nav-link" href="{% url 'home' %}">Home<span class="sr-only">(current)</span></a>
-    <a class="nav-link" href="{% url 'customerslist' %}"> Customers <span class="sr-only">(current)</span></a>
-    <a class="nav-link" href="{% url 'opportunitylist' %}"> Opportunities <span class="sr-only">(current)</span></a>
-    <a class="nav-link" href="{% url 'order' %}">Orders<span class="sr-only">(current)</span></a>
-    <a class="nav-link" href="{% url 'servicelist' %}">Services<span class="sr-only">(current)</span></a>
-    <a class="nav-link" href="{% url 'stafflist' %}">Team <span class="sr-only">(current)</span></a>
-    <a class="nav-link" href="{% url 'report' %}">Reports<span class="sr-only">(current)</span></a>
-    <a class="nav-link" href="{% url 'suggestion' %}">Requests<span class="sr-only">(current)</span></a>
-    <a class="nav-link" href="{% url 'dashboard' %}">DashBoard<span class="sr-only">(current)</span></a>
-    <a class="nav-link" href="{% url 'orderpost' %}">Post Orders<span class="sr-only">(current)</span></a>
-    {% if user.username %}
-
-
-    <button  class="btn btn-outline-primary">{{user.username}}</a></button>
-
-    <a class="nav-link" href="{% url 'logout' %}">Logout<span class="sr-only">(current)</span></a>
-    {% else %}
-    <a class="nav-link" href="{% url 'login' %}">Login<span class="sr-only">(current)</span></a>
-    {% endif %}
-
-
-
-
-
-
-
-  </nav>
-
-  <!-- Example single danger button -->
-<!-- <div class="btn-group">
-  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Action
+<div class="btn-group">
+  <button type="button" class="btn text-white">Opportunities</button>
+  <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
   </button>
   <div class="dropdown-menu">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
+    <a class="dropdown-item" href="{% url 'opportunitylist' %}">Opportunities</a>
+    <a class="dropdown-item" href="{% url 'opportunitypost' %}">Post Opportunities</a>
+    <a class="dropdown-item" href="{% url 'opportunityhotlead' %}">Hot Leads Opportunities</a>
     <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">Separated link</a>
+    <a class="dropdown-item" href="#"></a>
+     <a class="dropdown-item" href="{% url 'operationstages' %}">Stages Report</a>
   </div>
-  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Report
+</div>
+
+
+<div class="btn-group">
+  <button type="button" class="btn text-white">Operation</button>
+  <button type="button" class="btn text-white dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
   </button>
   <div class="dropdown-menu">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
+    <a class="dropdown-item" href="{% url 'operval' %}">Operation Validation</a>
+    <a class="dropdown-item" href="{% url 'order' %}">All Orders</a>
+    <a class="dropdown-item" href="{% url 'orderopen' %}">Open Orders</a>
+    <a class="dropdown-item" href="{% url 'orderheld' %}">Held Orders</a>
+    <a class="dropdown-item" href="{% url 'ordercancel' %}">Cancelled  Orders</a>
+    <a class="dropdown-item" href="{% url 'orderpost' %}">Post orders</a>
+    <a class="dropdown-item" href="{% url 'orderupgrade' %}">Upgrades orders</a>
+    <a class="dropdown-item" href="{% url 'orderfingerprint' %}">Fingerprint orders</a>
+    <a class="dropdown-item" href="{% url 'billspayment' %}">Order cheking with STC</a>
+
+
+
+
     <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">Separated link</a>
+    <a class="dropdown-item" href="{% url 'operationreport' %}">Operation Report</a>
+
+    <a class="dropdown-item" href="{% url 'servicelist' %}">Services</a>
+    <a class="dropdown-item" href="{% url 'productreport' %}">Service report</a>
+    <a class="dropdown-item" href="{% url 'cctv' %}">CCTV report</a>
   </div>
-</div> -->
+</div>
+
+
+
+
+
+<div class="btn-group">
+  <button type="button" class="btn text-white">Accounts Payments</button>
+  <button type="button" class="btn text-white dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="{% url 'accountlist' %}">Unpaid Accounts</a>
+    <a class="dropdown-item" href="{% url 'lastpayments' %}">Paid Accounts</a>
+    <a class="dropdown-item" href=""></a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#"></a>
+     <a class="dropdown-item" href=""></a>
+  </div>
+</div>
+
+
+<!-- operation end -->
+
+<div class="btn-group">
+  <button type="button" class="btn text-white">Reports</button>
+  <button type="button" class="btn text-white dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="{% url 'report' %}">General Reports</a>
+    <a class="dropdown-item" href="{% url 'pipeline' %}">Pipeline</a>
+    <a class="dropdown-item" href="{% url 'megapipeline' %}">Mega Pipeline</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="{% url 'suggestion' %}">Requests</a>
+  </div>
 
 
 </div>
 
 
 
+<!-- team start -->
+
+{% if user.user_profile.jobtitle|stringformat:"s" == 'CEO' or user.user_profile.jobtitle|stringformat:"s" == 'GM' or user.user_profile.jobtitle|stringformat:"s" == 'General Manager' or user.user_profile.jobtitle|stringformat:"s" == 'SalesManager' or user.user_profile.jobtitle|stringformat:"s" == 'Board' or user.user_profile.jobtitle|stringformat:"s" == 'OperationV' or user.user_profile.jobtitle|stringformat:"s" == 'accountant'%}
+
+
+<div class="btn-group">
+  <button type="button" class="btn text-white">Team</button>
+  <button type="button" class="btn text-white dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item text-primary" href="{% url 'stafflist' %}">All users</a>
+    <a class="dropdown-item text-primary" href="{% url 'salesteam' %}">Sales Team</a>
+    <a class="dropdown-item text-primary" href="{% url 'partners' %}">Partners</a>
+    <a class="dropdown-item text-success" href="{% url 'reportcustomerteam' %}">Team-Customers</a>
+    <a class="dropdown-item text-success" href="{% url 'reportweaklastweek' %}">Sales Executives Performance Report</a>
+    <div class="dropdown-divider"></div>
+  </div>
+</div>
+
+<a class="nav-link text-white" href="{% url 'dashboard' %}">Dashboard</a>
+
+{% endif %}
+
+<!-- team end -->
+
+
+
+
+{% if user.user_profile.jobtitle|stringformat:"s" == 'CEO' or user.user_profile.jobtitle|stringformat:"s" == 'GM' or user.user_profile.jobtitle|stringformat:"s" == 'General Manager' or user.user_profile.jobtitle|stringformat:"s" == 'accountant' or user.user_profile.jobtitle|stringformat:"s" == 'Board'%}
+
+<div class="btn-group">
+  <button type="button" class="btn text-white">Finance</button>
+  <button type="button" class="btn text-white dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="{% url 'postreport' %}">Monthly Post Report</a>
+    <a class="dropdown-item" href="{% url 'invoicenew' %}">New Invoice</a>
+    <a class="dropdown-item" href="{% url 'invoiceslist' %}">Invoices List</a>
+    <a class="dropdown-item" href="{% url 'expensecategorynew' %}">New Category</a>
+    <a class="dropdown-item" href="{% url 'expensecategorylist' %}">categories List</a>
+    <a class="dropdown-item" href="{% url 'expensesnew' %}">New Expense</a>
+    <a class="dropdown-item" href="{% url 'expenseslist' %}">Expenses List</a>
+    <a class="dropdown-item" href="{% url 'expensestotal' %}">Expenses Report</a>
+    <a class="dropdown-item" href="{% url 'commission' %}">Commission</a>
+
+    <div class="dropdown-divider"></div>
+  </div>
+</div>
+{% endif %}
+
+
+{% if user.username %}
+<button  class="btn btn-outline-dark text-white">{{user.username}}</a></button>
+<div class="btn-group">
+  <button type="button" class="btn text-white">Settings</button>
+  <i class="fa-thin fa-amp-guitar"></i>
+  <button type="button" class="btn text-white dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <div class="dropdown-menu"> <i class="fa fa-cog" aria-hidden="true"></i>
+        <a class="nav-link text-primary" href="{% url 'password_change' %}">Password Change<span class="sr-only">(current)</span></a>
+        <a class="nav-link text-primary" href="{% url 'logout' %}">Logout<span class="sr-only">(current)</span></a>
+        <a class="nav-link text-primary" href="{% url 'emailregister' %}">Email Update<span class="sr-only">(current)</span></a>
+
+
+  </div>
+</div>
+{% else %}
+<div class="btn-group">
+  <button  class="btn btn-outline-dark text-white">Settings</button>
+  <button type="button" class="btn text-white dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <div class="dropdown-menu">
+         <a class="nav-link text-primary" href="{% url 'login' %}">Login<span class="sr-only">(current)</span></a>
+         <a class="nav-link text-primary" href="{% url 'accounts:reset' %}">Password Reset<span class="sr-only">(current)</span></a>
+  </div>
+</div>
+{% endif %}
+</nav>
+<div class="container mt-2">
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">
+            <h4>{{ message|safe }}</h4>
+            <a href="#" class="close">x</a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+</div>
+
+<br>
+<br>
+
+<div class = "container mt-3 w-50">
+{% if user.username %}
+    <h3 class="text-danger">{% check_email user.username %} </h3>
+{% endif %}
+</div>
+
+
 {% block content %}
   {% endblock %}
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+{% block javascript %}
+
+{% endblock %}
 
 
   </body>

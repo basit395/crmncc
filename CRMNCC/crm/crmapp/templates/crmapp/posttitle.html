@@ -1,0 +1,31 @@
+{% extends 'crmapp/base.html' %}
+
+
+
+{% block content %}
+
+<div class="container mt-5">
+ {% for nn in myreport %}
+    <p> {{ nn.opportunity__salesman__user_profile__jobtitle}}</p>
+    <p> {{ nn.Total}}</p>
+    <br>
+
+ {% endfor %}
+
+<hr>
+
+
+ {% for nn in myreport1 %}
+    <p> {{ nn.opportunity__salesman__user_profile__jobtitle}}</p>
+    <p> {{ nn.Total}}</p>
+    <br>
+
+ {% endfor %}
+
+
+
+</div>
+
+
+
+{% endblock %}
